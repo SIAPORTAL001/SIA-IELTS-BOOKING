@@ -45,6 +45,10 @@
 
   <input type="date" id="testDate">
 
+  <script>
+  document.getElementById("testDate").min =
+  new Date().toISOString().split("T")[0];
+</script>
   <button onclick="bookTest()">Confirm Booking</button>
 
   <p id="msg"></p>
