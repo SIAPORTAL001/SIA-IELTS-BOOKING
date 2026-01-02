@@ -2,42 +2,29 @@
     position: fixed;
     top: 0;
     width: 100%;
-    padding: 15px 40px;
+    height: 65px;
+    background: rgba(0,0,0,0.75);
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    background: rgba(0,0,0,0.65);
-    backdrop-filter: blur(6px);
+    padding: 0 20px;
     z-index: 1000;
-}
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    color: #f5c400;
-    font-weight: bold;
-    font-size: 18px;
 }
 
 .logo img {
     height: 45px;
 }
 
-.navbar nav a {
-    color: white;
-    text-decoration: none;
-    margin-left: 25px;
-    font-size: 15px;
-    letter-spacing: 1px;
+.menu {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin-left: 30px;
 }
 
-.navbar nav a:hover {
-    color: #f5c400;
-}
-body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
+.menu li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
 }
 
 /* HERO SECTION */
