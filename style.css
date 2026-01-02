@@ -227,3 +227,12 @@ footer {
 body {
     padding-top: 70px;
     }
+@media (max-width: 600px) {
+    .menu li a {
+        font-size: 14px;
+    }
+
+    .logo img {
+        height: 38px;
+    }
+}
