@@ -184,59 +184,82 @@ footer {
 }
 /* ===== NAVBAR ===== */
 .navbar {
+    background: #222;
     position: fixed;
-    top: 0;
     width: 100%;
-    background: rgba(0,0,0,0.75);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 40px;
-    z-index: 999;
+    top: 0;
+    z-index: 1000;
 }
 
-.logo {
+.nav-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 15px 20px;
     display: flex;
     align-items: center;
-    gap: 10px;
-    color: #f5c400;
-    font-weight: bold;
+    justify-content: space-between;
 }
 
 .logo img {
-    height: 35px;
+    height: 40px;
 }
 
+/* NAV LINKS (DESKTOP) */
 .nav-links {
     list-style: none;
     display: flex;
-    gap: 25px;
+    gap: 30px;
 }
 
 .nav-links a {
-    color: white;
     text-decoration: none;
+    color: white;
     font-weight: 500;
+    transition: 0.3s;
 }
 
 .nav-links a:hover {
     color: #f5c400;
 }
 
-/* Fix top spacing because navbar is fixed */
-body {
-    padding-top: 70px;
-    }
-@media (max-width: 768px) {
-    .navbar {
-        padding: 10px;
+/* HAMBURGER */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.menu-toggle span {
+    height: 3px;
+    width: 25px;
+    background: white;
+    margin: 4px 0;
+    border-radius: 5px;
+}
+
+/* ===== MOBILE & TABLET ===== */
+@media (max-width: 900px) {
+    .menu-toggle {
+        display: flex;
     }
 
     .nav-links {
-        gap: 10px;
+        position: absolute;
+        top: 65px;
+        right: 0;
+        width: 100%;
+        background: #222;
+        flex-direction: column;
+        align-items: center;
+        display: none;
+        padding: 20px 0;
     }
 
-    .nav-links li a {
-        font-size: 13px;
+    .nav-links li {
+        margin: 15px 0;
+    }
+
+    .nav-links.active {
+        display: flex;
     }
 }
