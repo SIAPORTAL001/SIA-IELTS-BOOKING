@@ -1,13 +1,55 @@
-<h2>Book IELTS Test</h2>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SIA IELTS – Book Test</title>
+  <style>
+    body{
+      font-family: Arial;
+      background:#0f2027;
+      color:white;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      height:100vh;
+    }
+    .box{
+      background:#1c1c1c;
+      padding:30px;
+      width:350px;
+      border-radius:10px;
+    }
+    select,input,button{
+      width:100%;
+      padding:10px;
+      margin-top:10px;
+    }
+    button{
+      background:#e63946;
+      color:white;
+      border:none;
+      cursor:pointer;
+    }
+  </style>
+</head>
+<body>
 
-<select id="testType">
-  <option>Academic</option>
-  <option>General Training</option>
-  <option>Life Skills A1</option>
-</select><br><br>
+<div class="box">
+  <h2>Book IELTS Test</h2>
 
-<input type="date" id="date"><br><br>
+  <select id="testType">
+    <option value="">Select Test Type</option>
+    <option>Academic</option>
+    <option>General Training</option>
+    <option>Life Skills A1</option>
+  </select>
 
-<button onclick="book()">Book Test</button>
+  <input type="date" id="testDate">
 
-<script type="module" src="app.js"></script>
+  <button onclick="bookTest()">Confirm Booking</button>
+
+  <p id="msg"></p>
+</div>
+
+<script type="module" src="booking.js"></script>
+</body>
+</html>
