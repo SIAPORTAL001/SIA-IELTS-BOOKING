@@ -1,0 +1,142 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #000;
+  color: #fff;
+}
+
+/* HEADER */
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 15px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+}
+
+.logo {
+  height: 60px;
+}
+
+.nav a {
+  color: #fff;
+  margin-left: 30px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* HERO SECTION */
+.hero {
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.slider {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  animation: slideShow 15s infinite;
+}
+
+.bg1 {
+  background-image: url("images/bg1.jpg");
+}
+.bg2 {
+  background-image: url("images/bg2.jpg");
+  animation-delay: 5s;
+}
+.bg3 {
+  background-image: url("images/bg3.jpg");
+  animation-delay: 10s;
+}
+
+@keyframes slideShow {
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  30% { opacity: 1; }
+  40% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  top: 40%;
+  transform: translateY(-40%);
+}
+
+.hero-content h1 {
+  font-size: 48px;
+}
+
+.hero-content span {
+  color: #f5c518;
+}
+
+.hero-content p {
+  margin: 20px 0;
+}
+
+.btn-main {
+  padding: 12px 30px;
+  background: #f5c518;
+  color: #000;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+/* SECTIONS */
+section {
+  padding: 80px 40px;
+  text-align: center;
+}
+
+.services, .booking, .contact {
+  background: #111;
+}
+
+.service-box div {
+  margin: 10px 0;
+}
+
+/* MAP */
+iframe {
+  width: 100%;
+  height: 300px;
+  border: none;
+  margin-top: 20px;
+}
+
+/* FOOTER */
+footer {
+  background: #000;
+  padding: 15px;
+  text-align: center;
+  font-size: 14px;
+  }
