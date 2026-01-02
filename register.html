@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Register</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+<h1>Create Account</h1>
+<input id="email" placeholder="Email">
+<input id="password" type="password" placeholder="Password">
+<button onclick="register()">Register</button>
+</div>
+
+<script type="module">
+import { createUserWithEmailAndPassword } from
+"https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+
+register = () => {
+  createUserWithEmailAndPassword(auth,
+   email.value, password.value)
+  .then(()=>location.href="booking.html")
+  .catch(e=>alert(e.message));
+}
+</script>
+
+</body>
+</html>
