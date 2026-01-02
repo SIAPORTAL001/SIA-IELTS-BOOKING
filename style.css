@@ -139,3 +139,34 @@ footer {
     background: #f5c400;
     color: black;
 }
+.booking {
+    padding: 80px 20px;
+    background: #ffffff;
+    text-align: center;
+}
+
+.booking h2 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.booking p {
+    color: #666;
+    margin-bottom: 25px;
+}
+
+.booking .btn {
+    background: #f5c400;
+    border: none;
+    padding: 12px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.booking .btn:hover {
+    background: black;
+    color: #f5c400;
+}
