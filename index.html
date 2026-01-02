@@ -1,43 +1,80 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>SIA IELTS Exam Portal</title>
-  <style>
-    body{
-      font-family: Arial, sans-serif;
-      background:#f4f6f8;
-      text-align:center;
-      padding-top:80px;
-    }
-    .box{
-      background:white;
-      width:420px;
-      margin:auto;
-      padding:40px;
-      border-radius:8px;
-      box-shadow:0 0 15px rgba(0,0,0,0.1);
-    }
-    h1{color:#003366;}
-    a{
-      display:block;
-      margin:15px 0;
-      padding:12px;
-      background:#003366;
-      color:white;
-      text-decoration:none;
-      border-radius:5px;
-    }
-    a:hover{background:#0055aa;}
-  </style>
+<meta charset="UTF-8">
+<title>SIA IELTS Exam Portal</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+  height:100vh;
+  background:
+    linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+    url("https://images.unsplash.com/photo-1523580846011-d3a5bc25702b");
+  background-size:cover;
+  background-position:center;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.container{
+  text-align:center;
+  color:white;
+  max-width:700px;
+}
+
+.container h1{
+  font-size:42px;
+  letter-spacing:2px;
+  margin-bottom:20px;
+}
+
+.container p{
+  font-size:18px;
+  margin-bottom:35px;
+  opacity:0.9;
+}
+
+.btn{
+  display:inline-block;
+  padding:14px 28px;
+  margin:10px;
+  font-size:16px;
+  color:white;
+  background:#0b5ed7;
+  text-decoration:none;
+  border-radius:6px;
+  transition:0.3s;
+}
+
+.btn:hover{
+  background:#084298;
+}
+</style>
 </head>
+
 <body>
 
-<div class="box">
-  <h1>WELCOME TO OFFICIAL<br>SIA IELTS EXAM PORTAL</h1>
-  <p>Book your IELTS test online</p>
+<div class="container">
+  <h1>
+    WELCOME TO OFFICIAL <br>
+    SIA IELTS EXAM PORTAL
+  </h1>
 
-  <a href="register.html">Create Account</a>
-  <a href="login.html">Login</a>
+  <p>
+    Book your IELTS Academic, General Training & Life Skills test
+    in a secure computer-based environment.
+  </p>
+
+  <a href="register.html" class="btn">Create Account</a>
+  <a href="login.html" class="btn">Login</a>
 </div>
 
 </body>
