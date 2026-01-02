@@ -1,0 +1,30 @@
+<select id="test">
+<option>IELTS Academic</option>
+<option>IELTS General Training</option>
+<option>IELTS Life Skills</option>
+</select>
+
+<input type="date" id="date">
+<input type="time" id="time">
+
+<button onclick="book()">Book Now</button>
+
+<script type="module">
+import { collection, addDoc } from
+"https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+
+book = async () => {
+ let id = "SIA-" + Math.floor(Math.random()*100000);
+ let code = "IELTS-" + Math.floor(Math.random()*9999);
+
+ await addDoc(collection(db,"bookings"),{
+   test:test.value,
+   date:date.value,
+   time:time.value,
+   candidateID:id,
+   examCode:code
+ });
+
+ location.href="success.html";
+}
+</script>
