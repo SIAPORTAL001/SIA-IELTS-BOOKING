@@ -102,3 +102,40 @@ footer {
   text-align: center;
   font-size: 14px;
   }
+.services {
+    padding: 80px 20px;
+    background: #f7f7f7;
+    text-align: center;
+}
+
+.services h2 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #555;
+    margin-bottom: 40px;
+}
+
+.service-box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 25px 35px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    background: #f5c400;
+    color: black;
+}
