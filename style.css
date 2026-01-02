@@ -17,8 +17,10 @@
 .menu {
     list-style: none;
     display: flex;
-    gap: 25px;
-    margin-left: 30px;
+    gap: 18px;
+    margin-left: auto;   /* 🔥 THIS IS THE KEY FIX */
+    margin-right: 10px;
+}
 }
 
 .menu li a {
