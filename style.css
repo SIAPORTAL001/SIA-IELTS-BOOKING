@@ -40,7 +40,11 @@ section {
 }
 
 .services, .booking, .contact {
-  background: #111;
+  section {
+    background: #0d0d0d;
+    color: white;
+    padding: 60px 20px;
+  }
 }
 
 .service-box div {
