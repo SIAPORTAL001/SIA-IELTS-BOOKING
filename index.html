@@ -83,62 +83,148 @@
   <section id="services" class="services">
     <h2>Our Services</h2>
     <p class="subtitle">
-        We provide professional IELTS and language test services
-    </p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SIA IELTS Booking</title>
 
-    <div class="service-box">
-        <div class="card">IELTS Preparation</div>
-        <div class="card">LanguageCert</div>
-        <div class="card">Oxford Test</div>
-        <div class="card">TOEFL Preparation</div>
-        <div class="card">Other Language Tests</div>
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<nav class="navbar">
+  <div class="nav-container">
+
+    <!-- LOGO -->
+    <div class="logo">
+      <img src="images/logo.png" alt="SIA IELTS Logo">
     </div>
-</section>
-  <!-- BOOKING SECTION -->
-  <section class="booking" id="booking">
-    <h2>Book Your Test</h2>
-    <p>Please create your account first to book your test.</p>
-    <a href="register.html" class="btn-main">Create Account</a>
-  </section>
 
-  <!-- CONTACT SECTION -->
-  <section class="contact" id="contact">
-    <h2>SIA-PORTAL</h2>
+    <!-- HAMBURGER MENU -->
+    <div class="menu-toggle" id="mobile-menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
 
-    <p>📞 +92 304 5931881</p>
-    <p>📧 siaportal0@gmail.com</p>
-    <p>📍 Raj Ali Plaza, Dinga Road, Kharian</p>
+    <!-- NAV LINKS -->
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
 
-    <iframe 
-      src="https://maps.google.com/maps?q=Raj%20Ali%20Plaza%20Kharian&t=&z=13&ie=UTF8&iwloc=&output=embed">
-    </iframe>
-  </section>
+    <!-- SEARCH BAR -->
+    <div class="nav-search">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Search services..."
+        onkeyup="searchPage()"
+      >
+    </div>
 
-    <p class="copyright">
-        © 2026 SIA-IELTS-BOOKING. All copyright reserved.
+  </div>
+</nav>
+
+<!-- ================= HERO / SLIDER ================= -->
+<section class="hero" id="home">
+
+  <div class="slider">
+    <div class="slide bg1"></div>
+    <div class="slide bg2"></div>
+    <div class="slide bg3"></div>
+  </div>
+
+  <div class="overlay"></div>
+
+  <div class="hero-content">
+    <h1>
+      Welcome to the <span>SIA-EXAM-BOOKING-PORTAL</span>
+    </h1>
+
+    <p>
+      You can book your IELTS test here with confidentiality.<br>
+      IELTS Academic | General Training | Life Skills
     </p>
-  </footer>
+
+    <a href="#booking" class="btn-main">Book Your Test</a>
+  </div>
+
+</section>
+
+<!-- ================= SERVICES ================= -->
+<section id="services" class="services">
+  <h2>Our Services</h2>
+
+  <p class="subtitle">
+    We provide professional IELTS and language test services
+  </p>
+
+  <div class="service-box">
+    <div class="card">IELTS Preparation</div>
+    <div class="card">LanguageCert</div>
+    <div class="card">Oxford Test</div>
+    <div class="card">TOEFL Preparation</div>
+    <div class="card">Other Language Tests</div>
+  </div>
+</section>
+
+<!-- ================= BOOKING ================= -->
+<section class="booking" id="booking">
+  <h2>Book Your Test</h2>
+  <p>Please create your account first to book your test.</p>
+  <a href="register.html" class="btn-main">Create Account</a>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section class="contact" id="contact">
+  <h2>SIA-PORTAL</h2>
+
+  <p>📞 +92 304 5931881</p>
+  <p>📧 siaportal0@gmail.com</p>
+  <p>📍 Raj Ali Plaza, Dinga Road, Kharian</p>
+
+  <iframe
+    src="https://maps.google.com/maps?q=Raj%20Ali%20Plaza%20Kharian&t=&z=13&ie=UTF8&iwloc=&output=embed">
+  </iframe>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <p class="copyright">
+    © 2026 SIA-IELTS-BOOKING. All rights reserved.
+  </p>
+</footer>
+
+<!-- ================= JAVASCRIPT ================= -->
 <script>
-    const menu = document.getElementById("mobile-menu");
-    const nav = document.querySelector(".nav-links");
+  // Mobile menu toggle
+  const menu = document.getElementById("mobile-menu");
+  const navLinks = document.querySelector(".nav-links");
 
-    menu.addEventListener("click", () => {
-        nav.classList.toggle("active");
-    });
-  <script>
-function searchPage() {
-  const value = document.getElementById("searchInput").value.toLowerCase();
+  menu.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
+  });
 
-  if (value.includes("service")) {
-    document.getElementById("services").scrollIntoView({ behavior: "smooth" });
-  } 
-  else if (value.includes("book")) {
-    document.getElementById("booking").scrollIntoView({ behavior: "smooth" });
-  } 
-  else if (value.includes("contact")) {
-    document.getElementById("contact").scrollIntoView({ behavior: "smooth" });
+  // Search navigation
+  function searchPage() {
+    const value = document.getElementById("searchInput").value.toLowerCase();
+
+    if (value.includes("service")) {
+      document.getElementById("services").scrollIntoView({ behavior: "smooth" });
+    } 
+    else if (value.includes("book")) {
+      document.getElementById("booking").scrollIntoView({ behavior: "smooth" });
+    } 
+    else if (value.includes("contact")) {
+      document.getElementById("contact").scrollIntoView({ behavior: "smooth" });
+    }
   }
-}
 </script>
+
 </body>
 </html>
