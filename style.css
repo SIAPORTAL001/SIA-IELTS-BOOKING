@@ -260,3 +260,38 @@ footer {
   background: #0099cc;
   color: white;
 }
+.registration-form {
+  max-width: 600px;
+  margin: 120px auto;
+  background: #fff;
+  padding: 40px;
+  text-align: center;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.form-logo {
+  height: 70px;
+  margin-bottom: 20px;
+}
+
+.registration-form h1 {
+  margin-bottom: 30px;
+}
+
+.registration-form input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.registration-form button {
+  background: #f5c400;
+  padding: 12px 30px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 6px;
+}
