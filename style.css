@@ -250,3 +250,13 @@ footer {
     width: 90%;
   }
 }
+.btn-register {
+  margin-left: 15px;
+  background: #00c2ff;
+  color: #000;
+}
+
+.btn-register:hover {
+  background: #0099cc;
+  color: white;
+}
