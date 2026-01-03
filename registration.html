@@ -128,14 +128,14 @@ function generatePDF() {
       y += 14;
     }
 
-    draw("Candidate Name", name.value);
-    draw("Parents Name", father.value);
-    draw("Date of Birth", dob.value);
-    draw("Address", address.value);
-    draw("CNIC", cnic.value);
-    draw("Sex", sex.value);
-    draw("Exam ID", examId.value);
-    draw("Exam Code", examCode.value);
+    draw("Candidate Name", document.getElementById("name").value);
+    draw("Parents Name", document.getElementById("father").value);
+    draw("Date of Birth", document.getElementById("dob").value);
+    draw("Address", document.getElementById("address").value);
+    draw("CNIC", document.getElementById("cnic").value);
+    draw("Sex", document.getElementById("sex").value);
+    draw("Exam ID", document.getElementById("examId").value);
+    draw("Exam Code", document.getElementById("examCode").value);
     draw("Candidate Unique No", uniqueNo);
     draw("Candidate Reference No", refNo);
 
