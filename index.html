@@ -46,7 +46,7 @@
     <div class="overlay"></div>
 
     <div class="hero-content">
-      <h1>Welcome to <span>SIA-IELTS-BOOKING</span></h1>
+      <h1>Welcome to the <span>SIA-EXAM-BOOKING-PORTAL </span></h1>
       <p>
         You can book your IELTS test here with confidentiality.<br>
         IELTS Academic | General Training | Life Skills
@@ -79,7 +79,7 @@
 
   <!-- CONTACT SECTION -->
   <section class="contact" id="contact">
-    <h2>SIA-IELTS-BOOKING</h2>
+    <h2>SIA-PORTAL</h2>
 
     <p>📞 +92 304 5931881</p>
     <p>📧 siaportal0@gmail.com</p>
@@ -91,14 +91,14 @@
   </section>
 
   <footer class="footer" id="contact">
-    <h3>SIA-IELTS-BOOKING</h3>
+    <h3>SIA-PORTAL</h3>
 
     <p>📞 +92 304 5931881</p>
     <p>📧 siaportal0@gmail.com</p>
     <p>📍 Raj Ali Plaza, Dinga Road, Kharian</p>
 
     <p class="copyright">
-        © 2026 SIA-IELTS-BOOKING. All rights reserved.
+        © 2026 SIA-IELTS-BOOKING. All copyright reserved.
     </p>
   </footer>
 <script>
@@ -108,6 +108,20 @@
     menu.addEventListener("click", () => {
         nav.classList.toggle("active");
     });
+  <script>
+function searchPage() {
+  const value = document.getElementById("searchInput").value.toLowerCase();
+
+  if (value.includes("service")) {
+    document.getElementById("services").scrollIntoView({ behavior: "smooth" });
+  } 
+  else if (value.includes("book")) {
+    document.getElementById("booking").scrollIntoView({ behavior: "smooth" });
+  } 
+  else if (value.includes("contact")) {
+    document.getElementById("contact").scrollIntoView({ behavior: "smooth" });
+  }
+}
 </script>
 </body>
 </html>
