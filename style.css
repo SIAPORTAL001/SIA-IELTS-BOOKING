@@ -2,434 +2,162 @@
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family:Arial, sans-serif;
+  font-family:Arial,Helvetica,sans-serif;
 }
 
 body{
-  background:#fff;
-  color:#000;
+  background:#000;
+  color:#fff;
 }
 
-/* ================= NAVBAR ================= */
+/* NAVBAR */
 .navbar{
+  background:#000;
+  padding:15px 30px;
   position:fixed;
   width:100%;
-  top:0;
-  background:#000;
   z-index:1000;
 }
-
 .nav-container{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:10px 20px;
 }
-
-.logo img{
-  height:40px;
-}
-
+.logo img{height:45px}
 .nav-links{
-  list-style:none;
   display:flex;
   gap:20px;
 }
-
 .nav-links a{
   color:#fff;
   text-decoration:none;
   font-weight:bold;
 }
-
-.menu-toggle{
-  display:none;
-  flex-direction:column;
-  cursor:pointer;
-}
-
-.menu-toggle span{
-  background:#fff;
-  height:3px;
-  width:25px;
-  margin:4px 0;
-}
-
-.nav-search input{
-  padding:6px 10px;
+.search-bar{
+  padding:8px 15px;
   border-radius:20px;
   border:none;
 }
 
-/* ===== HERO BACKGROUND IMAGE SLIDER ===== */
-
+/* HERO */
 .hero{
-  width:100%;
   height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   position:relative;
-  background-size:cover;
-  background-position:center;
-  background-repeat:no-repeat;
-  animation:bgSlider 15s infinite ease-in-out;
 }
-
-/* DARK OVERLAY */
 .overlay{
   position:absolute;
   inset:0;
-  background:rgba(0,0,0,0.6);
-  z-index:1;
+  background:rgba(0,0,0,.7);
 }
-
-/* HERO CONTENT */
 .hero-content{
   position:relative;
-  z-index:2;
-  color:#fff;
   text-align:center;
-  top:50%;
-  transform:translateY(-50%);
+  max-width:700px;
 }
-
-/* BACKGROUND SLIDER KEYFRAMES */
-@keyframes bgSlider{
-  0%{
-    background-image:url("images/bg1.jpg");
-  }
-  33%{
-    background-image:url("images/bg2.jpg");
-  }
-  66%{
-    background-image:url("images/bg3.jpg");
-  }
-  100%{
-    background-image:url("images/bg1.jpg");
-  }
-}
-
-.overlay{
-  position:absolute;
-  inset:0;
-  background:rgba(0,0,0,0.6);
-}
-
-.hero-content{
-  position:relative;
-  z-index:2;
-  color:#fff;
-  text-align:center;
-  top:50%;
-  transform:translateY(-50%);
-  padding:20px;
-}
-
-.hero-content h1 span{
-  color:#f5c400;
-}
-
+.hero-content span{color:#f4c400}
 .btn-main{
-  display:inline-block;
-  margin-top:20px;
-  padding:14px 28px;
-  background:#f5c400;
-  color:#000;
+  margin-top:25px;
+  padding:15px 35px;
+  background:#f4c400;
+  border:none;
   font-weight:bold;
-  text-decoration:none;
-  border-radius:4px;
+  cursor:pointer;
 }
 
-/* ================= SECTIONS ================= */
-.services, .booking, .contact{
+/* CREATE ACCOUNT */
+.create-account{
   padding:80px 20px;
+  background:#fff;
+  color:#000;
   text-align:center;
 }
-
-.subtitle{
-  color:#555;
-  margin-bottom:30px;
+.btn-outline{
+  margin-top:20px;
+  padding:12px 30px;
+  border:2px solid #000;
+  background:none;
+  font-weight:bold;
 }
 
+/* SERVICES */
+.services{
+  padding:80px 20px;
+  background:#fff;
+  color:#000;
+  text-align:center;
+}
 .service-box{
   display:flex;
   flex-wrap:wrap;
   justify-content:center;
   gap:20px;
+  margin-top:40px;
+}
+.service-card{
+  width:220px;
+  padding:30px;
+  border:2px solid #000;
+  cursor:pointer;
+  transition:.4s;
+}
+.service-card:hover,
+.service-card.active{
+  background:#000;
+  color:#fff;
+  transform:scale(1.1);
 }
 
-.card{
-  padding:20px;
-  width:200px;
-  background:#fff;
-  box-shadow:0 5px 15px rgba(0,0,0,0.1);
-  border-radius:6px;
-  font-weight:bold;
+/* CONTACT */
+.contact{
+  padding:80px 20px;
+  text-align:center;
 }
-
-.booking h2{
-  font-weight:bold;
-}
-
-/* ================= CONTACT ================= */
-.contact-box{
-  margin-bottom:20px;
-}
-
 .contact iframe{
   width:100%;
   height:300px;
-  border:none;
+  margin-top:20px;
 }
 
-/* ================= FOOTER ================= */
+/* FOOTER */
 footer{
+  padding:20px;
   background:#000;
-  color:#fff;
   text-align:center;
-  padding:15px;
 }
 
-/* ================= ADMIN MODAL ================= */
+/* MODALS */
 .modal{
   display:none;
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,0.85);
+  background:rgba(0,0,0,.9);
   justify-content:center;
   align-items:center;
+  z-index:2000;
 }
-
 .modal-box{
   background:#111;
   padding:30px;
   width:320px;
 }
-
-.modal-box h2,
-.modal-box label{
-  color:#fff;
-}
-
 .modal-box input{
   width:100%;
   padding:10px;
-  margin:10px 0;
+  margin:8px 0;
 }
-
 .modal-box button{
   width:100%;
   padding:12px;
-  font-weight:bold;
+  margin-top:10px;
 }
-
-/* ================= MOBILE ================= */
-@media(max-width:768px){
-  .nav-links{
-    display:none;
-    flex-direction:column;
-    background:#000;
-    position:absolute;
-    top:60px;
-    right:0;
-    width:200px;
-  }
-  .nav-links.active{
-    display:flex;
-  }
-  .menu-toggle{
-    display:flex;
-  }
+.btn-white{
+  background:#fff;
+  color:#000;
 }
-/* =========================
-   ADMIN MODAL FIX (FINAL)
-========================= */
-
-.hero{
-  position:relative;
-  z-index:1;
-}
-
-.hero-content{
-  position:relative;
-  z-index:2;
-}
-
-.modal{
-  display:none;
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.95);
-  z-index:99999;
-}
-
-/* Jab admin login open ho */
-body.modal-open nav,
-body.modal-open .hero,
-body.modal-open footer{
-  display:none;
-}
-.hero {
-  width: 100%;
-  height: 100vh;
-  background-image: url("images/bg1.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  animation: bgSlider 15s infinite ease-in-out;
-}
-
-@keyframes bgSlider {
-  0% {
-    background-image: url("images/bg1.jpg");
-  }
-  33% {
-    background-image: url("images/bg2.jpg");
-  }
-  66% {
-    background-image: url("images/bg3.jpg");
-  }
-  100% {
-    background-image: url("images/bg1.jpg");
-  }
-}
-/* ================= BOOK TEST POPUP ================= */
-.modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.85);
-  justify-content:center;
-  align-items:center;
-  z-index:99999;
-}
-
-.modal-box{
-  background:#111;
-  padding:30px;
-  width:360px;
-  border-radius:12px;
-  color:#fff;
-}
-
-.modal-box.large{
-  width:380px;
-}
-
-.modal-box h2{
-  text-align:center;
-  margin-bottom:20px;
-}
-
-.modal-box label{
-  font-size:14px;
-  display:block;
-  margin:12px 0 6px;
-}
-
-.modal-box select,
-.modal-box input{
-  width:100%;
-  padding:10px;
-  border-radius:6px;
-  border:none;
-}
-
-.modal-box button{
-  margin-top:20px;
-  width:100%;
-}
-
 .close{
   float:right;
   cursor:pointer;
-  font-size:16px;
-}
-.create-account-section{
-  padding:80px 20px;
-  text-align:center;
-  background:#f7f7f7;
-}
-
-.create-account-section h2{
-  font-size:32px;
-  margin-bottom:10px;
-}
-
-.modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.8);
-  z-index:9999;
-  justify-content:center;
-  align-items:center;
-}
-
-.modal-box{
-  background:#fff;
-  padding:30px;
-  width:90%;
-  max-width:400px;
-  border-radius:12px;
-}
-
-.modal-box input{
-  width:100%;
-  padding:12px;
-  margin:8px 0;
-}
-
-.btn-white{
-  width:100%;
-  padding:12px;
-  background:#fff;
-  color:#000;
-  border:2px solid #000;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-.close{
-  text-align:right;
-  cursor:pointer;
-  font-size:20px;
-}
-/* ===== HERO BACKGROUND SLIDER ===== */
-.hero {
-  position: relative;
-  min-height: 100vh;
-  background-size: cover;
-  background-position: center;
-  animation: bgSlider 45s infinite;
-}
-
-/* Dark overlay (already used) */
-.hero .overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.55);
-  z-index: 1;
-}
-
-.hero-content {
-  position: relative;
-  z-index: 2;
-}
-
-/* Background images change every 15s */
-@keyframes bgSlider {
-  0% {
-    background-image: url("images/bg1.jpg");
-  }
-  33% {
-    background-image: url("images/bg2.jpg");
-  }
-  66% {
-    background-image: url("images/bg3.jpg");
-  }
-  100% {
-    background-image: url("images/bg1.jpg");
-  }
 }
