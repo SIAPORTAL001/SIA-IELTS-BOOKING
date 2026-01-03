@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SIA Admin Dashboard</title>
+
+<style>
+body{
+  font-family:Arial, sans-serif;
+  background:#f2f2f2;
+}
+.dashboard{
+  width:400px;
+  margin:80px auto;
+  background:#fff;
+  padding:25px;
+  border-radius:10px;
+  box-shadow:0 5px 15px rgba(0,0,0,.2);
+  text-align:center;
+}
+button{
+  width:100%;
+  padding:14px;
+  margin-bottom:15px;
+  font-size:15px;
+  font-weight:bold;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+}
+.btn1{background:#f5c400;}
+.btn2{background:#000;color:#fff;}
+</style>
+</head>
+
+<body>
+
+<div class="dashboard">
+  <h2>SIA ADMIN PANEL</h2>
+
+  <button class="btn1" onclick="goToResultEntry()">
+    Register Candidate / Upload Result
+  </button>
+
+  <button class="btn2" onclick="logout()">
+    Logout
+  </button>
+</div>
+
+<script>
+if(localStorage.getItem("SIA_ADMIN_LOGIN") !== "true"){
+  window.location.href = "admin-login.html";
+}
+
+function goToResultEntry(){
+  window.location.href = "admin-result-entry.html";
+}
+
+function logout(){
+  localStorage.removeItem("SIA_ADMIN_LOGIN");
+  window.location.href = "admin-login.html";
+}
+</script>
+
+</body>
+</html>
