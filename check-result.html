@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Check IELTS Result - SIA</title>
+
+<style>
+body{
+  font-family:Arial, sans-serif;
+  background:#f2f2f2;
+}
+.box{
+  width:420px;
+  margin:60px auto;
+  background:#fff;
+  padding:25px;
+  text-align:center;
+  box-shadow:0 5px 15px rgba(0,0,0,.2);
+}
+input{
+  width:100%;
+  padding:10px;
+  margin:10px 0;
+  border:1px solid #000;
+}
+button{
+  padding:10px;
+  width:100%;
+  font-weight:bold;
+  cursor:pointer;
+}
+.result{
+  margin-top:20px;
+  text-align:left;
+  display:none;
+}
+.row{
+  display:flex;
+  justify-content:space-between;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+  <h2>Check Your IELTS Result</h2>
+
+  <input id="searchKey" placeholder="Enter CNIC or TRF Number">
+  <button onclick="checkResult()">Check Result</button>
+
+  <div class="result" id="resultBox">
+    <hr>
+    <p><b>Name:</b> <span id="name"></span></p>
+    <p><b>Candidate No:</b> <span id="candNo"></span></p>
+    <p><b>TRF No:</b> <span id="trf"></span></p>
+
+    <div class="row">
+      <span>Listening</span><span id="listening"></span>
+    </div>
+    <div class="row">
+      <span>Reading</span><span id="reading"></span>
+    </div>
+    <div class="row">
+      <span>Writing</span><span id="writing"></span>
+    </div>
+    <div class="row">
+      <span>Speaking</span><span id="speaking"></span>
+    </div>
+
+    <div class="row">
+      <b>Overall Band</b><b id="overall"></b>
+    </div>
+
+    <div class="row">
+      <b>CEFR Level</b><b id="cefr"></b>
+    </div>
+
+    <button onclick="generatePDF()">Generate PDF</button>
+  </div>
+</div>
+
+<!-- jsPDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script>
+let resultData=null;
+
+function checkResult(){
+  const key=document.getElementById("searchKey").value.trim();
+  const data=localStorage.getItem("SIA_RESULT_"+key);
+
+  if(!data){
+    alert("Result not found");
+    return;
+  }
+
+  resultData=JSON.parse(data);
+  document.getElementById("resultBox").style.display="block";
+
+  name.innerText=resultData.name;
+  candNo.innerText=resultData.candidateNo;
+  trf.innerText=resultData.trfNo;
+  listening.innerText=resultData.listening+"/9.0";
+  reading.innerText=resultData.reading+"/9.0";
+  writing.innerText=resultData.writing+"/9.0";
+  speaking.innerText=resultData.speaking+"/9.0";
+  overall.innerText=resultData.overall;
+  cefr.innerText=resultData.cefr;
+}
+
+function generatePDF(){
+  const {jsPDF}=window.jspdf;
+  const pdf=new jsPDF();
+
+  pdf.text("IELTS TEST REPORT FORM",105,20,{align:"center"});
+  pdf.text("Name: "+resultData.name,20,40);
+  pdf.text("Candidate No: "+resultData.candidateNo,20,50);
+  pdf.text("TRF No: "+resultData.trfNo,20,60);
+
+  pdf.text("Listening: "+resultData.listening,20,80);
+  pdf.text("Reading: "+resultData.reading,20,90);
+  pdf.text("Writing: "+resultData.writing,20,100);
+  pdf.text("Speaking: "+resultData.speaking,20,110);
+
+  pdf.text("Overall Band: "+resultData.overall,20,130);
+  pdf.text("CEFR Level: "+resultData.cefr,20,140);
+
+  pdf.save("SIA-IELTS-Result.pdf");
+}
+</script>
+
+</body>
+</html>
