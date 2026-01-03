@@ -19,7 +19,6 @@ body{
 .header{
   display:flex;
   justify-content:space-between;
-  align-items:flex-start;
 }
 .header-right{
   text-align:right;
@@ -35,7 +34,6 @@ body{
 }
 .note{
   font-size:11px;
-  margin-top:10px;
 }
 .section-title{
   margin-top:25px;
@@ -45,7 +43,7 @@ body{
 .row{
   display:flex;
   gap:10px;
-  margin-top:8px;
+  margin-top:10px;
 }
 .box{
   flex:1;
@@ -60,19 +58,19 @@ input{
   height:160px;
   border:1px solid #000;
 }
-video, canvas{
+video,canvas{
   width:130px;
   height:160px;
 }
 button{
   padding:8px 12px;
-  margin-top:8px;
+  margin-top:10px;
   font-weight:bold;
   cursor:pointer;
 }
 .result-grid{
   display:grid;
-  grid-template-columns: repeat(6,1fr);
+  grid-template-columns:repeat(6,1fr);
   gap:8px;
 }
 .big-box{
@@ -108,14 +106,12 @@ if(localStorage.getItem("SIA_ADMIN_LOGIN")!=="true"){
   </div>
 </div>
 
-<!-- Candidate Numbers -->
 <div class="row">
-  <div class="box">Centre Number<br><input value="SIA"></div>
+  <div class="box">Centre Number<br><input value="SIA" readonly></div>
   <div class="box">Date<br><input type="date"></div>
   <div class="box">Candidate Number<br><input id="candNo" readonly></div>
 </div>
 
-<!-- Candidate Details -->
 <div class="section-title">Candidate Details</div>
 
 <div class="row">
@@ -148,19 +144,17 @@ if(localStorage.getItem("SIA_ADMIN_LOGIN")!=="true"){
   <div class="box">First Language<br><input></div>
 </div>
 
-<!-- Test Results -->
 <div class="section-title">Test Results</div>
 
 <div class="result-grid">
-  <input placeholder="Listening">
-  <input placeholder="Reading">
-  <input placeholder="Writing">
-  <input placeholder="Speaking">
-  <input placeholder="Overall Band">
-  <input placeholder="CEFR Level">
+  <input id="listening" placeholder="Listening">
+  <input id="reading" placeholder="Reading">
+  <input id="writing" placeholder="Writing">
+  <input id="speaking" placeholder="Speaking">
+  <input id="overall" placeholder="Overall Band" readonly>
+  <input id="cefr" placeholder="CEFR Level" readonly>
 </div>
 
-<!-- Admin Comments -->
 <div class="section-title">Administrator Comments</div>
 <div class="big-box"></div>
 
@@ -173,37 +167,72 @@ if(localStorage.getItem("SIA_ADMIN_LOGIN")!=="true"){
 
 </div>
 
-<!-- jsPDF -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <script>
-// Webcam
+const video=document.getElementById("video");
+const canvas=document.getElementById("canvas");
+
 navigator.mediaDevices.getUserMedia({video:true})
-.then(stream=>{
-  video.srcObject=stream;
-});
+.then(stream=>video.srcObject=stream);
 
 function capture(){
   canvas.style.display="block";
   canvas.getContext("2d").drawImage(video,0,0,130,160);
 }
 
-// Auto numbers
-document.getElementById("candNo").value =
-"SIA"+Math.floor(100000+Math.random()*900000);
+candNo.value="SIA"+Math.floor(100000+Math.random()*900000);
+trfNo.value="SIA-"+Date.now();
 
-document.getElementById("trfNo").value =
-"SIA-"+Date.now();
-
-// PDF
 function generatePDF(){
   const {jsPDF}=window.jspdf;
   const pdf=new jsPDF();
-  pdf.text("OFFICIAL IELTS TEST REPORT FORM",105,20,{align:"center"});
-  pdf.text("Candidate Name: "+family.value+" "+first.value,20,40);
-  pdf.text("CNIC: "+cnic.value,20,50);
-  pdf.text("Candidate Number: "+candNo.value,20,60);
+
+  const fullName=family.value+" "+first.value;
+  const cnicVal=cnic.value;
+
+  const l=+listening.value;
+  const r=+reading.value;
+  const w=+writing.value;
+  const s=+speaking.value;
+
+  const overall=((l+r+w+s)/4).toFixed(1);
+  let cefr="B1";
+  if(overall>=6.5) cefr="C1";
+  else if(overall>=6) cefr="B2";
+
+  document.getElementById("overall").value=overall;
+  document.getElementById("cefr").value=cefr;
+
+  localStorage.setItem(
+    "SIA_RESULT_"+cnicVal,
+    JSON.stringify({
+      name:fullName,
+      candidateNo:candNo.value,
+      trfNo:trfNo.value,
+      listening:l,
+      reading:r,
+      writing:w,
+      speaking:s,
+      overall:overall,
+      cefr:cefr
+    })
+  );
+
+  pdf.text("OFFICIAL IELTS TEST REPORT FORM",20,20);
+  pdf.text("Candidate Name: "+fullName,20,40);
+  pdf.text("CNIC: "+cnicVal,20,50);
+  pdf.text("Candidate No: "+candNo.value,20,60);
   pdf.text("TRF No: "+trfNo.value,20,70);
+
+  pdf.text("Listening: "+l,20,90);
+  pdf.text("Reading: "+r,20,100);
+  pdf.text("Writing: "+w,20,110);
+  pdf.text("Speaking: "+s,20,120);
+
+  pdf.text("Overall Band: "+overall,20,140);
+  pdf.text("CEFR Level: "+cefr,20,150);
+
   pdf.save("SIA-IELTS-TRF.pdf");
 }
 </script>
