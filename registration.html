@@ -44,25 +44,67 @@
 
 <script>
 function generatePDF() {
+
   const { jsPDF } = window.jspdf;
   const pdf = new jsPDF();
 
-  const inputs = document.querySelectorAll("input");
-  let y = 20;
+  // LOGO
+  const logo = new Image();
+  logo.src = "images/logo.png";
 
-  pdf.setFontSize(16);
-  pdf.text("SIA Candidate Registration Form", 20, y);
-  y += 12;
+  logo.onload = function () {
 
-  inputs.forEach(input => {
+    pdf.setFillColor(245, 196, 0);
+    pdf.rect(0, 0, 210, 40, "F");
+
+    pdf.addImage(logo, "PNG", 85, 8, 40, 20);
+
+    pdf.setFontSize(18);
+    pdf.setTextColor(0, 0, 0);
+    pdf.text("Welcome to New SIA Candidate Registration Form", 105, 55, { align: "center" });
+
+    const fields = document.querySelectorAll("input");
+    let y = 70;
+
     pdf.setFontSize(12);
-    pdf.text(input.placeholder + ": " + input.value, 20, y);
-    y += 8;
-  });
 
-  pdf.save("SIA-Candidate-Registration.pdf");
+    fields.forEach(field => {
+      pdf.setDrawColor(0);
+      pdf.rect(20, y - 6, 170, 10);
+      pdf.text(`${field.placeholder}: ${field.value}`, 25, y);
+      y += 14;
+    });
+
+    pdf.save("SIA-Candidate-Registration.pdf");
+
+    saveCandidateData(); // 👈 data save call
+  };
+}
+<script>
+function saveCandidateData() {
+
+  const inputs = document.querySelectorAll("input");
+
+  const data = {
+    studentName: inputs[0].value,
+    parentName: inputs[1].value,
+    cnic: inputs[2].value,
+    address: inputs[3].value,
+    phone: inputs[4].value,
+    courseName: inputs[5].value,
+    courseCode: inputs[6].value,
+    coursePurpose: inputs[7].value
+  };
+
+  if (!data.cnic) {
+    alert("CNIC is required to save data");
+    return;
+  }
+
+  localStorage.setItem("SIA_CANDIDATE_" + data.cnic, JSON.stringify(data));
+
+  alert("Candidate data saved successfully ✔");
 }
 </script>
-
 </body>
 </html>
