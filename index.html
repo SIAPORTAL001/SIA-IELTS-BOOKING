@@ -6,57 +6,6 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="style.css">
-
-  <style>
-    /* ================= ADMIN LOGIN MODAL ================= */
-    .modal{
-      display:none;
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,0.85);
-      justify-content:center;
-      align-items:center;
-      z-index:9999;
-    }
-    .modal-box{
-      background:#111;
-      padding:30px;
-      width:320px;
-      border-radius:6px;
-      box-shadow:0 0 30px rgba(255,255,255,0.1);
-    }
-    .modal-box h2{
-      color:#fff;
-      text-align:center;
-      margin-bottom:20px;
-    }
-    .modal-box label{
-      color:#fff;
-      font-size:14px;
-    }
-    .modal-box input{
-      width:100%;
-      padding:10px;
-      margin:8px 0 15px;
-      border:none;
-      outline:none;
-    }
-    .modal-box button{
-      width:100%;
-      padding:12px;
-      font-weight:bold;
-      background:#fff;
-      color:#000;
-      cursor:pointer;
-      border:none;
-    }
-    .close{
-      color:#fff;
-      text-align:right;
-      cursor:pointer;
-      font-size:14px;
-    }
-  </style>
 </head>
 
 <body>
@@ -87,7 +36,7 @@
   </div>
 </nav>
 
-<!-- ================= HERO ================= -->
+<!-- ================= HERO WITH SLIDER ================= -->
 <section class="hero" id="home">
 
   <div class="slider">
@@ -106,9 +55,8 @@
       IELTS Academic | General Training | Life Skills
     </p>
 
-    <!-- FIXED BUTTONS -->
-    <a href="#booking" class="btn-main">Create Account</a>
-    <a href="check-result.html" class="btn">Check Your IELTS Result</a>
+    <!-- ✅ ONLY ONE BUTTON HERE -->
+    <a href="#booking" class="btn-main">BOOK YOUR FIRST TEST</a>
   </div>
 
 </section>
@@ -129,20 +77,29 @@
 
 <!-- ================= BOOKING ================= -->
 <section class="booking" id="booking">
-  <h2>Book Your Test</h2>
-  <p>Please create your account first to book your test.</p>
+  <h2>BOOK YOUR FIRST TEST</h2>
+  <p>Please create your account first to book your first test.</p>
+
+  <!-- ✅ CREATE ACCOUNT BUTTON ONLY HERE -->
+  <a href="#" class="btn-main">Create Account</a>
 </section>
 
 <!-- ================= CONTACT ================= -->
 <section class="contact" id="contact">
   <h2>SIA-PORTAL</h2>
-  <p>📞 +92 304 5931881</p>
-  <p>📧 siaportal0@gmail.com</p>
-  <p>📍 Raj Ali Plaza, Dinga Road, Kharian</p>
 
-  <iframe src="https://maps.google.com/maps?q=Raj%20Ali%20Plaza%20Kharian&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
+  <div class="contact-box">
+    <p>📞 +92 304 5931881</p>
+    <p>📧 siaportal0@gmail.com</p>
+    <p>📍 Raj Ali Plaza, Dinga Road, Kharian</p>
+  </div>
+
+  <iframe
+    src="https://maps.google.com/maps?q=Raj%20Ali%20Plaza%20Kharian&t=&z=13&ie=UTF8&iwloc=&output=embed">
+  </iframe>
 </section>
 
+<!-- ================= FOOTER ================= -->
 <footer>
   <p>© 2026 SIA-IELTS-BOOKING. All rights reserved.</p>
 </footer>
@@ -176,8 +133,12 @@
     else if(v.includes("contact")) contact.scrollIntoView({behavior:"smooth"});
   }
 
-  function openAdmin(){ document.getElementById("adminModal").style.display="flex"; }
-  function closeAdmin(){ document.getElementById("adminModal").style.display="none"; }
+  function openAdmin(){
+    document.getElementById("adminModal").style.display="flex";
+  }
+  function closeAdmin(){
+    document.getElementById("adminModal").style.display="none";
+  }
 
   function adminLogin(){
     if(
