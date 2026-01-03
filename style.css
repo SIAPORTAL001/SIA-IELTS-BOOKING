@@ -346,3 +346,53 @@ body.modal-open footer{
   cursor:pointer;
   font-size:16px;
 }
+.create-account-section{
+  padding:80px 20px;
+  text-align:center;
+  background:#f7f7f7;
+}
+
+.create-account-section h2{
+  font-size:32px;
+  margin-bottom:10px;
+}
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.8);
+  z-index:9999;
+  justify-content:center;
+  align-items:center;
+}
+
+.modal-box{
+  background:#fff;
+  padding:30px;
+  width:90%;
+  max-width:400px;
+  border-radius:12px;
+}
+
+.modal-box input{
+  width:100%;
+  padding:12px;
+  margin:8px 0;
+}
+
+.btn-white{
+  width:100%;
+  padding:12px;
+  background:#fff;
+  color:#000;
+  border:2px solid #000;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.close{
+  text-align:right;
+  cursor:pointer;
+  font-size:20px;
+}
