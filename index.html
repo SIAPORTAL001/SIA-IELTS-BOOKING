@@ -50,9 +50,18 @@
     </p>
 
     <!-- ✅ ONLY ONE BUTTON HERE -->
-    <a href="javascript:void(0)" class="btn-main" onclick="openBookTest()">BOOK YOUR FIRST TEST</a>
+    <button class="btn-main" onclick="scrollToCreateAccount()">
+  BOOK YOUR FIRST TEST
+</button>
   </div>
 
+<section id="createAccount" class="create-account-section">
+  <h2>Create Your Account</h2>
+  <p>Before booking your test, please create your account</p>
+
+  <button class="btn-outline" onclick="openSignup()">
+    CREATE YOUR ACCOUNT
+  </button>
 </section>
 
 <!-- ================= SERVICES ================= -->
@@ -148,13 +157,40 @@
     <button onclick="adminLogin()">LOGIN</button>
   </div>
 </div>
+<!-- ============ SIGNUP MODAL ============ -->
+<div class="modal" id="signupModal">
+  <div class="modal-box">
+    <div class="close" onclick="closeSignup()">×</div>
 
+    <h2>Create Account</h2>
+
+    <input type="text" id="name" placeholder="Name">
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Password">
+    <input type="password" id="confirmPassword" placeholder="Confirm Password">
+
+    <div class="captcha-box">
+      <input type="checkbox" id="human"> Confirm you are human
+    </div>
+
+    <button class="btn-white" onclick="signup()">
+      SIGN UP
+    </button>
+  </div>
+</div>
 <!-- ================= JAVASCRIPT ================= -->
 <script>
+  // MOBILE MENU
   const menu = document.getElementById("mobile-menu");
   const navLinks = document.querySelector(".nav-links");
-  menu.addEventListener("click", () => navLinks.classList.toggle("active"));
 
+  if(menu){
+    menu.addEventListener("click", () => {
+      navLinks.classList.toggle("active");
+    });
+  }
+
+  // SEARCH
   function searchPage(){
     const v = searchInput.value.toLowerCase();
     if(v.includes("service")) services.scrollIntoView({behavior:"smooth"});
@@ -162,55 +198,73 @@
     else if(v.includes("contact")) contact.scrollIntoView({behavior:"smooth"});
   }
 
-  <script>
-function openAdmin(){
-  document.body.classList.add("modal-open");
-  document.getElementById("adminModal").style.display="flex";
-}
+  // ADMIN MODAL
+  function openAdmin(){
+    document.body.classList.add("modal-open");
+    document.getElementById("adminModal").style.display = "flex";
+  }
 
-function closeAdmin(){
-  document.body.classList.remove("modal-open");
-  document.getElementById("adminModal").style.display="none";
-}
+  function closeAdmin(){
+    document.body.classList.remove("modal-open");
+    document.getElementById("adminModal").style.display = "none";
+  }
+
+  function adminLogin(){
+    alert("Admin login demo");
+  }
+
+  // SIGNUP MODAL
+  function openSignup(){
+    document.getElementById("signupModal").style.display = "flex";
+  }
+
+  function closeSignup(){
+    document.getElementById("signupModal").style.display = "none";
+  }
+
+  function signup(){
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const pass = document.getElementById("password").value;
+    const cpass = document.getElementById("confirmPassword").value;
+    const human = document.getElementById("human").checked;
+
+    if(!name || !email || !pass || !cpass){
+      alert("Please fill all fields");
+      return;
+    }
+
+    if(pass !== cpass){
+      alert("Passwords do not match");
+      return;
+    }
+
+    if(!human){
+      alert("Please confirm you are human");
+      return;
+    }
+
+    alert(
+      "Congratulations!\n\n" +
+      "Your account has been created.\n" +
+      "Go and Book your first test.\n\n" +
+      "Best regards\nSIA-PORTAL"
+    );
+
+    closeSignup();
+  }
+
+  // BOOK TEST (FUTURE USE – SAFE)
   function openBookTest(){
-  document.getElementById("bookTestModal").style.display = "flex";
-}
-
-function closeBookTest(){
-  document.getElementById("bookTestModal").style.display = "none";
-}
-
-// Disable Friday, Saturday, Sunday
-document.getElementById("testDate").addEventListener("change", function(){
-  const d = new Date(this.value);
-  const day = d.getDay(); // 0=Sun,5=Fri,6=Sat
-
-  if(day === 0 || day === 5 || day === 6){
-    alert("Friday, Saturday & Sunday are not available");
-    this.value = "";
-  }
-});
-
-function bookNow(){
-  const test = document.getElementById("testType").value;
-  const date = document.getElementById("testDate").value;
-  const time = document.getElementById("testTime").value;
-
-  if(!test || !date || !time){
-    alert("Please complete all selections");
-    return;
+    const modal = document.getElementById("bookTestModal");
+    if(modal) modal.style.display = "flex";
   }
 
-  alert(
-    "Test Booked Successfully!\n\n" +
-    "Test: " + test +
-    "\nDate: " + date +
-    "\nTime: " + time
-  );
-
-  closeBookTest();
-}
-</script>
+  function closeBookTest(){
+    const modal = document.getElementById("bookTestModal");
+    if(modal) modal.style.display = "none";
+  }
+      </script>
 
 </body>
 </html>
