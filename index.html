@@ -133,24 +133,16 @@
     else if(v.includes("contact")) contact.scrollIntoView({behavior:"smooth"});
   }
 
-  function openAdmin(){
-    document.getElementById("adminModal").style.display="flex";
-  }
-  function closeAdmin(){
-    document.getElementById("adminModal").style.display="none";
-  }
+  <script>
+function openAdmin(){
+  document.body.classList.add("modal-open");
+  document.getElementById("adminModal").style.display="flex";
+}
 
-  function adminLogin(){
-    if(
-      adminEmail.value==="siaportal0@gmail.com" &&
-      adminPass.value==="SIAPORTAL@123"
-    ){
-      localStorage.setItem("SIA_ADMIN_LOGIN","true");
-      window.location.href="admin-result-entry.html";
-    }else{
-      alert("Invalid Admin Credentials");
-    }
-  }
+function closeAdmin(){
+  document.body.classList.remove("modal-open");
+  document.getElementById("adminModal").style.display="none";
+}
 </script>
 
 </body>
