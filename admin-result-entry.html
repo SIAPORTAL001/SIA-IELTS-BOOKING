@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SIA IELTS Result Entry</title>
+
+<style>
+body{
+  font-family:Arial, sans-serif;
+  background:#eaeaea;
+}
+.container{
+  width:850px;
+  margin:30px auto;
+  background:#fff;
+  padding:25px;
+  box-shadow:0 5px 15px rgba(0,0,0,.2);
+}
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+}
+.header-right{
+  text-align:right;
+}
+.header-right h1{
+  margin:0;
+  font-size:26px;
+  font-weight:bold;
+}
+.header-right p{
+  margin:3px 0;
+  font-weight:bold;
+}
+.note{
+  font-size:11px;
+  margin-top:10px;
+}
+.section-title{
+  margin-top:25px;
+  font-weight:bold;
+  border-bottom:2px solid #000;
+}
+.row{
+  display:flex;
+  gap:10px;
+  margin-top:8px;
+}
+.box{
+  flex:1;
+}
+input{
+  width:100%;
+  padding:7px;
+  border:1px solid #000;
+}
+.photo-box{
+  width:130px;
+  height:160px;
+  border:1px solid #000;
+}
+video, canvas{
+  width:130px;
+  height:160px;
+}
+button{
+  padding:8px 12px;
+  margin-top:8px;
+  font-weight:bold;
+  cursor:pointer;
+}
+.result-grid{
+  display:grid;
+  grid-template-columns: repeat(6,1fr);
+  gap:8px;
+}
+.big-box{
+  border:1px solid #000;
+  height:70px;
+}
+.footer{
+  display:flex;
+  justify-content:space-between;
+  margin-top:20px;
+}
+</style>
+</head>
+
+<body>
+
+<script>
+if(localStorage.getItem("SIA_ADMIN_LOGIN")!=="true"){
+  window.location.href="admin-login.html";
+}
+</script>
+
+<div class="container">
+
+<div class="header">
+  <div></div>
+  <div class="header-right">
+    <h1>IELTS™</h1>
+    <p>TEST REPORT FORM</p>
+    <div class="note">
+      This Test Report Form is valid for two years from the test date.
+    </div>
+  </div>
+</div>
+
+<!-- Candidate Numbers -->
+<div class="row">
+  <div class="box">Centre Number<br><input value="SIA"></div>
+  <div class="box">Date<br><input type="date"></div>
+  <div class="box">Candidate Number<br><input id="candNo" readonly></div>
+</div>
+
+<!-- Candidate Details -->
+<div class="section-title">Candidate Details</div>
+
+<div class="row">
+  <div class="box">Family Name<br><input id="family"></div>
+  <div class="box">First Name<br><input id="first"></div>
+  <div class="photo-box">
+    <video id="video" autoplay></video>
+    <canvas id="canvas" style="display:none"></canvas>
+  </div>
+</div>
+
+<button onclick="capture()">Capture Photo</button>
+
+<div class="row">
+  <div class="box">Candidate CNIC<br><input id="cnic"></div>
+  <div class="box">Date of Birth<br><input type="date"></div>
+  <div class="box">Sex (M/F)<br><input></div>
+  <div class="box">Scheme Code<br><input></div>
+</div>
+
+<div class="row">
+  <div class="box">Country or Region of Origin<br><input></div>
+</div>
+
+<div class="row">
+  <div class="box">Country of Nationality<br><input></div>
+</div>
+
+<div class="row">
+  <div class="box">First Language<br><input></div>
+</div>
+
+<!-- Test Results -->
+<div class="section-title">Test Results</div>
+
+<div class="result-grid">
+  <input placeholder="Listening">
+  <input placeholder="Reading">
+  <input placeholder="Writing">
+  <input placeholder="Speaking">
+  <input placeholder="Overall Band">
+  <input placeholder="CEFR Level">
+</div>
+
+<!-- Admin Comments -->
+<div class="section-title">Administrator Comments</div>
+<div class="big-box"></div>
+
+<div class="footer">
+  <div>Date<br><input type="date"></div>
+  <div>Test Report Form Number<br><input id="trfNo" readonly></div>
+</div>
+
+<button onclick="generatePDF()">Generate Official TRF PDF</button>
+
+</div>
+
+<!-- jsPDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script>
+// Webcam
+navigator.mediaDevices.getUserMedia({video:true})
+.then(stream=>{
+  video.srcObject=stream;
+});
+
+function capture(){
+  canvas.style.display="block";
+  canvas.getContext("2d").drawImage(video,0,0,130,160);
+}
+
+// Auto numbers
+document.getElementById("candNo").value =
+"SIA"+Math.floor(100000+Math.random()*900000);
+
+document.getElementById("trfNo").value =
+"SIA-"+Date.now();
+
+// PDF
+function generatePDF(){
+  const {jsPDF}=window.jspdf;
+  const pdf=new jsPDF();
+  pdf.text("OFFICIAL IELTS TEST REPORT FORM",105,20,{align:"center"});
+  pdf.text("Candidate Name: "+family.value+" "+first.value,20,40);
+  pdf.text("CNIC: "+cnic.value,20,50);
+  pdf.text("Candidate Number: "+candNo.value,20,60);
+  pdf.text("TRF No: "+trfNo.value,20,70);
+  pdf.save("SIA-IELTS-TRF.pdf");
+}
+</script>
+
+</body>
+</html>
