@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SIA Candidate Registration</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<section class="registration-form">
+
+  <!-- LOGO -->
+  <img src="images/logo.png" class="form-logo">
+
+  <!-- HEADING -->
+  <h1>
+    Welcome to <br>
+    <strong>New SIA Candidate Registration Form</strong>
+  </h1>
+
+  <!-- FORM -->
+  <form id="candidateForm">
+
+    <input type="text" placeholder="Student Name" required>
+    <input type="text" placeholder="Parents Name" required>
+    <input type="text" placeholder="CNIC No" required>
+    <input type="text" placeholder="Address" required>
+    <input type="text" placeholder="Phone No" required>
+    <input type="text" placeholder="Course Name" required>
+    <input type="text" placeholder="Course Code" required>
+    <input type="text" placeholder="Course Purpose" required>
+
+    <!-- PDF BUTTON -->
+    <button type="button" onclick="generatePDF()">
+      Generate PDF Form
+    </button>
+
+  </form>
+
+</section>
+
+<!-- PDF SCRIPT -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script>
+function generatePDF() {
+  const { jsPDF } = window.jspdf;
+  const pdf = new jsPDF();
+
+  const inputs = document.querySelectorAll("input");
+  let y = 20;
+
+  pdf.setFontSize(16);
+  pdf.text("SIA Candidate Registration Form", 20, y);
+  y += 12;
+
+  inputs.forEach(input => {
+    pdf.setFontSize(12);
+    pdf.text(input.placeholder + ": " + input.value, 20, y);
+    y += 8;
+  });
+
+  pdf.save("SIA-Candidate-Registration.pdf");
+}
+</script>
+
+</body>
+</html>
