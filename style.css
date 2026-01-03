@@ -319,3 +319,34 @@ footer {
     width: 100%;
   }
 }
+/* 🔥 MOBILE LAYOUT FIX */
+@media (max-width: 768px) {
+
+  .hero {
+    display: block;
+    height: auto;
+  }
+
+  .slider,
+  .slide {
+    width: 100%;
+    height: 60vh;
+  }
+
+  .hero-content {
+    position: absolute;
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .services {
+    display: block;
+    padding: 40px 20px;
+  }
+
+  .service-box {
+    flex-direction: column;
+    align-items: center;
+  }
+}
