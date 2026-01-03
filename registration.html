@@ -1,9 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>SIA Candidate Registration</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>SIA Exam Registration</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f2f2f2;
+}
+
+.registration-form {
+  max-width: 420px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.form-logo {
+  width: 90px;
+  margin-bottom: 10px;
+}
+
+h1 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #fafafa;
+}
+
+button {
+  background: #f5c400;
+  color: #000;
+  border: none;
+  padding: 12px;
+  width: 100%;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+</style>
 </head>
 
 <body>
@@ -15,145 +62,85 @@
 
   <!-- HEADING -->
   <h1>
-    Welcome to <br>
-    <strong>New SIA Candidate Registration Form</strong>
+    Welcome to<br>
+    <strong>SIA-EXAM-REGISTRATION-FORM</strong>
   </h1>
 
   <!-- FORM -->
-  <form id="candidateForm" onsubmit="return false;">
+  <form id="examForm">
 
-    <input type="text" id="studentName" placeholder="Student Name" required>
-    <input type="text" id="parentName" placeholder="Parents Name" required>
-    <input type="text" id="cnic" placeholder="CNIC No" required>
-    <input type="text" id="address" placeholder="Address" required>
-    <input type="text" id="phone" placeholder="Phone No" required>
-    <input type="text" id="courseName" placeholder="Course Name" required>
-    <input type="text" id="courseCode" placeholder="Course Code" required>
-    <input type="text" id="coursePurpose" placeholder="Course Purpose" required>
+    <input type="text" id="name" placeholder="Candidate Name" required>
+    <input type="text" id="father" placeholder="Candidate Parents Name" required>
+    <input type="date" id="dob" required>
+    <input type="text" id="address" placeholder="Candidate Address" required>
+    <input type="text" id="cnic" placeholder="Candidate CNIC No" required>
+
+    <select id="sex" required>
+      <option value="">Candidate Sex</option>
+      <option>Male</option>
+      <option>Female</option>
+    </select>
+
+    <input type="text" id="examId" placeholder="Candidate Exam ID" required>
+    <input type="text" id="examCode" placeholder="Candidate Exam Code" required>
 
     <button type="button" onclick="generatePDF()">
-      Generate PDF Form
+      Generate Exam PDF
     </button>
 
   </form>
 
-  <hr style="margin:30px 0">
-
-  <!-- CHECK SECTION -->
-  <h2>Check Candidate Registration</h2>
-
-  <input type="text" id="searchCnic" placeholder="Enter CNIC Number">
-  
-  <button type="button" onclick="checkCandidate()">
-    Check Candidate Detail
-  </button>
-
-  <button type="button" onclick="deleteCandidate()" style="background:red;">
-    Delete Candidate Data
-  </button>
-
 </section>
 
-<!-- ================= PDF + STORAGE SCRIPT ================= -->
-
+<!-- jsPDF -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <script>
-/* ===== SAVE DATA ===== */
-function saveCandidateData(data) {
-  localStorage.setItem("SIA_CANDIDATE_" + data.cnic, JSON.stringify(data));
-}
-
-/* ===== GENERATE PDF ===== */
 function generatePDF() {
-
-  const data = {
-    studentName: studentName.value,
-    parentName: parentName.value,
-    cnic: cnic.value,
-    address: address.value,
-    phone: phone.value,
-    courseName: courseName.value,
-    courseCode: courseCode.value,
-    coursePurpose: coursePurpose.value
-  };
-
-  if (!data.cnic) {
-    alert("CNIC is required");
-    return;
-  }
-
-  saveCandidateData(data);
 
   const { jsPDF } = window.jspdf;
   const pdf = new jsPDF();
+
+  // AUTO GENERATED NUMBERS
+  const uniqueNo = "SIA-" + Math.random().toString(36).substring(2,10).toUpperCase();
+  const refNo = "REF-" + Date.now().toString().slice(-8);
 
   const logo = new Image();
   logo.src = "images/logo.png";
 
   logo.onload = function () {
 
-    pdf.setFillColor(245, 196, 0);
-    pdf.rect(0, 0, 210, 40, "F");
+    // HEADER
+    pdf.setFillColor(245,196,0);
+    pdf.rect(0,0,210,35,"F");
+    pdf.addImage(logo,"PNG",85,6,40,20);
 
-    pdf.addImage(logo, "PNG", 85, 8, 40, 20);
-
-    pdf.setFontSize(18);
-    pdf.text(
-      "Welcome to New SIA Candidate Registration Form",
-      105, 55,
-      { align: "center" }
-    );
+    pdf.setFontSize(16);
+    pdf.setTextColor(0,0,0);
+    pdf.text("SIA EXAM REGISTRATION FORM",105,45,{align:"center"});
 
     pdf.setFontSize(12);
-    let y = 75;
+    let y = 60;
 
-    for (let key in data) {
-      pdf.rect(20, y - 6, 170, 10);
-      pdf.text(key.replace(/([A-Z])/g, ' $1') + ": " + data[key], 25, y);
+    function draw(label,value){
+      pdf.rect(20,y-6,170,10);
+      pdf.text(label + ": " + value,25,y);
       y += 14;
     }
 
-    pdf.save("SIA-Candidate-Registration.pdf");
-    alert("PDF generated & data saved ✔");
+    draw("Candidate Name", name.value);
+    draw("Parents Name", father.value);
+    draw("Date of Birth", dob.value);
+    draw("Address", address.value);
+    draw("CNIC", cnic.value);
+    draw("Sex", sex.value);
+    draw("Exam ID", examId.value);
+    draw("Exam Code", examCode.value);
+    draw("Candidate Unique No", uniqueNo);
+    draw("Candidate Reference No", refNo);
+
+    pdf.save("SIA-Exam-Registration.pdf");
   };
-}
-
-/* ===== CHECK DATA ===== */
-function checkCandidate() {
-  const cnic = document.getElementById("searchCnic").value;
-  const saved = localStorage.getItem("SIA_CANDIDATE_" + cnic);
-
-  if (!saved) {
-    alert("No record found");
-    return;
-  }
-
-  const data = JSON.parse(saved);
-
-  studentName.value = data.studentName;
-  parentName.value = data.parentName;
-  document.getElementById("cnic").value = data.cnic;
-  address.value = data.address;
-  phone.value = data.phone;
-  courseName.value = data.courseName;
-  courseCode.value = data.courseCode;
-  coursePurpose.value = data.coursePurpose;
-
-  alert("Candidate data loaded ✔");
-}
-
-/* ===== DELETE DATA ===== */
-function deleteCandidate() {
-  const cnic = document.getElementById("searchCnic").value;
-
-  if (!cnic) {
-    alert("Enter CNIC first");
-    return;
-  }
-
-  localStorage.removeItem("SIA_CANDIDATE_" + cnic);
-  alert("Candidate data deleted ❌");
 }
 </script>
 
