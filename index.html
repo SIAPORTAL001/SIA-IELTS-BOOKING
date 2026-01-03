@@ -36,9 +36,8 @@
   </div>
 </nav>
 
-<!-- ================= HERO WITH SLIDER ================= -->
+<!-- ================= HERO ================= -->
 <section class="hero" id="home">
-
   <div class="overlay"></div>
 
   <div class="hero-content">
@@ -49,12 +48,13 @@
       IELTS Academic | General Training | Life Skills
     </p>
 
-    <!-- ✅ ONLY ONE BUTTON HERE -->
     <button class="btn-main" onclick="scrollToCreateAccount()">
-  BOOK YOUR FIRST TEST
-</button>
+      BOOK YOUR FIRST TEST
+    </button>
   </div>
+</section>
 
+<!-- ================= CREATE ACCOUNT SECTION ================= -->
 <section id="createAccount" class="create-account-section">
   <h2>Create Your Account</h2>
   <p>Before booking your test, please create your account</p>
@@ -83,8 +83,7 @@
   <h2>BOOK YOUR FIRST TEST</h2>
   <p>Please create your account first to book your first test.</p>
 
-  <!-- ✅ CREATE ACCOUNT BUTTON ONLY HERE -->
-  <a href="#" class="btn-main">Create Account</a>
+  <a href="#" class="btn-main" onclick="openSignup()">Create Account</a>
 </section>
 
 <!-- ================= CONTACT ================= -->
@@ -101,42 +100,7 @@
     src="https://maps.google.com/maps?q=Raj%20Ali%20Plaza%20Kharian&t=&z=13&ie=UTF8&iwloc=&output=embed">
   </iframe>
 </section>
-<!-- ================= BOOK TEST MODAL ================= -->
-<div class="modal" id="bookTestModal">
-  <div class="modal-box large">
-    <span class="close" onclick="closeBookTest()">✖</span>
 
-    <h2>Book Your First Test</h2>
-
-    <!-- STEP 1 -->
-    <label>Select your preferred test</label>
-    <select id="testType">
-      <option value="">-- Select Test --</option>
-      <option>IELTS Academic</option>
-      <option>IELTS General Training</option>
-      <option>IELTS Life Skill</option>
-    </select>
-
-    <!-- STEP 2 -->
-    <label>Select preferred test date</label>
-    <input type="date" id="testDate">
-
-    <!-- STEP 3 -->
-    <label>Select preferred test time</label>
-    <select id="testTime">
-      <option value="">-- Select Time --</option>
-      <option>10:00 AM</option>
-      <option>11:00 AM</option>
-      <option>12:00 PM</option>
-      <option>01:00 PM</option>
-      <option>02:00 PM</option>
-      <option>03:00 PM</option>
-      <option>04:00 PM</option>
-    </select>
-
-    <button class="btn-main" onclick="bookNow()">BOOK NOW</button>
-  </div>
-</div>
 <!-- ================= FOOTER ================= -->
 <footer>
   <p>© 2026 SIA-IELTS-BOOKING. All rights reserved.</p>
@@ -149,15 +113,16 @@
     <h2>Admin Login</h2>
 
     <label>Email</label>
-    <input type="email" id="adminEmail">
+    <input type="email">
 
     <label>Password</label>
-    <input type="password" id="adminPass">
+    <input type="password">
 
     <button onclick="adminLogin()">LOGIN</button>
   </div>
 </div>
-<!-- ============ SIGNUP MODAL ============ -->
+
+<!-- ================= SIGNUP MODAL ================= -->
 <div class="modal" id="signupModal">
   <div class="modal-box">
     <div class="close" onclick="closeSignup()">×</div>
@@ -173,98 +138,96 @@
       <input type="checkbox" id="human"> Confirm you are human
     </div>
 
-    <button class="btn-white" onclick="signup()">
-      SIGN UP
-    </button>
+    <button class="btn-white" onclick="signup()">SIGN UP</button>
   </div>
 </div>
+
 <!-- ================= JAVASCRIPT ================= -->
 <script>
-  // MOBILE MENU
-  const menu = document.getElementById("mobile-menu");
-  const navLinks = document.querySelector(".nav-links");
+/* ===== MOBILE MENU ===== */
+const menu = document.getElementById("mobile-menu");
+const navLinks = document.querySelector(".nav-links");
 
-  if(menu){
-    menu.addEventListener("click", () => {
-      navLinks.classList.toggle("active");
-    });
+if(menu){
+  menu.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
+  });
+}
+
+/* ===== SCROLL TO CREATE ACCOUNT ===== */
+function scrollToCreateAccount(){
+  document.getElementById("createAccount").scrollIntoView({
+    behavior: "smooth"
+  });
+}
+
+/* ===== SEARCH (SAFE FIX) ===== */
+function searchPage(){
+  const v = document.getElementById("searchInput").value.toLowerCase();
+
+  if(v.includes("service")){
+    document.getElementById("services").scrollIntoView({behavior:"smooth"});
+  }else if(v.includes("book")){
+    document.getElementById("booking").scrollIntoView({behavior:"smooth"});
+  }else if(v.includes("contact")){
+    document.getElementById("contact").scrollIntoView({behavior:"smooth"});
+  }
+}
+
+/* ===== ADMIN MODAL ===== */
+function openAdmin(){
+  document.getElementById("adminModal").style.display = "flex";
+}
+
+function closeAdmin(){
+  document.getElementById("adminModal").style.display = "none";
+}
+
+function adminLogin(){
+  alert("Admin login demo");
+}
+
+/* ===== SIGNUP MODAL ===== */
+function openSignup(){
+  document.getElementById("signupModal").style.display = "flex";
+}
+
+function closeSignup(){
+  document.getElementById("signupModal").style.display = "none";
+}
+
+function signup(){
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const pass = document.getElementById("password").value;
+  const cpass = document.getElementById("confirmPassword").value;
+  const human = document.getElementById("human").checked;
+
+  if(!name || !email || !pass || !cpass){
+    alert("Please fill all fields");
+    return;
   }
 
-  // SEARCH
-  function searchPage(){
-    const v = searchInput.value.toLowerCase();
-    if(v.includes("service")) services.scrollIntoView({behavior:"smooth"});
-    else if(v.includes("book")) booking.scrollIntoView({behavior:"smooth"});
-    else if(v.includes("contact")) contact.scrollIntoView({behavior:"smooth"});
+  if(pass !== cpass){
+    alert("Passwords do not match");
+    return;
   }
 
-  // ADMIN MODAL
-  function openAdmin(){
-    document.body.classList.add("modal-open");
-    document.getElementById("adminModal").style.display = "flex";
+  if(!human){
+    alert("Please confirm you are human");
+    return;
   }
 
-  function closeAdmin(){
-    document.body.classList.remove("modal-open");
-    document.getElementById("adminModal").style.display = "none";
-  }
+  alert(
+    "Congratulations!\n\n" +
+    "Your account has been created.\n" +
+    "Go and Book your first test.\n\n" +
+    "Best regards\nSIA-PORTAL"
+  );
 
-  function adminLogin(){
-    alert("Admin login demo");
-  }
-
-  // SIGNUP MODAL
-  function openSignup(){
-    document.getElementById("signupModal").style.display = "flex";
-  }
-
-  function closeSignup(){
-    document.getElementById("signupModal").style.display = "none";
-  }
-
-  function signup(){
-    const name = document.getElementById("name").value;
-    const email = document.getElementById("email").value;
-    const pass = document.getElementById("password").value;
-    const cpass = document.getElementById("confirmPassword").value;
-    const human = document.getElementById("human").checked;
-
-    if(!name || !email || !pass || !cpass){
-      alert("Please fill all fields");
-      return;
-    }
-
-    if(pass !== cpass){
-      alert("Passwords do not match");
-      return;
-    }
-
-    if(!human){
-      alert("Please confirm you are human");
-      return;
-    }
-
-    alert(
-      "Congratulations!\n\n" +
-      "Your account has been created.\n" +
-      "Go and Book your first test.\n\n" +
-      "Best regards\nSIA-PORTAL"
-    );
-
-    closeSignup();
-  }
-
-  // BOOK TEST (FUTURE USE – SAFE)
-  function openBookTest(){
-    const modal = document.getElementById("bookTestModal");
-    if(modal) modal.style.display = "flex";
-  }
-
-  function closeBookTest(){
-    const modal = document.getElementById("bookTestModal");
-    if(modal) modal.style.display = "none";
-  }
-      </script>
+  closeSignup();
+}
+</script>
 
 </body>
 </html>
