@@ -2,43 +2,30 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>SIA IELTS Result Entry</title>
+<title>SIA IELTS – Admin Result Entry</title>
 
 <style>
 body{
-  font-family:Arial, sans-serif;
+  font-family: Arial, sans-serif;
   background:#eaeaea;
 }
 .container{
-  width:850px;
+  width:900px;
   margin:30px auto;
   background:#fff;
   padding:25px;
-  box-shadow:0 5px 15px rgba(0,0,0,.2);
+  box-shadow:0 5px 20px rgba(0,0,0,.2);
 }
 .header{
   display:flex;
   justify-content:space-between;
 }
-.header-right{
-  text-align:right;
-}
-.header-right h1{
+.header h1{
   margin:0;
-  font-size:26px;
-  font-weight:bold;
+  font-size:32px;
 }
-.header-right p{
-  margin:3px 0;
+.header small{
   font-weight:bold;
-}
-.note{
-  font-size:11px;
-}
-.section-title{
-  margin-top:25px;
-  font-weight:bold;
-  border-bottom:2px solid #000;
 }
 .row{
   display:flex;
@@ -48,39 +35,53 @@ body{
 .box{
   flex:1;
 }
+label{
+  font-size:12px;
+  font-weight:bold;
+}
 input{
   width:100%;
-  padding:7px;
+  padding:6px;
   border:1px solid #000;
 }
 .photo-box{
-  width:130px;
-  height:160px;
+  width:140px;
+  height:180px;
   border:1px solid #000;
 }
 video,canvas{
-  width:130px;
-  height:160px;
+  width:140px;
+  height:180px;
 }
-button{
-  padding:8px 12px;
-  margin-top:10px;
+.section-title{
+  margin-top:25px;
   font-weight:bold;
-  cursor:pointer;
+  border-bottom:2px solid #000;
 }
 .result-grid{
   display:grid;
-  grid-template-columns:repeat(6,1fr);
+  grid-template-columns: repeat(6,1fr);
   gap:8px;
+  margin-top:10px;
 }
 .big-box{
   border:1px solid #000;
-  height:70px;
+  height:90px;
 }
 .footer{
   display:flex;
   justify-content:space-between;
   margin-top:20px;
+}
+button{
+  padding:10px 18px;
+  font-weight:bold;
+  cursor:pointer;
+}
+.upload-btn{
+  background:#000;
+  color:#fff;
+  float:right;
 }
 </style>
 </head>
@@ -95,28 +96,45 @@ if(localStorage.getItem("SIA_ADMIN_LOGIN")!=="true"){
 
 <div class="container">
 
+<!-- HEADER -->
 <div class="header">
-  <div></div>
-  <div class="header-right">
+  <div>
     <h1>IELTS™</h1>
-    <p>TEST REPORT FORM</p>
-    <div class="note">
-      This Test Report Form is valid for two years from the test date.
-    </div>
+    <small>TEST REPORT FORM</small>
+  </div>
+  <div>
+    <small>ACADEMIC</small>
   </div>
 </div>
 
+<!-- TOP NUMBERS -->
 <div class="row">
-  <div class="box">Centre Number<br><input value="SIA" readonly></div>
-  <div class="box">Date<br><input type="date"></div>
-  <div class="box">Candidate Number<br><input id="candNo" readonly></div>
+  <div class="box">
+    <label>Centre Number</label>
+    <input value="SIA" readonly>
+  </div>
+  <div class="box">
+    <label>Date</label>
+    <input type="date">
+  </div>
+  <div class="box">
+    <label>Candidate Number</label>
+    <input id="candNo" readonly>
+  </div>
 </div>
 
+<!-- DETAILS -->
 <div class="section-title">Candidate Details</div>
 
 <div class="row">
-  <div class="box">Family Name<br><input id="family"></div>
-  <div class="box">First Name<br><input id="first"></div>
+  <div class="box">
+    <label>Family Name</label>
+    <input id="family">
+  </div>
+  <div class="box">
+    <label>First Name</label>
+    <input id="first">
+  </div>
   <div class="photo-box">
     <video id="video" autoplay></video>
     <canvas id="canvas" style="display:none"></canvas>
@@ -126,24 +144,39 @@ if(localStorage.getItem("SIA_ADMIN_LOGIN")!=="true"){
 <button onclick="capture()">Capture Photo</button>
 
 <div class="row">
-  <div class="box">Candidate CNIC<br><input id="cnic"></div>
-  <div class="box">Date of Birth<br><input type="date"></div>
-  <div class="box">Sex (M/F)<br><input></div>
-  <div class="box">Scheme Code<br><input></div>
+  <div class="box">
+    <label>CNIC</label>
+    <input id="cnic">
+  </div>
+  <div class="box">
+    <label>Date of Birth</label>
+    <input type="date">
+  </div>
+  <div class="box">
+    <label>Sex</label>
+    <input>
+  </div>
+  <div class="box">
+    <label>Scheme Code</label>
+    <input value="Private Candidate">
+  </div>
 </div>
 
 <div class="row">
-  <div class="box">Country or Region of Origin<br><input></div>
+  <div class="box">
+    <label>Country / Region</label>
+    <input value="Pakistan">
+  </div>
 </div>
 
 <div class="row">
-  <div class="box">Country of Nationality<br><input></div>
+  <div class="box">
+    <label>First Language</label>
+    <input value="Urdu">
+  </div>
 </div>
 
-<div class="row">
-  <div class="box">First Language<br><input></div>
-</div>
-
+<!-- RESULTS -->
 <div class="section-title">Test Results</div>
 
 <div class="result-grid">
@@ -151,25 +184,34 @@ if(localStorage.getItem("SIA_ADMIN_LOGIN")!=="true"){
   <input id="reading" placeholder="Reading">
   <input id="writing" placeholder="Writing">
   <input id="speaking" placeholder="Speaking">
-  <input id="overall" placeholder="Overall Band" readonly>
-  <input id="cefr" placeholder="CEFR Level" readonly>
+  <input id="overall" placeholder="Overall" readonly>
+  <input id="cefr" placeholder="CEFR" readonly>
 </div>
 
+<!-- COMMENTS -->
 <div class="section-title">Administrator Comments</div>
 <div class="big-box"></div>
 
 <div class="footer">
-  <div>Date<br><input type="date"></div>
-  <div>Test Report Form Number<br><input id="trfNo" readonly></div>
+  <div>
+    <label>Date</label>
+    <input type="date">
+  </div>
+  <div>
+    <label>TRF Number</label>
+    <input id="trfNo" readonly>
+  </div>
 </div>
 
-<button onclick="generatePDF()">Generate Official TRF PDF</button>
+<button class="upload-btn" onclick="generatePDF()">Upload Result & Generate PDF</button>
 
 </div>
 
+<!-- jsPDF -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <script>
+// Webcam
 const video=document.getElementById("video");
 const canvas=document.getElementById("canvas");
 
@@ -178,18 +220,20 @@ navigator.mediaDevices.getUserMedia({video:true})
 
 function capture(){
   canvas.style.display="block";
-  canvas.getContext("2d").drawImage(video,0,0,130,160);
+  canvas.getContext("2d").drawImage(video,0,0,140,180);
 }
 
+// Auto IDs
 candNo.value="SIA"+Math.floor(100000+Math.random()*900000);
 trfNo.value="SIA-"+Date.now();
 
+// PDF + SAVE
 function generatePDF(){
-  const {jsPDF}=window.jspdf;
-  const pdf=new jsPDF();
+  const { jsPDF } = window.jspdf;
+  const pdf = new jsPDF();
 
-  const fullName=family.value+" "+first.value;
-  const cnicVal=cnic.value;
+  const fullName = family.value+" "+first.value;
+  const cnicVal = cnic.value;
 
   const l=+listening.value;
   const r=+reading.value;
@@ -197,13 +241,17 @@ function generatePDF(){
   const s=+speaking.value;
 
   const overall=((l+r+w+s)/4).toFixed(1);
+  overallInput=overall;
+  overallField=overall;
+
   let cefr="B1";
   if(overall>=6.5) cefr="C1";
   else if(overall>=6) cefr="B2";
 
-  document.getElementById("overall").value=overall;
-  document.getElementById("cefr").value=cefr;
+  overall.value=overall;
+  cefr.value=cefr;
 
+  // SAVE RESULT
   localStorage.setItem(
     "SIA_RESULT_"+cnicVal,
     JSON.stringify({
@@ -219,8 +267,9 @@ function generatePDF(){
     })
   );
 
-  pdf.text("OFFICIAL IELTS TEST REPORT FORM",20,20);
-  pdf.text("Candidate Name: "+fullName,20,40);
+  // PDF TEXT
+  pdf.text("IELTS TEST REPORT FORM",20,20);
+  pdf.text("Name: "+fullName,20,40);
   pdf.text("CNIC: "+cnicVal,20,50);
   pdf.text("Candidate No: "+candNo.value,20,60);
   pdf.text("TRF No: "+trfNo.value,20,70);
@@ -232,6 +281,10 @@ function generatePDF(){
 
   pdf.text("Overall Band: "+overall,20,140);
   pdf.text("CEFR Level: "+cefr,20,150);
+
+  // PHOTO
+  const img=canvas.toDataURL("image/png");
+  pdf.addImage(img,"PNG",150,35,40,55);
 
   pdf.save("SIA-IELTS-TRF.pdf");
 }
