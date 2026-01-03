@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>SIA IELTS Booking</title>
+<meta charset="UTF-8">
+<title>SIA IELTS Booking Portal</title>
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -15,11 +14,7 @@
   <div class="nav-container">
 
     <div class="logo">
-      <img src="images/logo.png" alt="SIA IELTS Logo">
-    </div>
-
-    <div class="menu-toggle" id="mobile-menu">
-      <span></span><span></span><span></span>
+      <img src="images/logo.png">
     </div>
 
     <ul class="nav-links">
@@ -29,9 +24,7 @@
       <li><a href="#" onclick="openAdmin()">Admin Login</a></li>
     </ul>
 
-    <div class="nav-search">
-      <input type="text" id="searchInput" placeholder="Search services..." onkeyup="searchPage()">
-    </div>
+    <input type="text" id="searchBar" placeholder="Search services..." class="search-bar">
 
   </div>
 </nav>
@@ -42,7 +35,6 @@
 
   <div class="hero-content">
     <h1>Welcome to the <span>SIA-EXAM-BOOKING-PORTAL</span></h1>
-
     <p>
       You can book your IELTS test here with confidentiality.<br>
       IELTS Academic | General Training | Life Skills
@@ -54,8 +46,8 @@
   </div>
 </section>
 
-<!-- ================= CREATE ACCOUNT SECTION ================= -->
-<section id="createAccount" class="create-account-section">
+<!-- ================= CREATE ACCOUNT ================= -->
+<section id="createAccount" class="create-account">
   <h2>Create Your Account</h2>
   <p>Before booking your test, please create your account</p>
 
@@ -67,23 +59,14 @@
 <!-- ================= SERVICES ================= -->
 <section id="services" class="services">
   <h2>Our Services</h2>
-  <p class="subtitle">We provide professional IELTS and language test services</p>
 
   <div class="service-box">
-    <div class="card">IELTS Preparation</div>
-    <div class="card">LanguageCert</div>
-    <div class="card">Oxford Test</div>
-    <div class="card">TOEFL Preparation</div>
-    <div class="card">Other Language Tests</div>
+    <div class="service-card">IELTS Preparation</div>
+    <div class="service-card">LanguageCert</div>
+    <div class="service-card">Oxford Test</div>
+    <div class="service-card">TOEFL Preparation</div>
+    <div class="service-card">Other Languages</div>
   </div>
-</section>
-
-<!-- ================= BOOKING ================= -->
-<section class="booking" id="booking">
-  <h2>BOOK YOUR FIRST TEST</h2>
-  <p>Please create your account first to book your first test.</p>
-
-  <a href="#" class="btn-main" onclick="openSignup()">Create Account</a>
 </section>
 
 <!-- ================= CONTACT ================= -->
@@ -96,137 +79,75 @@
     <p>📍 Raj Ali Plaza, Dinga Road, Kharian</p>
   </div>
 
-  <iframe
-    src="https://maps.google.com/maps?q=Raj%20Ali%20Plaza%20Kharian&t=&z=13&ie=UTF8&iwloc=&output=embed">
-  </iframe>
+  <iframe src="https://maps.google.com/maps?q=Raj%20Ali%20Plaza%20Kharian&output=embed"></iframe>
 </section>
 
-<!-- ================= FOOTER ================= -->
 <footer>
-  <p>© 2026 SIA-IELTS-BOOKING. All rights reserved.</p>
+  © 2026 SIA-IELTS-BOOKING — All Copyright Reserved
 </footer>
 
-<!-- ================= ADMIN LOGIN MODAL ================= -->
+<!-- ================= ADMIN LOGIN ================= -->
 <div class="modal" id="adminModal">
   <div class="modal-box">
-    <div class="close" onclick="closeAdmin()">✖</div>
+    <span class="close" onclick="closeAdmin()">✖</span>
     <h2>Admin Login</h2>
 
-    <label>Email</label>
-    <input type="email">
+    <input type="email" placeholder="Email">
+    <input type="password" placeholder="Password">
 
-    <label>Password</label>
-    <input type="password">
-
-    <button onclick="adminLogin()">LOGIN</button>
+    <button>LOGIN</button>
   </div>
 </div>
 
-<!-- ================= SIGNUP MODAL ================= -->
+<!-- ================= SIGNUP ================= -->
 <div class="modal" id="signupModal">
   <div class="modal-box">
-    <div class="close" onclick="closeSignup()">×</div>
-
+    <span class="close" onclick="closeSignup()">✖</span>
     <h2>Create Account</h2>
 
-    <input type="text" id="name" placeholder="Name">
-    <input type="email" id="email" placeholder="Email">
-    <input type="password" id="password" placeholder="Password">
-    <input type="password" id="confirmPassword" placeholder="Confirm Password">
+    <input type="text" placeholder="Name">
+    <input type="email" placeholder="Email">
+    <input type="password" placeholder="Password">
+    <input type="password" placeholder="Confirm Password">
 
-    <div class="captcha-box">
-      <input type="checkbox" id="human"> Confirm you are human
-    </div>
+    <label class="captcha">
+      <input type="checkbox"> Confirm you are human
+    </label>
 
-    <button class="btn-white" onclick="signup()">SIGN UP</button>
+    <button class="btn-white">SIGN UP</button>
   </div>
 </div>
 
 <!-- ================= JAVASCRIPT ================= -->
 <script>
-/* ===== MOBILE MENU ===== */
-const menu = document.getElementById("mobile-menu");
-const navLinks = document.querySelector(".nav-links");
+/* background auto slider */
+let bg = ["bg1.jpg","bg2.jpg","bg3.jpg"];
+let i = 0;
+setInterval(()=>{
+  document.body.style.background = `url(${bg[i]}) center/cover fixed`;
+  i = (i+1)%bg.length;
+},15000);
 
-if(menu){
-  menu.addEventListener("click", () => {
-    navLinks.classList.toggle("active");
+/* services animation */
+document.querySelectorAll(".service-card").forEach(card=>{
+  card.onclick=()=>card.classList.toggle("active");
+});
+
+/* search */
+document.getElementById("searchBar").onkeyup=function(){
+  let v=this.value.toLowerCase();
+  document.querySelectorAll(".service-card").forEach(c=>{
+    c.style.display=c.innerText.toLowerCase().includes(v)?"block":"none";
   });
-}
+};
 
-/* ===== SCROLL TO CREATE ACCOUNT ===== */
 function scrollToCreateAccount(){
-  document.getElementById("createAccount").scrollIntoView({
-    behavior: "smooth"
-  });
+  document.getElementById("createAccount").scrollIntoView({behavior:"smooth"});
 }
-
-/* ===== SEARCH (SAFE FIX) ===== */
-function searchPage(){
-  const v = document.getElementById("searchInput").value.toLowerCase();
-
-  if(v.includes("service")){
-    document.getElementById("services").scrollIntoView({behavior:"smooth"});
-  }else if(v.includes("book")){
-    document.getElementById("booking").scrollIntoView({behavior:"smooth"});
-  }else if(v.includes("contact")){
-    document.getElementById("contact").scrollIntoView({behavior:"smooth"});
-  }
-}
-
-/* ===== ADMIN MODAL ===== */
-function openAdmin(){
-  document.getElementById("adminModal").style.display = "flex";
-}
-
-function closeAdmin(){
-  document.getElementById("adminModal").style.display = "none";
-}
-
-function adminLogin(){
-  alert("Admin login demo");
-}
-
-/* ===== SIGNUP MODAL ===== */
-function openSignup(){
-  document.getElementById("signupModal").style.display = "flex";
-}
-
-function closeSignup(){
-  document.getElementById("signupModal").style.display = "none";
-}
-
-function signup(){
-  const name = document.getElementById("name").value;
-  const email = document.getElementById("email").value;
-  const pass = document.getElementById("password").value;
-  const cpass = document.getElementById("confirmPassword").value;
-  const human = document.getElementById("human").checked;
-
-  if(!name || !email || !pass || !cpass){
-    alert("Please fill all fields");
-    return;
-  }
-
-  if(pass !== cpass){
-    alert("Passwords do not match");
-    return;
-  }
-
-  if(!human){
-    alert("Please confirm you are human");
-    return;
-  }
-
-  alert(
-    "Congratulations!\n\n" +
-    "Your account has been created.\n" +
-    "Go and Book your first test.\n\n" +
-    "Best regards\nSIA-PORTAL"
-  );
-
-  closeSignup();
-}
+function openAdmin(){adminModal.style.display="flex";}
+function closeAdmin(){adminModal.style.display="none";}
+function openSignup(){signupModal.style.display="flex";}
+function closeSignup(){signupModal.style.display="none";}
 </script>
 
 </body>
