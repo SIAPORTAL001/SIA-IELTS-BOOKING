@@ -64,34 +64,25 @@ body{
 /* ================= HERO SLIDER ================= */
 .hero{
   height:100vh;
-  position:relative;
-  overflow:hidden;
-}
-
-.slider{
-  position:absolute;
-  inset:0;
-}
-
-.slide{
-  position:absolute;
-  inset:0;
   background-size:cover;
   background-position:center;
-  animation:fade 12s infinite;
-  opacity:0;
+  background-repeat:no-repeat;
+  animation:bgSlider 15s infinite;
 }
 
-.bg1{ background-image:url("images/slide1.jpg"); }
-.bg2{ background-image:url("images/slide2.jpg"); animation-delay:4s; }
-.bg3{ background-image:url("images/slide3.jpg"); animation-delay:8s; }
-
-@keyframes fade{
-  0%{opacity:0;}
-  10%{opacity:1;}
-  30%{opacity:1;}
-  40%{opacity:0;}
-  100%{opacity:0;}
+@keyframes bgSlider{
+  0%{
+    background-image:url("images/bg1.jpg");
+  }
+  33%{
+    background-image:url("images/bg2.jpg");
+  }
+  66%{
+    background-image:url("images/bg3.jpg");
+  }
+  100%{
+    background-image:url("images/bg1.jpg");
+  }
 }
 
 .overlay{
