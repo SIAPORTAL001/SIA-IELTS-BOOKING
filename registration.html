@@ -5,6 +5,7 @@
   <title>SIA Candidate Registration</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <section class="registration-form">
@@ -19,36 +20,74 @@
   </h1>
 
   <!-- FORM -->
-  <form id="candidateForm">
+  <form id="candidateForm" onsubmit="return false;">
 
-    <input type="text" placeholder="Student Name" required>
-    <input type="text" placeholder="Parents Name" required>
-    <input type="text" placeholder="CNIC No" required>
-    <input type="text" placeholder="Address" required>
-    <input type="text" placeholder="Phone No" required>
-    <input type="text" placeholder="Course Name" required>
-    <input type="text" placeholder="Course Code" required>
-    <input type="text" placeholder="Course Purpose" required>
+    <input type="text" id="studentName" placeholder="Student Name" required>
+    <input type="text" id="parentName" placeholder="Parents Name" required>
+    <input type="text" id="cnic" placeholder="CNIC No" required>
+    <input type="text" id="address" placeholder="Address" required>
+    <input type="text" id="phone" placeholder="Phone No" required>
+    <input type="text" id="courseName" placeholder="Course Name" required>
+    <input type="text" id="courseCode" placeholder="Course Code" required>
+    <input type="text" id="coursePurpose" placeholder="Course Purpose" required>
 
-    <!-- PDF BUTTON -->
     <button type="button" onclick="generatePDF()">
       Generate PDF Form
     </button>
 
   </form>
 
+  <hr style="margin:30px 0">
+
+  <!-- CHECK SECTION -->
+  <h2>Check Candidate Registration</h2>
+
+  <input type="text" id="searchCnic" placeholder="Enter CNIC Number">
+  
+  <button type="button" onclick="checkCandidate()">
+    Check Candidate Detail
+  </button>
+
+  <button type="button" onclick="deleteCandidate()" style="background:red;">
+    Delete Candidate Data
+  </button>
+
 </section>
 
-<!-- PDF SCRIPT -->
+<!-- ================= PDF + STORAGE SCRIPT ================= -->
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <script>
+/* ===== SAVE DATA ===== */
+function saveCandidateData(data) {
+  localStorage.setItem("SIA_CANDIDATE_" + data.cnic, JSON.stringify(data));
+}
+
+/* ===== GENERATE PDF ===== */
 function generatePDF() {
+
+  const data = {
+    studentName: studentName.value,
+    parentName: parentName.value,
+    cnic: cnic.value,
+    address: address.value,
+    phone: phone.value,
+    courseName: courseName.value,
+    courseCode: courseCode.value,
+    coursePurpose: coursePurpose.value
+  };
+
+  if (!data.cnic) {
+    alert("CNIC is required");
+    return;
+  }
+
+  saveCandidateData(data);
 
   const { jsPDF } = window.jspdf;
   const pdf = new jsPDF();
 
-  // LOGO
   const logo = new Image();
   logo.src = "images/logo.png";
 
@@ -60,51 +99,63 @@ function generatePDF() {
     pdf.addImage(logo, "PNG", 85, 8, 40, 20);
 
     pdf.setFontSize(18);
-    pdf.setTextColor(0, 0, 0);
-    pdf.text("Welcome to New SIA Candidate Registration Form", 105, 55, { align: "center" });
-
-    const fields = document.querySelectorAll("input");
-    let y = 70;
+    pdf.text(
+      "Welcome to New SIA Candidate Registration Form",
+      105, 55,
+      { align: "center" }
+    );
 
     pdf.setFontSize(12);
+    let y = 75;
 
-    fields.forEach(field => {
-      pdf.setDrawColor(0);
+    for (let key in data) {
       pdf.rect(20, y - 6, 170, 10);
-      pdf.text(`${field.placeholder}: ${field.value}`, 25, y);
+      pdf.text(key.replace(/([A-Z])/g, ' $1') + ": " + data[key], 25, y);
       y += 14;
-    });
+    }
 
     pdf.save("SIA-Candidate-Registration.pdf");
-
-    saveCandidateData(); // 👈 data save call
+    alert("PDF generated & data saved ✔");
   };
 }
-<script>
-function saveCandidateData() {
 
-  const inputs = document.querySelectorAll("input");
+/* ===== CHECK DATA ===== */
+function checkCandidate() {
+  const cnic = document.getElementById("searchCnic").value;
+  const saved = localStorage.getItem("SIA_CANDIDATE_" + cnic);
 
-  const data = {
-    studentName: inputs[0].value,
-    parentName: inputs[1].value,
-    cnic: inputs[2].value,
-    address: inputs[3].value,
-    phone: inputs[4].value,
-    courseName: inputs[5].value,
-    courseCode: inputs[6].value,
-    coursePurpose: inputs[7].value
-  };
-
-  if (!data.cnic) {
-    alert("CNIC is required to save data");
+  if (!saved) {
+    alert("No record found");
     return;
   }
 
-  localStorage.setItem("SIA_CANDIDATE_" + data.cnic, JSON.stringify(data));
+  const data = JSON.parse(saved);
 
-  alert("Candidate data saved successfully ✔");
+  studentName.value = data.studentName;
+  parentName.value = data.parentName;
+  document.getElementById("cnic").value = data.cnic;
+  address.value = data.address;
+  phone.value = data.phone;
+  courseName.value = data.courseName;
+  courseCode.value = data.courseCode;
+  coursePurpose.value = data.coursePurpose;
+
+  alert("Candidate data loaded ✔");
+}
+
+/* ===== DELETE DATA ===== */
+function deleteCandidate() {
+  const cnic = document.getElementById("searchCnic").value;
+
+  if (!cnic) {
+    alert("Enter CNIC first");
+    return;
+  }
+
+  localStorage.removeItem("SIA_CANDIDATE_" + cnic);
+  alert("Candidate data deleted ❌");
 }
 </script>
+
 </body>
 </html>
