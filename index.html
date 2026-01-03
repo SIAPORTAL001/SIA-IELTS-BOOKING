@@ -50,7 +50,7 @@
     </p>
 
     <!-- ✅ ONLY ONE BUTTON HERE -->
-    <a href="#booking" class="btn-main">BOOK YOUR FIRST TEST</a>
+    <a href="javascript:void(0)" class="btn-main" onclick="openBookTest()">BOOK YOUR FIRST TEST</a>
   </div>
 
 </section>
@@ -92,7 +92,42 @@
     src="https://maps.google.com/maps?q=Raj%20Ali%20Plaza%20Kharian&t=&z=13&ie=UTF8&iwloc=&output=embed">
   </iframe>
 </section>
+<!-- ================= BOOK TEST MODAL ================= -->
+<div class="modal" id="bookTestModal">
+  <div class="modal-box large">
+    <span class="close" onclick="closeBookTest()">✖</span>
 
+    <h2>Book Your First Test</h2>
+
+    <!-- STEP 1 -->
+    <label>Select your preferred test</label>
+    <select id="testType">
+      <option value="">-- Select Test --</option>
+      <option>IELTS Academic</option>
+      <option>IELTS General Training</option>
+      <option>IELTS Life Skill</option>
+    </select>
+
+    <!-- STEP 2 -->
+    <label>Select preferred test date</label>
+    <input type="date" id="testDate">
+
+    <!-- STEP 3 -->
+    <label>Select preferred test time</label>
+    <select id="testTime">
+      <option value="">-- Select Time --</option>
+      <option>10:00 AM</option>
+      <option>11:00 AM</option>
+      <option>12:00 PM</option>
+      <option>01:00 PM</option>
+      <option>02:00 PM</option>
+      <option>03:00 PM</option>
+      <option>04:00 PM</option>
+    </select>
+
+    <button class="btn-main" onclick="bookNow()">BOOK NOW</button>
+  </div>
+</div>
 <!-- ================= FOOTER ================= -->
 <footer>
   <p>© 2026 SIA-IELTS-BOOKING. All rights reserved.</p>
@@ -136,6 +171,44 @@ function openAdmin(){
 function closeAdmin(){
   document.body.classList.remove("modal-open");
   document.getElementById("adminModal").style.display="none";
+}
+  function openBookTest(){
+  document.getElementById("bookTestModal").style.display = "flex";
+}
+
+function closeBookTest(){
+  document.getElementById("bookTestModal").style.display = "none";
+}
+
+// Disable Friday, Saturday, Sunday
+document.getElementById("testDate").addEventListener("change", function(){
+  const d = new Date(this.value);
+  const day = d.getDay(); // 0=Sun,5=Fri,6=Sat
+
+  if(day === 0 || day === 5 || day === 6){
+    alert("Friday, Saturday & Sunday are not available");
+    this.value = "";
+  }
+});
+
+function bookNow(){
+  const test = document.getElementById("testType").value;
+  const date = document.getElementById("testDate").value;
+  const time = document.getElementById("testTime").value;
+
+  if(!test || !date || !time){
+    alert("Please complete all selections");
+    return;
+  }
+
+  alert(
+    "Test Booked Successfully!\n\n" +
+    "Test: " + test +
+    "\nDate: " + date +
+    "\nTime: " + time
+  );
+
+  closeBookTest();
 }
 </script>
 
