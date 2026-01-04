@@ -217,7 +217,26 @@ function openTRF(){
   document.getElementById("trfSection").style.display="block";
   document.getElementById("registrationSection").style.display="none";
 }
+<script>
+function updateResult() {
+
+  const resultData = {
+    overall: document.getElementById("overallScore").value,
+    listening: document.getElementById("listeningScore").value,
+    reading: document.getElementById("readingScore").value,
+    writing: document.getElementById("writingScore").value,
+    speaking: document.getElementById("speakingScore").value,
+    cefr: document.getElementById("cefrLevel").value,
+    pdfPath: "uploaded-trf/sample-trf.pdf"
+  };
+
+  localStorage.setItem("candidateResult", JSON.stringify(resultData));
+  alert("Result Updated Successfully ✅");
+}
 </script>
+
+</body>
+</html>
 
 </body>
 </html>
