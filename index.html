@@ -11,22 +11,19 @@
 <nav class="navbar">
   <div class="nav-container">
 
-    <!-- LOGO -->
     <div class="logo">
       <img src="images/logo.png" alt="OFFICIAL-SIA">
     </div>
 
-    <!-- MENU -->
     <ul class="nav-links">
       <li><a href="#home">Home</a></li>
       <li><a href="#services">Services</a></li>
       <li><a href="#contact">Contact</a></li>
-     <li><a href="#admin-login">Admin Login</a></li>
+      <li><a href="#" onclick="openAdminLogin()">Admin Login</a></li>
       <li><a href="#">Signup</a></li>
       <li><a href="#">Login</a></li>
     </ul>
 
-    <!-- SEARCH -->
     <div class="nav-search">
       <input type="text" id="searchInput" placeholder="Search..." onkeydown="searchPage(event)">
     </div>
@@ -37,7 +34,6 @@
 <!-- ================= HERO ================= -->
 <section class="hero" id="home">
   <div class="overlay"></div>
-
   <div class="hero-content">
     <h1>Welcome to the <span>OFFICIAL-SIA</span></h1>
     <p>
@@ -51,9 +47,7 @@
 <!-- ================= SERVICES ================= -->
 <section id="services" class="services">
   <h2>Our Services</h2>
-  <p class="subtitle">
-    We Provide Professional IELTS and Language Test Services
-  </p>
+  <p class="subtitle">We Provide Professional IELTS and Language Test Services</p>
 
   <div class="service-box">
     <div class="service-card">IELTS Preparation</div>
@@ -72,84 +66,80 @@
     <p>Address: Raj Ali Plaza, Dinga Road, Kharian</p>
   </div>
 
-  <iframe
-    src="https://maps.google.com/maps?q=Raj%20Ali%20Plaza%20Kharian&t=&z=13&ie=UTF8&iwloc=&output=embed">
-  </iframe>
+  <iframe src="https://maps.google.com/maps?q=Raj%20Ali%20Plaza%20Kharian&output=embed"></iframe>
 </section>
-<!-- ================= ADMIN LOGIN ================= -->
-<section class="admin-login" id="admin-login">
-  <h2>Admin Login</h2>
 
-  <input type="email" id="adminEmail" placeholder="Admin Email">
-  <input type="password" id="adminPass" placeholder="Admin Password">
+<!-- ================= ADMIN LOGIN MODAL ================= -->
+<div class="admin-modal" id="adminModal">
+  <div class="admin-box">
+    <span class="close-btn" onclick="closeAdminLogin()">×</span>
+    <h2>Admin Login</h2>
 
-  <button onclick="adminLogin()">Login</button>
-</section>
-<!-- ================= FOOTER ================= -->
+    <input type="email" id="adminEmail" placeholder="Admin Email">
+    <input type="password" id="adminPass" placeholder="Admin Password">
+
+    <button onclick="adminLogin()">Login</button>
+  </div>
+</div>
+
 <footer>
   <p>© OFFICIAL-SIA — All Copyright Reserved</p>
 </footer>
 
 <!-- ================= JAVASCRIPT ================= -->
 <script>
-  function searchPage(e){
-    if(e.key === "Enter"){
-      const value = document.getElementById("searchInput").value.toLowerCase();
-
-      if(value.includes("home")){
-        document.getElementById("home").scrollIntoView({behavior:"smooth"});
-      }
-      else if(value.includes("service")){
-        document.getElementById("services").scrollIntoView({behavior:"smooth"});
-      }
-      else if(value.includes("contact")){
-        document.getElementById("contact").scrollIntoView({behavior:"smooth"});
-      }
-    }
+function searchPage(e){
+  if(e.key === "Enter"){
+    const v = searchInput.value.toLowerCase();
+    if(v.includes("home")) home.scrollIntoView({behavior:"smooth"});
+    else if(v.includes("service")) services.scrollIntoView({behavior:"smooth"});
+    else if(v.includes("contact")) contact.scrollIntoView({behavior:"smooth"});
   }
+}
+
+function openAdminLogin(){
+  document.getElementById("adminModal").style.display="flex";
+}
+function closeAdminLogin(){
+  document.getElementById("adminModal").style.display="none";
+}
 </script>
-<!-- Firebase SDK (COMPAT - for normal HTML) -->
+
+<!-- ================= FIREBASE ================= -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 
 <script>
-  const firebaseConfig = {
-    apiKey: "AIzaSyA88FtGXII...",
-    authDomain: "official-sia.firebaseapp.com",
-    projectId: "official-sia",
-    storageBucket: "official-sia.appspot.com",
-    messagingSenderId: "866558839812",
-    appId: "1:866558839812:web:xxxx"
-  };
+const firebaseConfig = {
+  apiKey: "AIzaSyA88FtGXII...",
+  authDomain: "official-sia.firebaseapp.com",
+  projectId: "official-sia",
+  storageBucket: "official-sia.appspot.com",
+  messagingSenderId: "866558839812",
+  appId: "1:866558839812:web:xxxx"
+};
 
-  firebase.initializeApp(firebaseConfig);
-  const auth = firebase.auth();
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
 
-function adminLogin() {
-  const email = document.getElementById("adminEmail").value;
-  const password = document.getElementById("adminPass").value;
+function adminLogin(){
+  const email = adminEmail.value;
+  const pass = adminPass.value;
 
-  if (!email || !password) {
-    alert("Please enter email and password");
-    return;
-  }
-
-  auth.signInWithEmailAndPassword(email, password)
-    .then((userCredential) => {
-      const user = userCredential.user;
-
-      if (user.email === "siaportal0@gmail.com") {
-        alert("Welcome Admin");
-        window.location.href = "admin-panel.html";
-      } else {
-        alert("Access denied");
-        auth.signOut();
-      }
-    })
-    .catch(() => {
-      alert("Invalid admin credentials");
-    });
+  auth.signInWithEmailAndPassword(email, pass)
+  .then(res=>{
+    if(res.user.email === "siaportal0@gmail.com"){
+      window.location.href="admin-panel.html";
+    } else {
+      alert("Access denied");
+      auth.signOut();
+    }
+  })
+  .catch(err=>{
+    alert("Invalid admin credentials");
+  });
 }
 </script>
+
 </body>
 </html>
