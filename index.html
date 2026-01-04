@@ -5,34 +5,60 @@
 <title>OFFICIAL-SIA</title>
 
 <link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- FORCE NAV LINK COLOR SAME -->
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
+
+  .nav-links a {
+    color: white !important;
+    font-weight: 500;
+    text-decoration: none;
+    margin: 0 10px;
+  }
+
+  .nav-links a:hover {
+    color: #f5c400 !important;
+  }
+</style>
 </head>
 
 <body>
 
 <!-- ================= NAVBAR ================= -->
 <nav class="navbar">
-  <div class="nav-left">
-    <img src="images/logo.png" class="logo" alt="OFFICIAL-SIA">
-  </div>
+  <div class="nav-container">
 
-  <ul class="nav-links">
-    <li><a href="#home">Home</a></li>
-    <li><a href="#services">Services</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li>Admin Login</li>
-    <li>Signup</li>
-    <li>Login</li>
-  </ul>
+    <!-- LOGO -->
+    <div class="logo">
+      <img src="images/logo.png" alt="OFFICIAL-SIA Logo">
+    </div>
 
-  <div class="nav-search">
-    <input type="text" placeholder="Search...">
+    <!-- NAV LINKS -->
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#" onclick="openAdmin()">Admin Login</a></li>
+      <li><a href="#">Signup</a></li>
+      <li><a href="#">Login</a></li>
+    </ul>
+
+    <!-- SEARCH -->
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Search..."
+      onkeydown="handleSearch(event)"
+    >
   </div>
 </nav>
 
-<!-- ================= HERO SECTION ================= -->
+<!-- ================= HERO ================= -->
 <section class="hero" id="home">
-  <div class="hero-overlay"></div>
+  <div class="overlay"></div>
 
   <div class="hero-content">
     <h1>Welcome to the <span>OFFICIAL-SIA</span></h1>
@@ -40,56 +66,79 @@
       You can book your test here with confidentiality<br>
       Academic | General Training | Life Skill
     </p>
-
     <button class="btn-main">BOOK YOUR TEST</button>
   </div>
 </section>
 
 <!-- ================= SERVICES ================= -->
-<section class="services" id="services">
+<section id="services" class="services">
   <h2>Our Services</h2>
-  <p class="subtitle">
-    We Provide Professional IELTS and Language Test Services
-  </p>
+  <p>We Provide Professional IELTS and Language Test Services</p>
 
-  <div class="service-row">
-    <div class="service-card">IELTS Preparation</div>
-    <div class="service-card">LanguageCert</div>
-    <div class="service-card">OXFORD TEST</div>
-    <div class="service-card">TOFEL</div>
+  <div class="service-box">
+    <div class="card">IELTS Preparation</div>
+    <div class="card">LanguageCert</div>
+    <div class="card">OXFORD TEST</div>
+    <div class="card">TOFEL</div>
   </div>
 </section>
 
 <!-- ================= CONTACT ================= -->
 <section class="contact" id="contact">
-  <div class="contact-info">
+  <div class="contact-box">
     <h3>OFFICIAL-SIA</h3>
     <p>Phone: +92 304 5931881</p>
     <p>Email: siaportal0@gmail.com</p>
-    <p>Address: Raj Ali Plaza, Dinga Road, Kharian</p>
+    <p>Address Raj Ali Plaza, Dinga Road, Kharian</p>
   </div>
 
-  <div class="map">
-    <iframe
-      src="https://maps.google.com/maps?q=Raj%20Ali%20Plaza%20Kharian&t=&z=13&ie=UTF8&iwloc=&output=embed">
-    </iframe>
-  </div>
+  <iframe
+    src="https://maps.google.com/maps?q=Raj%20Ali%20Plaza%20Kharian&t=&z=13&ie=UTF8&iwloc=&output=embed">
+  </iframe>
 </section>
 
 <!-- ================= FOOTER ================= -->
 <footer>
-  <p>© OFFICIAL-SIA — All Copyright Reserved</p>
+  <p>© OFFICIAL-SIA All Copyright Reserved</p>
 </footer>
 
-<!-- ================= SMOOTH SCROLL SCRIPT ================= -->
+<!-- ================= ADMIN MODAL ================= -->
+<div class="modal" id="adminModal">
+  <div class="modal-box">
+    <span class="close" onclick="closeAdmin()">✖</span>
+    <h2>Admin Login</h2>
+    <input type="email" placeholder="Email">
+    <input type="password" placeholder="Password">
+    <button>LOGIN</button>
+  </div>
+</div>
+
+<!-- ================= JAVASCRIPT ================= -->
 <script>
-  document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', function(e){
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      target.scrollIntoView({ behavior: 'smooth' });
-    });
-  });
+/* ADMIN MODAL */
+function openAdmin(){
+  document.getElementById("adminModal").style.display = "flex";
+}
+function closeAdmin(){
+  document.getElementById("adminModal").style.display = "none";
+}
+
+/* SEARCH WORKING */
+function handleSearch(event){
+  if(event.key === "Enter"){
+    const value = document.getElementById("searchInput").value.toLowerCase().trim();
+
+    if(value === "home"){
+      document.getElementById("home").scrollIntoView({behavior:"smooth"});
+    }
+    else if(value === "services"){
+      document.getElementById("services").scrollIntoView({behavior:"smooth"});
+    }
+    else if(value === "contact"){
+      document.getElementById("contact").scrollIntoView({behavior:"smooth"});
+    }
+  }
+}
 </script>
 
 </body>
