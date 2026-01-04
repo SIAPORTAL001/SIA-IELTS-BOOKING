@@ -1,106 +1,261 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Admin Panel - OFFICIAL-SIA</title>
-  <style>
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-      font-family: Arial, Helvetica, sans-serif;
-    }
+<meta charset="UTF-8">
+<title>Admin Panel - OFFICIAL SIA</title>
 
-    body{
-      min-height:100vh;
-      background: linear-gradient(135deg, #000, #1a1a1a);
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      color:#fff;
-    }
+<style>
+*{
+  box-sizing:border-box;
+  font-family:Arial, Helvetica, sans-serif;
+}
 
-    .admin-panel{
-      background:#111;
-      width:90%;
-      max-width:600px;
-      padding:50px 40px;
-      border-radius:14px;
-      text-align:center;
-      box-shadow:0 20px 50px rgba(0,0,0,0.6);
-    }
+body{
+  margin:0;
+  background:#e6e6e6;
+}
 
-    .admin-panel h1{
-      font-size:30px;
-      margin-bottom:40px;
-      color:#f5c400;
-      letter-spacing:1px;
-    }
+/* ===== TOP TITLE ===== */
+.top-title{
+  text-align:center;
+  padding:30px;
+  background:#000;
+  color:#fff;
+}
 
-    .admin-buttons{
-      display:flex;
-      flex-direction:column;
-      gap:20px;
-    }
+.top-title h1{
+  margin:0;
+  font-size:34px;
+  letter-spacing:2px;
+}
 
-    .btn{
-      padding:16px;
-      font-size:16px;
-      font-weight:bold;
-      border:none;
-      border-radius:8px;
-      cursor:pointer;
-      transition:0.3s ease;
-    }
+/* ===== BUTTON AREA ===== */
+.admin-actions{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  padding:30px;
+}
 
-    /* Registration Form Button */
-    .btn-register{
-      background:#f5c400;
-      color:#000;
-    }
+.admin-actions button{
+  padding:14px 28px;
+  border:none;
+  cursor:pointer;
+  font-size:16px;
+  border-radius:6px;
+}
 
-    .btn-register:hover{
-      background:#fff;
-      transform:translateY(-3px);
-    }
+.btn-register{
+  background:#f5c400;
+}
 
-    /* Update Result Button */
-    .btn-result{
-      background:#00b3b3;
-      color:#000;
-    }
+.btn-update{
+  background:#0a7cff;
+  color:#fff;
+}
 
-    .btn-result:hover{
-      background:#1affff;
-      transform:translateY(-3px);
-    }
+/* ===== FORM PANEL ===== */
+.panel{
+  max-width:1100px;
+  margin:30px auto;
+  background:#fff;
+  padding:30px;
+  border:1px solid #999;
+  display:none;
+}
 
-    .footer-text{
-      margin-top:40px;
-      font-size:13px;
-      color:#aaa;
-    }
-  </style>
+/* ===== IELTS HEADER ===== */
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+}
+
+.header h2{
+  font-size:42px;
+  margin:0;
+}
+
+.academic{
+  border:2px solid #000;
+  padding:8px 20px;
+  font-weight:bold;
+}
+
+/* ===== ROW ===== */
+.row{
+  display:flex;
+  gap:20px;
+  margin-top:15px;
+}
+
+.input{
+  width:100%;
+  padding:6px;
+  border:1px solid #777;
+}
+
+/* ===== SECTION ===== */
+.section-title{
+  font-weight:bold;
+  margin-top:25px;
+  margin-bottom:10px;
+}
+
+/* ===== CANDIDATE ===== */
+.candidate-wrap{
+  display:flex;
+  gap:20px;
+}
+
+/* PHOTO */
+.photo-box{
+  width:200px;
+  height:230px;
+  border:2px solid #000;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+
+.photo-box video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* ===== RESULTS ===== */
+.results{
+  display:flex;
+  gap:20px;
+}
+
+.result{
+  text-align:center;
+}
+
+.score{
+  border:1px solid #000;
+  width:60px;
+  padding:10px;
+  margin:auto;
+  font-weight:bold;
+}
+
+/* ===== FOOT ===== */
+.footer{
+  display:flex;
+  justify-content:space-between;
+  margin-top:30px;
+}
+
+.stamp{
+  width:140px;
+  height:140px;
+  border:1px solid #000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#b00;
+  font-weight:bold;
+}
+</style>
 </head>
+
 <body>
 
-  <div class="admin-panel">
-    <h1>WELCOME TO THE ADMIN PANEL</h1>
+<!-- ===== TITLE ===== -->
+<div class="top-title">
+  <h1>WELCOME TO THE ADMIN PANEL</h1>
+</div>
 
-    <div class="admin-buttons">
-      <button class="btn btn-register">
-        Candidate Registration Form
-      </button>
+<!-- ===== BUTTONS ===== -->
+<div class="admin-actions">
+  <button class="btn-register" onclick="openForm()">Candidate Registration Form</button>
+  <button class="btn-update">Update Result</button>
+</div>
 
-      <button class="btn btn-result">
-        Update Result
-      </button>
+<!-- ===== REGISTRATION FORM ===== -->
+<div class="panel" id="regForm">
+
+  <div class="header">
+    <div>
+      <h2>IELTS</h2>
+      <strong>Test Report Form</strong>
+    </div>
+    <div class="academic">ACADEMIC</div>
+  </div>
+
+  <div class="row">
+    <div>Centre Number<br><input class="input"></div>
+    <div>Date<br><input type="date" class="input"></div>
+    <div>Candidate Number<br><input class="input"></div>
+  </div>
+
+  <div class="section-title">Candidate Details</div>
+
+  <div class="candidate-wrap">
+
+    <!-- PHOTO -->
+    <div class="photo-box">
+      <video id="video" autoplay></video>
+      <button onclick="startCamera()">Start Camera</button>
     </div>
 
-    <div class="footer-text">
-      © OFFICIAL-SIA — Admin Access Only
+    <!-- DETAILS -->
+    <div style="flex:1">
+      Family Name<br><input class="input"><br><br>
+      First Name(s)<br><input class="input"><br><br>
+
+      <div class="row">
+        <div>Candidate ID<br><input class="input"></div>
+        <div>Date of Birth<br><input type="date" class="input"></div>
+        <div>Sex (M/F)<br><input class="input"></div>
+      </div><br>
+
+      Country or Region of Origin<br><input class="input"><br><br>
+      Country of Nationality<br><input class="input"><br><br>
+      First Language<br><input class="input">
     </div>
   </div>
+
+  <div class="section-title">Test Results</div>
+
+  <div class="results">
+    <div class="result">Listening<div class="score"></div></div>
+    <div class="result">Reading<div class="score"></div></div>
+    <div class="result">Writing<div class="score"></div></div>
+    <div class="result">Speaking<div class="score"></div></div>
+    <div class="result">Overall<div class="score"></div></div>
+    <div class="result">CEFR<div class="score"></div></div>
+  </div>
+
+  <div class="section-title">Administrator Comments</div>
+  <textarea style="width:100%; height:100px;"></textarea>
+
+  <div class="footer">
+    <div>
+      Date<br><input class="input"><br><br>
+      Test Report Form Number<br><input class="input">
+    </div>
+    <div class="stamp">IELTS<br>STAMP</div>
+  </div>
+
+</div>
+
+<script>
+function openForm(){
+  document.getElementById("regForm").style.display = "block";
+}
+
+function startCamera(){
+  navigator.mediaDevices.getUserMedia({video:true})
+  .then(stream=>{
+    document.getElementById("video").srcObject = stream;
+  });
+}
+</script>
 
 </body>
 </html>
