@@ -28,6 +28,7 @@ body{
 
 .logo img{
   height:45px;
+  pointer-events:none; /* ❌ NO ZOOM */
 }
 
 .nav-links{
@@ -77,10 +78,25 @@ body{
   z-index:1;
 }
 
+.hero-buttons{
+  margin-top:25px;
+  display:flex;
+  gap:15px;
+  justify-content:center;
+}
+
 .btn-main{
   padding:12px 25px;
   background:#f5c400;
   border:none;
+  cursor:pointer;
+}
+
+.btn-secondary{
+  padding:12px 25px;
+  background:#00bcd4;
+  border:none;
+  color:#fff;
   cursor:pointer;
 }
 
@@ -94,11 +110,20 @@ body{
   display:flex;
   gap:20px;
   justify-content:center;
+  flex-wrap:wrap;
 }
 
 .service-card{
-  padding:20px;
+  padding:25px;
   border:2px solid #000;
+  transition:0.4s;
+  cursor:pointer;
+}
+
+.service-card:hover{
+  transform:translateY(-10px) scale(1.05);
+  background:#000;
+  color:#fff;
 }
 
 /* ================= CONTACT ================= */
