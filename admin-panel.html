@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Admin Panel - OFFICIAL SIA</title>
+  <title>Admin Panel - OFFICIAL-SIA</title>
   <style>
     *{
       margin:0;
@@ -12,53 +12,94 @@
     }
 
     body{
-      height:100vh;
+      min-height:100vh;
+      background: linear-gradient(135deg, #000, #1a1a1a);
       display:flex;
       justify-content:center;
       align-items:center;
-      background:#f4f4f4;
-    }
-
-    .admin-container{
-      text-align:center;
-      background:#fff;
-      padding:50px 60px;
-      border-radius:14px;
-      box-shadow:0 15px 40px rgba(0,0,0,0.15);
-    }
-
-    .admin-container h1{
-      font-size:32px;
-      font-weight:bold;
-      margin-bottom:30px;
-      color:#000;
-    }
-
-    .admin-btn{
-      padding:15px 35px;
-      font-size:16px;
-      background:#000;
       color:#fff;
+    }
+
+    .admin-panel{
+      background:#111;
+      width:90%;
+      max-width:600px;
+      padding:50px 40px;
+      border-radius:14px;
+      text-align:center;
+      box-shadow:0 20px 50px rgba(0,0,0,0.6);
+    }
+
+    .admin-panel h1{
+      font-size:30px;
+      margin-bottom:40px;
+      color:#f5c400;
+      letter-spacing:1px;
+    }
+
+    .admin-buttons{
+      display:flex;
+      flex-direction:column;
+      gap:20px;
+    }
+
+    .btn{
+      padding:16px;
+      font-size:16px;
+      font-weight:bold;
       border:none;
       border-radius:8px;
       cursor:pointer;
-      transition:0.3s;
+      transition:0.3s ease;
     }
 
-    .admin-btn:hover{
+    /* Registration Form Button */
+    .btn-register{
       background:#f5c400;
       color:#000;
+    }
+
+    .btn-register:hover{
+      background:#fff;
+      transform:translateY(-3px);
+    }
+
+    /* Update Result Button */
+    .btn-result{
+      background:#00b3b3;
+      color:#000;
+    }
+
+    .btn-result:hover{
+      background:#1affff;
+      transform:translateY(-3px);
+    }
+
+    .footer-text{
+      margin-top:40px;
+      font-size:13px;
+      color:#aaa;
     }
   </style>
 </head>
 <body>
 
-  <div class="admin-container">
+  <div class="admin-panel">
     <h1>WELCOME TO THE ADMIN PANEL</h1>
 
-    <button class="admin-btn">
-      Candidate Registration Form
-    </button>
+    <div class="admin-buttons">
+      <button class="btn btn-register">
+        Candidate Registration Form
+      </button>
+
+      <button class="btn btn-result">
+        Update Result
+      </button>
+    </div>
+
+    <div class="footer-text">
+      © OFFICIAL-SIA — Admin Access Only
+    </div>
   </div>
 
 </body>
