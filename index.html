@@ -136,22 +136,6 @@ auth.signInWithEmailAndPassword(
   alert(e.message);
 });
 
-function adminLogin(){
-  const email = document.getElementById("adminEmail").value;
-  const pass  = document.getElementById("adminPass").value;
-
-  auth.signInWithEmailAndPassword(email, pass)
-    .then(res=>{
-      if(res.user.email === "siaportal0@gmail.com"){
-        window.location.href = "admin-panel.html";
-      } else {
-        alert("Access denied");
-        auth.signOut();
-      }
-    })
-    .catch(()=>{
-      alert("Invalid admin credentials");
-    });
 }
 </script>
 
