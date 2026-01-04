@@ -7,7 +7,7 @@
 <style>
 *{
   box-sizing:border-box;
-  font-family:Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 body{
@@ -15,187 +15,208 @@ body{
   background:#e6e6e6;
 }
 
-/* ===== TOP TITLE ===== */
-.top-title{
-  text-align:center;
-  padding:30px;
+/* ===== HEADER ===== */
+.admin-header{
   background:#000;
   color:#fff;
+  text-align:center;
+  padding:18px;
+  font-size:22px;
+  font-weight:bold;
+  letter-spacing:1px;
 }
 
-.top-title h1{
-  margin:0;
-  font-size:34px;
-  letter-spacing:2px;
-}
-
-/* ===== BUTTON AREA ===== */
+/* ===== BUTTONS ===== */
 .admin-actions{
-  display:flex;
-  justify-content:center;
-  gap:20px;
-  padding:30px;
+  background:#ddd;
+  text-align:center;
+  padding:20px;
 }
 
 .admin-actions button{
-  padding:14px 28px;
+  padding:12px 22px;
   border:none;
+  margin:0 8px;
+  font-size:14px;
   cursor:pointer;
-  font-size:16px;
-  border-radius:6px;
+  border-radius:4px;
 }
 
-.btn-register{
+.btn-reg{
   background:#f5c400;
 }
 
 .btn-update{
-  background:#0a7cff;
+  background:#1e88e5;
   color:#fff;
 }
 
-/* ===== FORM PANEL ===== */
-.panel{
-  max-width:1100px;
-  margin:30px auto;
+/* ===== FORM CONTAINER ===== */
+.form-wrapper{
   background:#fff;
-  padding:30px;
-  border:1px solid #999;
-  display:none;
+  width:90%;
+  max-width:1000px;
+  margin:30px auto;
+  padding:25px;
+  border:1px solid #aaa;
 }
 
-/* ===== IELTS HEADER ===== */
-.header{
+/* ===== TOP IELTS ===== */
+.ielts-top{
   display:flex;
   justify-content:space-between;
-  align-items:flex-start;
+  align-items:center;
 }
 
-.header h2{
+.ielts-logo{
   font-size:42px;
-  margin:0;
-}
-
-.academic{
-  border:2px solid #000;
-  padding:8px 20px;
   font-weight:bold;
 }
 
-/* ===== ROW ===== */
+.academic-box{
+  border:2px solid #000;
+  padding:6px 20px;
+  font-size:14px;
+}
+
+/* ===== ROWS ===== */
 .row{
   display:flex;
-  gap:20px;
-  margin-top:15px;
+  gap:12px;
+  margin-top:10px;
 }
 
-.input{
-  width:100%;
+.row input{
   padding:6px;
-  border:1px solid #777;
+  border:1px solid #999;
+  background:#eee;
+  width:100%;
 }
 
-/* ===== SECTION ===== */
+/* ===== DETAILS ===== */
 .section-title{
+  margin-top:20px;
   font-weight:bold;
-  margin-top:25px;
-  margin-bottom:10px;
 }
 
-/* ===== CANDIDATE ===== */
-.candidate-wrap{
+/* ===== PHOTO + DETAILS ===== */
+.details-area{
   display:flex;
-  gap:20px;
+  gap:15px;
+  margin-top:10px;
 }
 
-/* PHOTO */
 .photo-box{
-  width:200px;
-  height:230px;
-  border:2px solid #000;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
+  width:160px;
+  border:1px solid #000;
+  text-align:center;
+  padding:10px;
 }
 
 .photo-box video{
   width:100%;
-  height:100%;
-  object-fit:cover;
+  height:180px;
+  background:#000;
 }
 
-/* ===== RESULTS ===== */
+.photo-box button{
+  margin-top:8px;
+  width:100%;
+  padding:6px;
+}
+
+.details-fields{
+  flex:1;
+}
+
+/* ===== TEST RESULTS ===== */
 .results{
   display:flex;
-  gap:20px;
+  gap:10px;
+  margin-top:10px;
 }
 
-.result{
+.results div{
+  flex:1;
   text-align:center;
 }
 
-.score{
-  border:1px solid #000;
-  width:60px;
-  padding:10px;
-  margin:auto;
-  font-weight:bold;
+.results input{
+  width:100%;
+  padding:6px;
+  text-align:center;
+  background:#eee;
+  border:1px solid #999;
 }
 
-/* ===== FOOT ===== */
-.footer{
+/* ===== COMMENTS ===== */
+textarea{
+  width:100%;
+  height:90px;
+  border:1px solid #999;
+  background:#eee;
+}
+
+/* ===== BOTTOM ===== */
+.bottom-area{
   display:flex;
   justify-content:space-between;
-  margin-top:30px;
+  margin-top:20px;
 }
 
 .stamp{
-  width:140px;
-  height:140px;
   border:1px solid #000;
+  width:120px;
+  height:120px;
   display:flex;
   align-items:center;
   justify-content:center;
-  color:#b00;
+  font-size:14px;
+  color:red;
   font-weight:bold;
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+  .details-area{
+    flex-direction:column;
+  }
+  .photo-box{
+    width:100%;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- ===== TITLE ===== -->
-<div class="top-title">
-  <h1>WELCOME TO THE ADMIN PANEL</h1>
+<div class="admin-header">
+WELCOME TO THE ADMIN PANEL
 </div>
 
-<!-- ===== BUTTONS ===== -->
 <div class="admin-actions">
-  <button class="btn-register" onclick="openForm()">Candidate Registration Form</button>
+  <button class="btn-reg">Candidate Registration Form</button>
   <button class="btn-update">Update Result</button>
 </div>
 
-<!-- ===== REGISTRATION FORM ===== -->
-<div class="panel" id="regForm">
+<div class="form-wrapper">
 
-  <div class="header">
-    <div>
-      <h2>IELTS</h2>
-      <strong>Test Report Form</strong>
-    </div>
-    <div class="academic">ACADEMIC</div>
+  <div class="ielts-top">
+    <div class="ielts-logo">IELTS</div>
+    <div class="academic-box">ACADEMIC</div>
   </div>
 
+  <p><b>Test Report Form</b></p>
+
   <div class="row">
-    <div>Centre Number<br><input class="input"></div>
-    <div>Date<br><input type="date" class="input"></div>
-    <div>Candidate Number<br><input class="input"></div>
+    <input placeholder="Centre Number">
+    <input type="date">
+    <input placeholder="Candidate Number">
   </div>
 
   <div class="section-title">Candidate Details</div>
 
-  <div class="candidate-wrap">
+  <div class="details-area">
 
     <!-- PHOTO -->
     <div class="photo-box">
@@ -204,40 +225,39 @@ body{
     </div>
 
     <!-- DETAILS -->
-    <div style="flex:1">
-      Family Name<br><input class="input"><br><br>
-      First Name(s)<br><input class="input"><br><br>
-
+    <div class="details-fields">
+      <input placeholder="Family Name">
+      <input placeholder="First Name(s)">
       <div class="row">
-        <div>Candidate ID<br><input class="input"></div>
-        <div>Date of Birth<br><input type="date" class="input"></div>
-        <div>Sex (M/F)<br><input class="input"></div>
-      </div><br>
-
-      Country or Region of Origin<br><input class="input"><br><br>
-      Country of Nationality<br><input class="input"><br><br>
-      First Language<br><input class="input">
+        <input placeholder="Candidate ID">
+        <input type="date">
+        <input placeholder="Sex (M/F)">
+      </div>
+      <input placeholder="Country or Region of Origin">
+      <input placeholder="Country of Nationality">
+      <input placeholder="First Language">
     </div>
+
   </div>
 
   <div class="section-title">Test Results</div>
 
   <div class="results">
-    <div class="result">Listening<div class="score"></div></div>
-    <div class="result">Reading<div class="score"></div></div>
-    <div class="result">Writing<div class="score"></div></div>
-    <div class="result">Speaking<div class="score"></div></div>
-    <div class="result">Overall<div class="score"></div></div>
-    <div class="result">CEFR<div class="score"></div></div>
+    <div>Listening<input></div>
+    <div>Reading<input></div>
+    <div>Writing<input></div>
+    <div>Speaking<input></div>
+    <div>Overall<input></div>
+    <div>CEFR<input></div>
   </div>
 
   <div class="section-title">Administrator Comments</div>
-  <textarea style="width:100%; height:100px;"></textarea>
+  <textarea></textarea>
 
-  <div class="footer">
+  <div class="bottom-area">
     <div>
-      Date<br><input class="input"><br><br>
-      Test Report Form Number<br><input class="input">
+      <input placeholder="Date"><br><br>
+      <input placeholder="Test Report Form Number">
     </div>
     <div class="stamp">IELTS<br>STAMP</div>
   </div>
@@ -245,10 +265,6 @@ body{
 </div>
 
 <script>
-function openForm(){
-  document.getElementById("regForm").style.display = "block";
-}
-
 function startCamera(){
   navigator.mediaDevices.getUserMedia({video:true})
   .then(stream=>{
