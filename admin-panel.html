@@ -146,7 +146,42 @@ WELCOME TO THE ADMIN PANEL
 
   </div>
 </div>
+<!-- ================= RESULT ENTRY FORM ================= -->
+<section class="admin-result-section">
+  <h2 class="section-title">Result Entry (Admin Only)</h2>
 
+  <div class="overall-box">
+    <label>Overall Band Score</label>
+    <input type="number" step="0.5" id="overallScore" placeholder="e.g 7.5">
+  </div>
+
+  <div class="result-grid">
+    <div class="result-card">
+      <label>Listening</label>
+      <input type="number" step="0.5" id="listeningScore">
+    </div>
+
+    <div class="result-card">
+      <label>Reading</label>
+      <input type="number" step="0.5" id="readingScore">
+    </div>
+
+    <div class="result-card">
+      <label>Writing</label>
+      <input type="number" step="0.5" id="writingScore">
+    </div>
+
+    <div class="result-card">
+      <label>Speaking</label>
+      <input type="number" step="0.5" id="speakingScore">
+    </div>
+
+    <div class="result-card">
+      <label>CEFR Level</label>
+      <input type="text" id="cefrLevel" placeholder="e.g C1">
+    </div>
+  </div>
+</section>
 <!-- ================= TRF UPLOAD ================= -->
 <div class="section" id="trfSection">
   <div class="trf-box">
