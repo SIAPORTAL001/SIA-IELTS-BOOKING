@@ -124,6 +124,18 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 
+
+auth.signInWithEmailAndPassword(
+  "siaportal0@gmail.com",
+  "SIAPORTAL@123"
+)
+.then(()=>{
+  alert("LOGIN OK — Firebase working");
+})
+.catch((e)=>{
+  alert(e.message);
+});
+
 function adminLogin(){
   const email = document.getElementById("adminEmail").value;
   const pass  = document.getElementById("adminPass").value;
