@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Admin Panel - OFFICIAL SIA</title>
+
 <style>
 body{
   font-family: Arial, Helvetica, sans-serif;
@@ -22,8 +23,9 @@ body{
 
 /* DASHBOARD */
 .dashboard{
-  padding:30px;
+  padding:25px;
   text-align:center;
+  background:#eee;
 }
 
 .dashboard button{
@@ -35,15 +37,8 @@ body{
   border-radius:6px;
 }
 
-.btn-reg{
-  background:#f5c400;
-  color:#000;
-}
-
-.btn-trf{
-  background:#000;
-  color:#fff;
-}
+.btn-reg{ background:#f5c400; }
+.btn-trf{ background:#1976d2; color:#fff; }
 
 /* SECTIONS */
 .section{
@@ -51,7 +46,7 @@ body{
   padding:30px;
 }
 
-/* REGISTRATION FORM */
+/* REG FORM */
 .form-container{
   display:flex;
   gap:30px;
@@ -60,183 +55,130 @@ body{
   border-radius:10px;
 }
 
-/* LEFT FORM */
-.form-left{
-  width:65%;
-}
+.form-left{ width:65%; }
+.form-right{ width:35%; text-align:center; }
 
-.form-left h3{
-  margin-bottom:15px;
-}
-
-.form-left input, .form-left select{
+.form-left input{
   width:100%;
   padding:10px;
   margin-bottom:12px;
 }
 
-/* RIGHT PHOTO */
-.form-right{
-  width:35%;
-  text-align:center;
-}
-
 .photo-box{
-  width:100%;
   height:260px;
   border:2px dashed #000;
   display:flex;
   align-items:center;
   justify-content:center;
-  margin-bottom:10px;
   background:#fafafa;
+  margin-bottom:10px;
 }
 
-/* TRF UPLOAD */
-.trf-box{
+/* RESULT ENTRY */
+.result-box{
   background:#fff;
   padding:30px;
   border-radius:10px;
-  max-width:400px;
+  max-width:600px;
   margin:auto;
 }
 
-.trf-box input{
+.result-box input{
   width:100%;
-  padding:12px;
-  margin-top:15px;
+  padding:10px;
+  margin-bottom:10px;
+}
+
+.update-btn{
+  background:#2e7d32;
+  color:#fff;
+  padding:14px;
+  width:100%;
+  border:none;
+  font-size:16px;
+  cursor:pointer;
 }
 </style>
 </head>
 
 <body>
 
-<div class="header">
-WELCOME TO THE ADMIN PANEL
-</div>
+<div class="header">WELCOME TO THE ADMIN PANEL</div>
 
 <div class="dashboard">
-  <button class="btn-reg" onclick="openRegistration()">Candidate Registration Form</button>
-  <button class="btn-trf" onclick="openTRF()">Upload TRF PDF</button>
+  <button class="btn-reg" onclick="showReg()">Candidate Registration Form</button>
+  <button class="btn-trf" onclick="showResult()">Update Result</button>
 </div>
 
-<!-- ================= REGISTRATION FORM ================= -->
-<div class="section" id="registrationSection">
+<!-- ================= REGISTRATION ================= -->
+<div class="section" id="regSection">
   <div class="form-container">
-
-    <!-- LEFT -->
     <div class="form-left">
       <h3>Candidate Details</h3>
-      <input type="text" placeholder="Candidate Full Name">
-      <input type="text" placeholder="Passport / CNIC No">
-      <input type="date" placeholder="Date of Birth">
-      <input type="text" placeholder="Test Type (IELTS Academic / GT)">
-      <input type="text" placeholder="Test Center">
-      <input type="date" placeholder="Test Date">
+      <input placeholder="Full Name">
+      <input placeholder="Passport / CNIC">
+      <input type="date">
+      <input placeholder="Test Type">
+      <input placeholder="Test Center">
+      <input type="date">
     </div>
 
-    <!-- RIGHT PHOTO -->
     <div class="form-right">
-      <h3>Candidate Photo</h3>
-      <div class="photo-box">
-        Live Webcam Photo
-      </div>
+      <h3>Live Photo</h3>
+      <div class="photo-box">Webcam Preview</div>
       <button>Capture Photo</button>
     </div>
-
   </div>
 </div>
-<!-- ================= RESULT ENTRY FORM ================= -->
-<section class="admin-result-section">
-  <h2 class="section-title">Result Entry (Admin Only)</h2>
 
-  <div class="overall-box">
-    <label>Overall Band Score</label>
-    <input type="number" step="0.5" id="overallScore" placeholder="e.g 7.5">
-  </div>
+<!-- ================= RESULT + TRF ================= -->
+<div class="section" id="resultSection">
+  <div class="result-box">
+    <h3>Result Entry (Admin Only)</h3>
 
-  <div class="result-grid">
-    <div class="result-card">
-      <label>Listening</label>
-      <input type="number" step="0.5" id="listeningScore">
-    </div>
+    <input id="overall" placeholder="Overall Band (e.g 7.5)">
+    <input id="listening" placeholder="Listening">
+    <input id="reading" placeholder="Reading">
+    <input id="writing" placeholder="Writing">
+    <input id="speaking" placeholder="Speaking">
+    <input id="cefr" placeholder="CEFR Level (e.g C1)">
 
-    <div class="result-card">
-      <label>Reading</label>
-      <input type="number" step="0.5" id="readingScore">
-    </div>
+    <hr>
 
-    <div class="result-card">
-      <label>Writing</label>
-      <input type="number" step="0.5" id="writingScore">
-    </div>
+    <label>Upload TRF PDF</label>
+    <input type="file" id="trfPdf" accept="application/pdf">
 
-    <div class="result-card">
-      <label>Speaking</label>
-      <input type="number" step="0.5" id="speakingScore">
-    </div>
-
-    <div class="result-card">
-      <label>CEFR Level</label>
-      <input type="text" id="cefrLevel" placeholder="e.g C1">
-    </div>
-  </div>
-</section>
-
-<!-- ================= UPLOAD TRF PDF ================= -->
-<section class="admin-upload-section">
-  <h2 class="section-title">Upload TRF PDF</h2>
-
-  <input type="file" id="trfPdf" accept="application/pdf">
-
-  <p class="note-text">
-    Upload manually filled IELTS TRF (PDF only)
-  </p>
-</section>
-
-<!-- ================= TRF UPLOAD ================= -->
-<div class="section" id="trfSection">
-  <div class="trf-box">
-    <h3>Upload TRF PDF</h3>
-    <input type="file" accept="application/pdf">
     <br><br>
-    <button class="btn-trf">Upload PDF</button>
-<button class="update-result-btn" onclick="updateResult()">
-  Update Result
-</button>
+    <button class="update-btn" onclick="updateResult()">Update Result</button>
   </div>
 </div>
 
 <script>
-function openRegistration(){
-  document.getElementById("registrationSection").style.display="block";
-  document.getElementById("trfSection").style.display="none";
+function showReg(){
+  regSection.style.display="block";
+  resultSection.style.display="none";
 }
 
-function openTRF(){
-  document.getElementById("trfSection").style.display="block";
-  document.getElementById("registrationSection").style.display="none";
+function showResult(){
+  resultSection.style.display="block";
+  regSection.style.display="none";
 }
-<script>
-function updateResult() {
 
-  const resultData = {
-    overall: document.getElementById("overallScore").value,
-    listening: document.getElementById("listeningScore").value,
-    reading: document.getElementById("readingScore").value,
-    writing: document.getElementById("writingScore").value,
-    speaking: document.getElementById("speakingScore").value,
-    cefr: document.getElementById("cefrLevel").value,
-    pdfPath: "uploaded-trf/sample-trf.pdf"
+function updateResult(){
+  const data = {
+    overall: overall.value,
+    listening: listening.value,
+    reading: reading.value,
+    writing: writing.value,
+    speaking: speaking.value,
+    cefr: cefr.value,
+    pdf: "uploaded-trf/sample-trf.pdf"
   };
 
-  localStorage.setItem("candidateResult", JSON.stringify(resultData));
+  localStorage.setItem("candidateResult", JSON.stringify(data));
   alert("Result Updated Successfully ✅");
 }
 </script>
-
-</body>
-</html>
 
 </body>
 </html>
