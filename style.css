@@ -1,0 +1,177 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, sans-serif;
+}
+
+/* ============ NAVBAR ============ */
+.navbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:15px 40px;
+  background:#000;
+  color:#fff;
+  position:fixed;
+  width:100%;
+  top:0;
+  z-index:1000;
+}
+
+.logo{
+  width:80px;
+  transition:transform 0.4s ease;
+  cursor:pointer;
+}
+
+.logo:hover{
+  transform:scale(1.15);
+}
+
+.nav-links{
+  display:flex;
+  gap:20px;
+  list-style:none;
+}
+
+.nav-links li{
+  cursor:pointer;
+  transition:color 0.3s;
+}
+
+.nav-links li:hover{
+  color:#f5c400;
+}
+
+.nav-search input{
+  padding:6px 10px;
+  border:none;
+  outline:none;
+}
+
+/* ============ HERO SECTION ============ */
+.hero{
+  height:100vh;
+  background:
+    url("images/bg1.jpg"),
+    url("images/bg2.jpg"),
+    url("images/bg3.jpg");
+  background-size:cover;
+  background-position:center;
+  animation:bgSlide 15s infinite;
+  position:relative;
+}
+
+@keyframes bgSlide{
+  0%{background-image:url("images/bg1.jpg");}
+  33%{background-image:url("images/bg2.jpg");}
+  66%{background-image:url("images/bg3.jpg");}
+}
+
+.hero-overlay{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.6);
+}
+
+.hero-content{
+  position:relative;
+  color:#fff;
+  text-align:center;
+  top:50%;
+  transform:translateY(-50%);
+  padding:20px;
+}
+
+.hero-content h1{
+  font-size:48px;
+}
+
+.hero-content span{
+  color:#f5c400;
+}
+
+.hero-content p{
+  margin:20px 0;
+  font-size:18px;
+}
+
+.btn-main{
+  padding:14px 30px;
+  font-size:16px;
+  font-weight:bold;
+  background:#f5c400;
+  border:none;
+  cursor:pointer;
+  transition:transform 0.3s;
+}
+
+.btn-main:hover{
+  transform:scale(1.05);
+}
+
+/* ============ SERVICES ============ */
+.services{
+  padding:80px 20px;
+  text-align:center;
+}
+
+.services h2{
+  font-size:36px;
+  font-weight:bold;
+}
+
+.subtitle{
+  margin:10px 0 40px;
+}
+
+.service-row{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  flex-wrap:wrap;
+}
+
+.service-card{
+  width:220px;
+  padding:30px;
+  background:#fff;
+  border:2px solid #000;
+  cursor:pointer;
+  transition:all 0.4s ease;
+}
+
+.service-card:hover{
+  background:#000;
+  color:#fff;
+  transform:translateY(-10px);
+}
+
+/* ============ CONTACT ============ */
+.contact{
+  display:flex;
+  justify-content:space-between;
+  padding:60px 40px;
+  background:#111;
+  color:#fff;
+  flex-wrap:wrap;
+}
+
+.contact-info h3{
+  margin-bottom:15px;
+}
+
+.map iframe{
+  width:320px;
+  height:220px;
+  border:none;
+}
+
+/* ============ FOOTER ============ */
+footer{
+  text-align:center;
+  padding:15px;
+  background:#000;
+  color:#fff;
+}
