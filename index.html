@@ -100,6 +100,22 @@
     }
   }
 </script>
+<!-- Firebase SDK (COMPAT - for normal HTML) -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyA88FtGXII...",
+    authDomain: "official-sia.firebaseapp.com",
+    projectId: "official-sia",
+    storageBucket: "official-sia.appspot.com",
+    messagingSenderId: "866558839812",
+    appId: "1:866558839812:web:xxxx"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+</script>
 </body>
 </html>
