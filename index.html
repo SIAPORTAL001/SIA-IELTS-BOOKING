@@ -69,6 +69,21 @@
   <iframe src="https://maps.google.com/maps?q=Raj%20Ali%20Plaza%20Kharian&output=embed"></iframe>
 </section>
 
+<!-- ================= ADMIN LOGIN POPUP ================= -->
+<div class="admin-modal" id="adminModal">
+  <div class="admin-box">
+    <span class="close-btn" onclick="closeAdminLogin()">×</span>
+
+    <h2>Admin</h2>
+
+    <input type="email" id="adminEmail" placeholder="Email">
+    <input type="password" id="adminPass" placeholder="Password">
+
+    <button class="admin-login-btn" onclick="adminLogin()">Login</button>
+  </div>
+</div>
+
+<!-- ================= FOOTER ================= -->
 <footer>
   <p>© OFFICIAL-SIA — All Copyright Reserved</p>
 </footer>
@@ -78,24 +93,17 @@
 function searchPage(e){
   if(e.key === "Enter"){
     const v = document.getElementById("searchInput").value.toLowerCase();
-
-    if(v.includes("home")){
-      document.getElementById("home").scrollIntoView({behavior:"smooth"});
-    } 
-    else if(v.includes("service")){
-      document.getElementById("services").scrollIntoView({behavior:"smooth"});
-    } 
-    else if(v.includes("contact")){
-      document.getElementById("contact").scrollIntoView({behavior:"smooth"});
-    }
+    if(v.includes("home")) document.getElementById("home").scrollIntoView({behavior:"smooth"});
+    else if(v.includes("service")) document.getElementById("services").scrollIntoView({behavior:"smooth"});
+    else if(v.includes("contact")) document.getElementById("contact").scrollIntoView({behavior:"smooth"});
   }
 }
 
 function openAdminLogin(){
-  document.getElementById("adminModal").style.display="flex";
+  document.getElementById("adminModal").style.display = "flex";
 }
 function closeAdminLogin(){
-  document.getElementById("adminModal").style.display="none";
+  document.getElementById("adminModal").style.display = "none";
 }
 </script>
 
@@ -121,17 +129,17 @@ function adminLogin(){
   const pass  = document.getElementById("adminPass").value;
 
   auth.signInWithEmailAndPassword(email, pass)
-  .then(res=>{
-    if(res.user.email === "siaportal0@gmail.com"){
-      window.location.href="admin-panel.html";
-    } else {
-      alert("Access denied");
-      auth.signOut();
-    }
-  })
-  .catch(()=>{
-    alert("Invalid admin credentials");
-  });
+    .then(res=>{
+      if(res.user.email === "siaportal0@gmail.com"){
+        window.location.href = "admin-panel.html";
+      } else {
+        alert("Access denied");
+        auth.signOut();
+      }
+    })
+    .catch(()=>{
+      alert("Invalid admin credentials");
+    });
 }
 </script>
 
