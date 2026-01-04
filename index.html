@@ -1,30 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>OFFICIAL-SIA</title>
-
-<link rel="stylesheet" href="style.css">
-
-<!-- FORCE NAV LINK COLOR SAME -->
-<style>
-  html {
-    scroll-behavior: smooth;
-  }
-
-  .nav-links a {
-    color: white !important;
-    font-weight: 500;
-    text-decoration: none;
-    margin: 0 10px;
-  }
-
-  .nav-links a:hover {
-    color: #f5c400 !important;
-  }
-</style>
+  <meta charset="UTF-8">
+  <title>OFFICIAL-SIA</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <!-- ================= NAVBAR ================= -->
@@ -33,26 +13,24 @@
 
     <!-- LOGO -->
     <div class="logo">
-      <img src="images/logo.png" alt="OFFICIAL-SIA Logo">
+      <img src="images/logo.png" alt="OFFICIAL-SIA">
     </div>
 
-    <!-- NAV LINKS -->
+    <!-- MENU -->
     <ul class="nav-links">
       <li><a href="#home">Home</a></li>
       <li><a href="#services">Services</a></li>
       <li><a href="#contact">Contact</a></li>
-      <li><a href="#" onclick="openAdmin()">Admin Login</a></li>
+      <li><a href="#">Admin Login</a></li>
       <li><a href="#">Signup</a></li>
       <li><a href="#">Login</a></li>
     </ul>
 
     <!-- SEARCH -->
-    <input
-      type="text"
-      id="searchInput"
-      placeholder="Search..."
-      onkeydown="handleSearch(event)"
-    >
+    <div class="nav-search">
+      <input type="text" id="searchInput" placeholder="Search..." onkeydown="searchPage(event)">
+    </div>
+
   </div>
 </nav>
 
@@ -73,23 +51,25 @@
 <!-- ================= SERVICES ================= -->
 <section id="services" class="services">
   <h2>Our Services</h2>
-  <p>We Provide Professional IELTS and Language Test Services</p>
+  <p class="subtitle">
+    We Provide Professional IELTS and Language Test Services
+  </p>
 
   <div class="service-box">
-    <div class="card">IELTS Preparation</div>
-    <div class="card">LanguageCert</div>
-    <div class="card">OXFORD TEST</div>
-    <div class="card">TOFEL</div>
+    <div class="service-card">IELTS Preparation</div>
+    <div class="service-card">LanguageCert</div>
+    <div class="service-card">OXFORD TEST</div>
+    <div class="service-card">TOEFL</div>
   </div>
 </section>
 
 <!-- ================= CONTACT ================= -->
 <section class="contact" id="contact">
-  <div class="contact-box">
-    <h3>OFFICIAL-SIA</h3>
+  <div class="contact-info">
+    <h2>OFFICIAL-SIA</h2>
     <p>Phone: +92 304 5931881</p>
     <p>Email: siaportal0@gmail.com</p>
-    <p>Address Raj Ali Plaza, Dinga Road, Kharian</p>
+    <p>Address: Raj Ali Plaza, Dinga Road, Kharian</p>
   </div>
 
   <iframe
@@ -99,46 +79,26 @@
 
 <!-- ================= FOOTER ================= -->
 <footer>
-  <p>© OFFICIAL-SIA All Copyright Reserved</p>
+  <p>© OFFICIAL-SIA — All Copyright Reserved</p>
 </footer>
-
-<!-- ================= ADMIN MODAL ================= -->
-<div class="modal" id="adminModal">
-  <div class="modal-box">
-    <span class="close" onclick="closeAdmin()">✖</span>
-    <h2>Admin Login</h2>
-    <input type="email" placeholder="Email">
-    <input type="password" placeholder="Password">
-    <button>LOGIN</button>
-  </div>
-</div>
 
 <!-- ================= JAVASCRIPT ================= -->
 <script>
-/* ADMIN MODAL */
-function openAdmin(){
-  document.getElementById("adminModal").style.display = "flex";
-}
-function closeAdmin(){
-  document.getElementById("adminModal").style.display = "none";
-}
+  function searchPage(e){
+    if(e.key === "Enter"){
+      const value = document.getElementById("searchInput").value.toLowerCase();
 
-/* SEARCH WORKING */
-function handleSearch(event){
-  if(event.key === "Enter"){
-    const value = document.getElementById("searchInput").value.toLowerCase().trim();
-
-    if(value === "home"){
-      document.getElementById("home").scrollIntoView({behavior:"smooth"});
-    }
-    else if(value === "services"){
-      document.getElementById("services").scrollIntoView({behavior:"smooth"});
-    }
-    else if(value === "contact"){
-      document.getElementById("contact").scrollIntoView({behavior:"smooth"});
+      if(value.includes("home")){
+        document.getElementById("home").scrollIntoView({behavior:"smooth"});
+      }
+      else if(value.includes("service")){
+        document.getElementById("services").scrollIntoView({behavior:"smooth"});
+      }
+      else if(value.includes("contact")){
+        document.getElementById("contact").scrollIntoView({behavior:"smooth"});
+      }
     }
   }
-}
 </script>
 
 </body>
