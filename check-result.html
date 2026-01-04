@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Check Your Result</title>
-<link rel="stylesheet" href="style.css">
+
 <style>
 .result-container{
   max-width:800px;
@@ -17,8 +17,8 @@
   padding:15px 30px;
   border:none;
   font-size:18px;
-  cursor:pointer;
   border-radius:6px;
+  cursor:pointer;
 }
 
 .score-big{
@@ -31,17 +31,12 @@
   display:grid;
   grid-template-columns:repeat(2,1fr);
   gap:20px;
-  margin-top:30px;
 }
 
 .score-box{
   border:1px solid #ccc;
   padding:20px;
   border-radius:10px;
-}
-
-.score-box h3{
-  margin-bottom:10px;
 }
 </style>
 </head>
@@ -50,45 +45,39 @@
 
 <div class="result-container">
 
-  <!-- DOWNLOAD RESULT -->
-  <button class="download-btn"
-    onclick="window.location.href='uploaded-trf/sample-trf.pdf'">
-    Download Result
-  </button>
+<button class="download-btn" id="downloadBtn">
+  Download Result
+</button>
 
-  <!-- OVERALL -->
-  <h2>Overall Score</h2>
-  <div class="score-big">7.5</div>
+<h2>Overall Score</h2>
+<div class="score-big" id="overallScore">-</div>
 
-  <!-- DETAILS -->
-  <div class="scores">
-    <div class="score-box">
-      <h3>Listening</h3>
-      <strong>7.0</strong>
-    </div>
-
-    <div class="score-box">
-      <h3>Reading</h3>
-      <strong>9.0</strong>
-    </div>
-
-    <div class="score-box">
-      <h3>Writing</h3>
-      <strong>6.5</strong>
-    </div>
-
-    <div class="score-box">
-      <h3>Speaking</h3>
-      <strong>7.0</strong>
-    </div>
-
-    <div class="score-box">
-      <h3>CEFR Level</h3>
-      <strong>C1</strong>
-    </div>
-  </div>
+<div class="scores">
+  <div class="score-box">Listening<br><strong id="listening"></strong></div>
+  <div class="score-box">Reading<br><strong id="reading"></strong></div>
+  <div class="score-box">Writing<br><strong id="writing"></strong></div>
+  <div class="score-box">Speaking<br><strong id="speaking"></strong></div>
+  <div class="score-box">CEFR Level<br><strong id="cefr"></strong></div>
+</div>
 
 </div>
+
+<script>
+const data = JSON.parse(localStorage.getItem("candidateResult"));
+
+if(data){
+  overallScore.innerText = data.overall;
+  listening.innerText = data.listening;
+  reading.innerText = data.reading;
+  writing.innerText = data.writing;
+  speaking.innerText = data.speaking;
+  cefr.innerText = data.cefr;
+
+  downloadBtn.onclick = () => {
+    window.location.href = data.pdf;
+  }
+}
+</script>
 
 </body>
 </html>
