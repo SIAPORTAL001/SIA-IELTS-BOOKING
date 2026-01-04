@@ -40,7 +40,11 @@
       You can book your test here with confidentiality<br>
       Academic | General Training | Life Skill
     </p>
-    <button class="btn-main">BOOK YOUR TEST</button>
+
+    <div class="hero-buttons">
+      <button class="btn-main">BOOK YOUR TEST</button>
+      <button class="btn-secondary">CHECK YOUR RESULT</button>
+    </div>
   </div>
 </section>
 
@@ -77,7 +81,7 @@
     <h2>Admin</h2>
 
     <input type="email" id="adminEmail" placeholder="Email">
-    <input type="password" id="adminPass" placeholder="Password">
+    <input type="password" id="adminPassword" placeholder="Password">
 
     <button class="admin-login-btn" onclick="adminLogin()">Login</button>
   </div>
@@ -102,24 +106,22 @@ function searchPage(e){
 function openAdminLogin(){
   document.getElementById("adminModal").style.display = "flex";
 }
+
 function closeAdminLogin(){
   document.getElementById("adminModal").style.display = "none";
 }
-<script>
-function adminLogin() {
 
+function adminLogin(){
   const email = document.getElementById("adminEmail").value;
   const password = document.getElementById("adminPassword").value;
 
-  if (
-    email === "siaportal0@gmail.com" &&
-    password === "SIAPORTAL@123"
-  ) {
+  if(email === "siaportal0@gmail.com" && password === "SIAPORTAL@123"){
     window.location.href = "admin-panel.html";
   } else {
     alert("Invalid admin credentials");
   }
 }
 </script>
+
 </body>
 </html>
