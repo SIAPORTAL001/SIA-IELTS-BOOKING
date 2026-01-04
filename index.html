@@ -124,20 +124,23 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 
+function adminLogin(){
+  const email = document.getElementById("adminEmail").value;
+  const pass  = document.getElementById("adminPass").value;
 
-auth.signInWithEmailAndPassword(
-  "siaportal0@gmail.com",
-  "SIAPORTAL@123"
-)
-.then(()=>{
-  alert("LOGIN OK — Firebase working");
-})
-.catch((e)=>{
-  alert(e.message);
-});
-
+  auth.signInWithEmailAndPassword(email, pass)
+    .then((res)=>{
+      if(res.user.email === "siaportal0@gmail.com"){
+        window.location.href = "admin-panel.html";
+      } else {
+        alert("Access denied");
+        auth.signOut();
+      }
+    })
+    .catch((error)=>{
+      alert(error.message);
+    });
 }
 </script>
-
 </body>
 </html>
