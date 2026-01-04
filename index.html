@@ -19,7 +19,7 @@
       <li><a href="#home">Home</a></li>
       <li><a href="#services">Services</a></li>
       <li><a href="#contact">Contact</a></li>
-      <li><a href="#" onclick="openAdminLogin()">Admin Login</a></li>
+      <li><a href="javascript:void(0)" onclick="openAdminLogin()">Admin Login</a></li>
       <li><a href="#">Signup</a></li>
       <li><a href="#">Login</a></li>
     </ul>
@@ -90,10 +90,17 @@
 <script>
 function searchPage(e){
   if(e.key === "Enter"){
-    const v = searchInput.value.toLowerCase();
-    if(v.includes("home")) home.scrollIntoView({behavior:"smooth"});
-    else if(v.includes("service")) services.scrollIntoView({behavior:"smooth"});
-    else if(v.includes("contact")) contact.scrollIntoView({behavior:"smooth"});
+    const v = document.getElementById("searchInput").value.toLowerCase();
+
+    if(v.includes("home")){
+      document.getElementById("home").scrollIntoView({behavior:"smooth"});
+    } 
+    else if(v.includes("service")){
+      document.getElementById("services").scrollIntoView({behavior:"smooth"});
+    } 
+    else if(v.includes("contact")){
+      document.getElementById("contact").scrollIntoView({behavior:"smooth"});
+    }
   }
 }
 
@@ -123,8 +130,8 @@ firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 
 function adminLogin(){
-  const email = adminEmail.value;
-  const pass = adminPass.value;
+  const email = document.getElementById("adminEmail").value;
+  const pass  = document.getElementById("adminPass").value;
 
   auth.signInWithEmailAndPassword(email, pass)
   .then(res=>{
@@ -135,7 +142,7 @@ function adminLogin(){
       auth.signOut();
     }
   })
-  .catch(err=>{
+  .catch(()=>{
     alert("Invalid admin credentials");
   });
 }
