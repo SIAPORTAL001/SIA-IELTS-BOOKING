@@ -3,273 +3,169 @@
 <head>
 <meta charset="UTF-8">
 <title>Admin Panel - OFFICIAL SIA</title>
-
 <style>
-*{
-  box-sizing:border-box;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
 body{
+  font-family: Arial, Helvetica, sans-serif;
+  background:#f4f4f4;
   margin:0;
-  background:#e6e6e6;
 }
 
-/* ===== HEADER ===== */
-.admin-header{
+/* HEADER */
+.header{
   background:#000;
   color:#fff;
-  text-align:center;
-  padding:18px;
-  font-size:22px;
-  font-weight:bold;
-  letter-spacing:1px;
-}
-
-/* ===== BUTTONS ===== */
-.admin-actions{
-  background:#ddd;
-  text-align:center;
   padding:20px;
+  text-align:center;
+  font-size:26px;
+  font-weight:bold;
 }
 
-.admin-actions button{
-  padding:12px 22px;
+/* DASHBOARD */
+.dashboard{
+  padding:30px;
+  text-align:center;
+}
+
+.dashboard button{
+  padding:15px 25px;
+  margin:10px;
   border:none;
-  margin:0 8px;
-  font-size:14px;
+  font-size:16px;
   cursor:pointer;
-  border-radius:4px;
+  border-radius:6px;
 }
 
 .btn-reg{
   background:#f5c400;
+  color:#000;
 }
 
-.btn-update{
-  background:#1e88e5;
+.btn-trf{
+  background:#000;
   color:#fff;
 }
 
-/* ===== FORM CONTAINER ===== */
-.form-wrapper{
+/* SECTIONS */
+.section{
+  display:none;
+  padding:30px;
+}
+
+/* REGISTRATION FORM */
+.form-container{
+  display:flex;
+  gap:30px;
   background:#fff;
-  width:90%;
-  max-width:1000px;
-  margin:30px auto;
-  padding:25px;
-  border:1px solid #aaa;
+  padding:30px;
+  border-radius:10px;
 }
 
-/* ===== TOP IELTS ===== */
-.ielts-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+/* LEFT FORM */
+.form-left{
+  width:65%;
 }
 
-.ielts-logo{
-  font-size:42px;
-  font-weight:bold;
+.form-left h3{
+  margin-bottom:15px;
 }
 
-.academic-box{
-  border:2px solid #000;
-  padding:6px 20px;
-  font-size:14px;
-}
-
-/* ===== ROWS ===== */
-.row{
-  display:flex;
-  gap:12px;
-  margin-top:10px;
-}
-
-.row input{
-  padding:6px;
-  border:1px solid #999;
-  background:#eee;
+.form-left input, .form-left select{
   width:100%;
+  padding:10px;
+  margin-bottom:12px;
 }
 
-/* ===== DETAILS ===== */
-.section-title{
-  margin-top:20px;
-  font-weight:bold;
-}
-
-/* ===== PHOTO + DETAILS ===== */
-.details-area{
-  display:flex;
-  gap:15px;
-  margin-top:10px;
+/* RIGHT PHOTO */
+.form-right{
+  width:35%;
+  text-align:center;
 }
 
 .photo-box{
-  width:160px;
-  border:1px solid #000;
-  text-align:center;
-  padding:10px;
-}
-
-.photo-box video{
   width:100%;
-  height:180px;
-  background:#000;
-}
-
-.photo-box button{
-  margin-top:8px;
-  width:100%;
-  padding:6px;
-}
-
-.details-fields{
-  flex:1;
-}
-
-/* ===== TEST RESULTS ===== */
-.results{
-  display:flex;
-  gap:10px;
-  margin-top:10px;
-}
-
-.results div{
-  flex:1;
-  text-align:center;
-}
-
-.results input{
-  width:100%;
-  padding:6px;
-  text-align:center;
-  background:#eee;
-  border:1px solid #999;
-}
-
-/* ===== COMMENTS ===== */
-textarea{
-  width:100%;
-  height:90px;
-  border:1px solid #999;
-  background:#eee;
-}
-
-/* ===== BOTTOM ===== */
-.bottom-area{
-  display:flex;
-  justify-content:space-between;
-  margin-top:20px;
-}
-
-.stamp{
-  border:1px solid #000;
-  width:120px;
-  height:120px;
+  height:260px;
+  border:2px dashed #000;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:14px;
-  color:red;
-  font-weight:bold;
+  margin-bottom:10px;
+  background:#fafafa;
 }
 
-/* ===== RESPONSIVE ===== */
-@media(max-width:768px){
-  .details-area{
-    flex-direction:column;
-  }
-  .photo-box{
-    width:100%;
-  }
+/* TRF UPLOAD */
+.trf-box{
+  background:#fff;
+  padding:30px;
+  border-radius:10px;
+  max-width:400px;
+  margin:auto;
+}
+
+.trf-box input{
+  width:100%;
+  padding:12px;
+  margin-top:15px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="admin-header">
+<div class="header">
 WELCOME TO THE ADMIN PANEL
 </div>
 
-<div class="admin-actions">
-  <button class="btn-reg">Candidate Registration Form</button>
-  <button class="btn-update">Update Result</button>
+<div class="dashboard">
+  <button class="btn-reg" onclick="openRegistration()">Candidate Registration Form</button>
+  <button class="btn-trf" onclick="openTRF()">Upload TRF PDF</button>
 </div>
 
-<div class="form-wrapper">
+<!-- ================= REGISTRATION FORM ================= -->
+<div class="section" id="registrationSection">
+  <div class="form-container">
 
-  <div class="ielts-top">
-    <div class="ielts-logo">IELTS</div>
-    <div class="academic-box">ACADEMIC</div>
-  </div>
-
-  <p><b>Test Report Form</b></p>
-
-  <div class="row">
-    <input placeholder="Centre Number">
-    <input type="date">
-    <input placeholder="Candidate Number">
-  </div>
-
-  <div class="section-title">Candidate Details</div>
-
-  <div class="details-area">
-
-    <!-- PHOTO -->
-    <div class="photo-box">
-      <video id="video" autoplay></video>
-      <button onclick="startCamera()">Start Camera</button>
+    <!-- LEFT -->
+    <div class="form-left">
+      <h3>Candidate Details</h3>
+      <input type="text" placeholder="Candidate Full Name">
+      <input type="text" placeholder="Passport / CNIC No">
+      <input type="date" placeholder="Date of Birth">
+      <input type="text" placeholder="Test Type (IELTS Academic / GT)">
+      <input type="text" placeholder="Test Center">
+      <input type="date" placeholder="Test Date">
     </div>
 
-    <!-- DETAILS -->
-    <div class="details-fields">
-      <input placeholder="Family Name">
-      <input placeholder="First Name(s)">
-      <div class="row">
-        <input placeholder="Candidate ID">
-        <input type="date">
-        <input placeholder="Sex (M/F)">
+    <!-- RIGHT PHOTO -->
+    <div class="form-right">
+      <h3>Candidate Photo</h3>
+      <div class="photo-box">
+        Live Webcam Photo
       </div>
-      <input placeholder="Country or Region of Origin">
-      <input placeholder="Country of Nationality">
-      <input placeholder="First Language">
+      <button>Capture Photo</button>
     </div>
 
   </div>
+</div>
 
-  <div class="section-title">Test Results</div>
-
-  <div class="results">
-    <div>Listening<input></div>
-    <div>Reading<input></div>
-    <div>Writing<input></div>
-    <div>Speaking<input></div>
-    <div>Overall<input></div>
-    <div>CEFR<input></div>
+<!-- ================= TRF UPLOAD ================= -->
+<div class="section" id="trfSection">
+  <div class="trf-box">
+    <h3>Upload TRF PDF</h3>
+    <input type="file" accept="application/pdf">
+    <br><br>
+    <button class="btn-trf">Upload PDF</button>
   </div>
-
-  <div class="section-title">Administrator Comments</div>
-  <textarea></textarea>
-
-  <div class="bottom-area">
-    <div>
-      <input placeholder="Date"><br><br>
-      <input placeholder="Test Report Form Number">
-    </div>
-    <div class="stamp">IELTS<br>STAMP</div>
-  </div>
-
 </div>
 
 <script>
-function startCamera(){
-  navigator.mediaDevices.getUserMedia({video:true})
-  .then(stream=>{
-    document.getElementById("video").srcObject = stream;
-  });
+function openRegistration(){
+  document.getElementById("registrationSection").style.display="block";
+  document.getElementById("trfSection").style.display="none";
+}
+
+function openTRF(){
+  document.getElementById("trfSection").style.display="block";
+  document.getElementById("registrationSection").style.display="none";
 }
 </script>
 
