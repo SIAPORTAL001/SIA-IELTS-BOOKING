@@ -308,12 +308,8 @@ function updateResult(){
 /* ================= CAMERA ================= */
 let stream = null;
 
-function startCamera(){
+function startCamera() {
   const video = document.getElementById("video");
-  const canvas = document.getElementById("canvas");
-
-  canvas.style.display = "none";
-  video.style.display = "block";
 
   navigator.mediaDevices.getUserMedia({ video: true })
     .then(s => {
@@ -322,27 +318,36 @@ function startCamera(){
       video.play();
     })
     .catch(err => {
-      alert("Camera access denied ❌");
+      alert("Camera access denied!");
+      console.error(err);
     });
 }
 
-function capturePhoto(){
+function capturePhoto() {
   const video = document.getElementById("video");
   const canvas = document.getElementById("canvas");
-  const ctx = canvas.getContext("2d");
 
-  canvas.width = video.videoWidth;
-  canvas.height = video.videoHeight;
+  const width = video.videoWidth;
+  const height = video.videoHeight;
 
-  ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-  // Stop camera
-  if(stream){
-    stream.getTracks().forEach(track => track.stop());
+  if (!width || !height) {
+    alert("Camera not ready yet!");
+    return;
   }
 
-  video.style.display = "none";
+  canvas.width = width;
+  canvas.height = height;
+
+  const ctx = canvas.getContext("2d");
+  ctx.drawImage(video, 0, 0, width, height);
+
   canvas.style.display = "block";
+  video.style.display = "none";
+
+  // OPTIONAL: stop camera after capture
+  if (stream) {
+    stream.getTracks().forEach(track => track.stop());
+  }
 }
 </script>
 </body>
