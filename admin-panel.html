@@ -269,55 +269,79 @@ input, textarea, select{
 </div>
 
 <!-- JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
-
 <script>
+/* ================= SECTION CONTROL ================= */
 function hideAll(){
-  document.getElementById("bookSection").style.display="none";
-  document.getElementById("regSection").style.display="none";
-  document.getElementById("resultSection").style.display="none";
+  document.getElementById("bookSection").style.display = "none";
+  document.getElementById("regSection").style.display = "none";
+  document.getElementById("resultSection").style.display = "none";
 }
 
-function showBook(){ hideAll(); bookSection.style.display="block"; }
-function showReg(){ hideAll(); regSection.style.display="block"; }
-function showResult(){ hideAll(); resultSection.style.display="block"; }
+function showBook(){
+  hideAll();
+  document.getElementById("bookSection").style.display = "block";
+}
 
+function showReg(){
+  hideAll();
+  document.getElementById("regSection").style.display = "block";
+}
+
+function showResult(){
+  hideAll();
+  document.getElementById("resultSection").style.display = "block";
+}
+
+/* ================= PDF GENERATE ================= */
 function generatePDF(){
-  html2pdf().from(document.getElementById("trfForm")).save("IELTS-TRF.pdf");
+  const form = document.getElementById("trfForm");
+  html2pdf().from(form).save("IELTS-TRF.pdf");
 }
 
+/* ================= UPDATE RESULT ================= */
 function updateResult(){
   alert("Result Updated Successfully ✅");
 }
 
 /* ================= CAMERA ================= */
-let stream;
+let stream = null;
 
 function startCamera(){
+  if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){
+    alert("Camera not supported");
+    return;
+  }
+
   navigator.mediaDevices.getUserMedia({ video: true })
     .then(s => {
       stream = s;
       const video = document.getElementById("video");
       video.srcObject = stream;
+      video.style.display = "block";
       video.play();
     })
-    .catch(() => {
-      alert("Camera access denied or not available");
+    .catch(err => {
+      alert("Camera access denied");
+      console.error(err);
     });
 }
 
 function capturePhoto(){
+  if(!stream){
+    alert("Please start camera first");
+    return;
+  }
+
   const video = document.getElementById("video");
   const canvas = document.getElementById("canvas");
   const ctx = canvas.getContext("2d");
 
   canvas.width = video.videoWidth;
   canvas.height = video.videoHeight;
+  ctx.drawImage(video, 0, 0);
 
-  ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-  // stop camera
   stream.getTracks().forEach(track => track.stop());
+  stream = null;
 
   video.style.display = "none";
   canvas.style.display = "block";
