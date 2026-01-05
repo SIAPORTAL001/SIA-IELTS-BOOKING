@@ -15,97 +15,98 @@ body{
 .header{
   background:#000;
   color:#fff;
-  padding:20px;
+  padding:18px;
   text-align:center;
-  font-size:26px;
+  font-size:24px;
   font-weight:bold;
 }
 
 /* DASHBOARD */
 .dashboard{
-  padding:25px;
+  padding:15px;
   text-align:center;
   background:#eee;
 }
 
 .dashboard button{
-  padding:15px 25px;
-  margin:10px;
+  padding:12px 22px;
+  margin:6px;
   border:none;
-  font-size:16px;
   cursor:pointer;
   border-radius:6px;
+  font-size:15px;
 }
 
-/* BUTTON COLORS */
-.btn-book{ background:linear-gradient(45deg,#8e24aa,#d81b60); color:#fff; }
+.btn-book{ background:#8e24aa; color:#fff; }
 .btn-reg{ background:#f5c400; }
 .btn-trf{ background:#1976d2; color:#fff; }
 
 /* SECTIONS */
-.section{
-  display:none;
-  padding:30px;
-}
+.section{ display:none; padding:25px; }
 
-/* BOOK TEST */
+/* ================= BOOK TEST ================= */
 .book-box{
   background:#fff;
-  padding:30px;
-  border-radius:10px;
   max-width:500px;
   margin:auto;
+  padding:25px;
+  border-radius:8px;
 }
 
-.book-box select, .book-box input{
+.book-box input,
+.book-box select{
   width:100%;
   padding:10px;
-  margin-bottom:12px;
+  margin-bottom:10px;
 }
 
 .book-btn{
+  width:100%;
+  padding:12px;
   background:#000;
   color:#fff;
-  padding:14px;
-  width:100%;
   border:none;
-  font-size:16px;
   cursor:pointer;
 }
 
-/* TRF FORM */
+/* ================= TRF FORM ================= */
 .trf-wrapper{
-  display:flex;
-  gap:30px;
   background:#fff;
-  padding:30px;
-  border-radius:10px;
+  padding:25px;
+  border-radius:8px;
 }
 
-.trf-left{ width:65%; }
-.trf-right{ width:35%; text-align:center; }
+.trf-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.trf-main{
+  display:flex;
+  gap:25px;
+}
+
+.trf-left{ width:70%; }
+.trf-right{ width:30%; }
 
 .row{
   display:flex;
   gap:10px;
-  margin-bottom:10px;
+  margin-bottom:8px;
 }
 
-input, textarea, select{
+input, textarea{
   width:100%;
-  padding:10px;
+  padding:6px;
 }
 
-/* 🔥 PHOTO FIX */
 .photo-box{
+  width:100%;
   height:260px;
-  border:2px dashed #000;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  margin-bottom:10px;
-  overflow:hidden;
+  border:2px solid #000;
   position:relative;
+  overflow:hidden;
 }
 
 .photo-box video,
@@ -118,32 +119,47 @@ input, textarea, select{
   left:0;
 }
 
-.pdf-btn{
-  background:#000;
-  color:#fff;
-  padding:12px;
-  border:none;
-  cursor:pointer;
-  margin-top:15px;
+.photo-actions{
+  display:flex;
+  gap:8px;
+  margin-top:8px;
 }
 
-/* UPDATE RESULT */
+.photo-actions button{
+  width:100%;
+  padding:6px;
+  cursor:pointer;
+}
+
+/* ================= UPDATE RESULT ================= */
 .result-box{
   background:#fff;
-  padding:30px;
-  border-radius:10px;
   max-width:600px;
   margin:auto;
+  padding:25px;
+  border-radius:8px;
+}
+
+.result-box input,
+.result-box select{
+  width:100%;
+  padding:10px;
+  margin-bottom:10px;
 }
 
 .update-btn{
   background:#2e7d32;
   color:#fff;
-  padding:14px;
+  padding:12px;
   width:100%;
   border:none;
-  font-size:16px;
   cursor:pointer;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .trf-main{ flex-direction:column; }
+  .trf-left,.trf-right{ width:100%; }
 }
 </style>
 </head>
@@ -158,24 +174,25 @@ input, textarea, select{
   <button class="btn-trf" onclick="showResult()">Update Result</button>
 </div>
 
-<!-- BOOK TEST -->
+<!-- ================= BOOK TEST ================= -->
 <div class="section" id="bookSection">
   <div class="book-box">
     <h3>Book Test (Admin)</h3>
 
     <select>
-      <option>Select Test Mode</option>
+      <option>Select Test Type</option>
       <option>IELTS Academic</option>
-      <option>IELTS General Training</option>
-      <option>IELTS Life Skill</option>
+      <option>IELTS General</option>
+      <option>IELTS Life Skills</option>
     </select>
 
     <input type="date">
 
     <select>
-      <option>Select Test Time</option>
+      <option>Select Time</option>
       <option>10:00 AM</option>
       <option>11:00 AM</option>
+      <option>12:00 PM</option>
       <option>01:00 PM</option>
       <option>02:00 PM</option>
       <option>03:00 PM</option>
@@ -186,21 +203,30 @@ input, textarea, select{
   </div>
 </div>
 
-<!-- REGISTRATION -->
+<!-- ================= REGISTRATION ================= -->
 <div class="section" id="regSection">
-  <h2>IELTS</h2>
-  <p>Test Report Form</p>
 
-  <div class="trf-wrapper">
+<div class="trf-wrapper">
 
-    <div class="trf-left" id="trfForm">
-      <div class="row">
-        <input placeholder="Centre Number">
-        <input type="date">
-        <input placeholder="Candidate Number">
-      </div>
+  <div class="trf-top">
+    <div>
+      <h2>IELTS</h2>
+      <p>Test Report Form</p>
+    </div>
+    <input placeholder ="Test Mode">
+  </div>
 
-      <h4>Candidate Details</h4>
+  <div class="row">
+    <input placeholder="Centre Number">
+    <input type="date">
+    <input placeholder="Candidate Number">
+  </div>
+
+  <h4>Candidate Details</h4>
+
+  <div class="trf-main">
+
+    <div class="trf-left">
       <input placeholder="Family Name">
       <input placeholder="First Name(s)">
 
@@ -210,33 +236,65 @@ input, textarea, select{
         <input placeholder="Sex (M/F)">
       </div>
 
-      <button class="pdf-btn">Generate PDF</button>
+      <input placeholder="Country or Region of Origin">
+      <input placeholder="Country of Nationality">
+      <input placeholder="First Language">
+
+      <h4>Test Results</h4>
+      <div class="row">
+        <input placeholder="Listening">
+        <input placeholder="Reading">
+        <input placeholder="Writing">
+        <input placeholder="Speaking">
+        <input placeholder="Overall">
+        <input placeholder="CEFR">
+      </div>
+
+      <h4>Administrator Comments</h4>
+      <textarea rows="4"></textarea>
+
+      <div class="row">
+        <input type="date">
+        <input placeholder="Test Report Form Number">
+      </div>
     </div>
 
     <div class="trf-right">
-      <h4>Live Photo</h4>
-
       <div class="photo-box">
         <video id="video" autoplay playsinline></video>
         <canvas id="canvas"></canvas>
       </div>
 
-      <button onclick="startCamera()">Start Camera</button>
-      <button onclick="capturePhoto()">Capture Photo</button>
+      <div class="photo-actions">
+        <button onclick="startCamera()">Open Camera</button>
+        <button onclick="capturePhoto()">Capture Photo</button>
+      </div>
     </div>
 
   </div>
 </div>
+</div>
 
-<!-- UPDATE RESULT -->
+<!-- ================= UPDATE RESULT ================= -->
 <div class="section" id="resultSection">
   <div class="result-box">
-    <h3>Candidate Result Update Form</h3>
+    <h3>Candidate Result Update</h3>
+
     <input placeholder="Listening">
     <input placeholder="Reading">
     <input placeholder="Writing">
     <input placeholder="Speaking">
     <input placeholder="Overall Band Score">
+
+    <select>
+      <option>Select CEFR</option>
+      <option>A1</option><option>A2</option>
+      <option>B1</option><option>B2</option>
+      <option>C1</option><option>C2</option>
+    </select>
+
+    <label>Upload TRF PDF</label>
+    <input type="file" accept="application/pdf">
 
     <button class="update-btn" onclick="updateResult()">Update Result</button>
   </div>
@@ -246,46 +304,35 @@ input, textarea, select{
 function hideAll(){
   document.querySelectorAll(".section").forEach(s=>s.style.display="none");
 }
-
 function showBook(){ hideAll(); bookSection.style.display="block"; }
 function showReg(){ hideAll(); regSection.style.display="block"; }
 function showResult(){ hideAll(); resultSection.style.display="block"; }
+showReg();
 
 /* CAMERA */
 let stream;
-
 function startCamera(){
-  const video=document.getElementById("video");
-  const canvas=document.getElementById("canvas");
-  canvas.style.display="none";
-  video.style.display="block";
+  const v=document.getElementById("video");
+  const c=document.getElementById("canvas");
+  c.style.display="none"; v.style.display="block";
 
   navigator.mediaDevices.getUserMedia({video:true})
-  .then(s=>{ stream=s; video.srcObject=s; })
-  .catch(()=>alert("Camera denied"));
+  .then(s=>{ stream=s; v.srcObject=s; })
+  .catch(()=>alert("Camera permission denied"));
 }
-
 function capturePhoto(){
-  const video=document.getElementById("video");
-  const canvas=document.getElementById("canvas");
-  const ctx=canvas.getContext("2d");
-
-  canvas.width=video.videoWidth;
-  canvas.height=video.videoHeight;
-  ctx.drawImage(video,0,0,canvas.width,canvas.height);
-
-  video.style.display="none";
-  canvas.style.display="block";
-
+  const v=document.getElementById("video");
+  const c=document.getElementById("canvas");
+  c.width=v.videoWidth;
+  c.height=v.videoHeight;
+  c.getContext("2d").drawImage(v,0,0,c.width,c.height);
+  v.style.display="none"; c.style.display="block";
   if(stream) stream.getTracks().forEach(t=>t.stop());
 }
 
 function updateResult(){
   alert("Result Updated Successfully ✅");
 }
-
-/* DEFAULT */
-showReg();
 </script>
 
 </body>
