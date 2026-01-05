@@ -28,7 +28,7 @@ body{
 
 .logo img{
   height:45px;
-  pointer-events:none; /* ❌ NO ZOOM */
+  pointer-events:none; /* ✅️ ZOOM */
 }
 
 .nav-links{
