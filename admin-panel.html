@@ -166,48 +166,49 @@ body{
   </div>
 </div>
 
-<!-- ================= CANDIDATE REGISTRATION (IELTS TRF STYLE) ================= -->
+<section id="candidate-registration">
 
-<div class="section" id="regSection">
+  <h2 class="trf-title">IELTS</h2>
+  <p class="trf-subtitle">Test Report Form</p>
 
-  <div class="trf-container">
+  <div class="trf-wrapper">
 
-    <!-- LEFT SIDE FORM -->
-    <div class="trf-form">
-
-      <h2>IELTS</h2>
-      <p>Test Report Form</p>
+    <!-- LEFT FORM -->
+    <div class="trf-left" id="trfForm">
 
       <div class="row">
-        <input type="text" placeholder="Centre Number">
+        <input placeholder="Centre Number">
         <input type="date">
-        <input type="text" placeholder="Candidate Number">
+        <input placeholder="Candidate Number">
       </div>
 
       <h4>Candidate Details</h4>
 
-      <input type="text" placeholder="Family Name">
-      <input type="text" placeholder="First Name(s)">
+      <input placeholder="Family Name">
+      <input placeholder="First Name(s)">
 
       <div class="row">
-        <input type="text" placeholder="Candidate ID">
-        <input type="date" placeholder="Date of Birth">
-        <input type="text" placeholder="Sex (M/F)">
+        <input placeholder="Candidate ID">
+        <input type="date">
+        <input placeholder="Sex (M/F)">
       </div>
 
-      <input type="text" placeholder="Country or Region of Origin">
-      <input type="text" placeholder="Country of Nationality">
-      <input type="text" placeholder="First Language">
+      <input placeholder="Country or Region of Origin">
+      <input placeholder="Country of Nationality">
+      <input placeholder="First Language">
 
       <h4>Test Results</h4>
 
       <div class="row">
-        <input type="text" placeholder="Listening">
-        <input type="text" placeholder="Reading">
-        <input type="text" placeholder="Writing">
-        <input type="text" placeholder="Speaking">
-        <input type="text" placeholder="Overall">
-        <input type="text" placeholder="CEFR">
+        <input placeholder="Listening">
+        <input placeholder="Reading">
+        <input placeholder="Writing">
+        <input placeholder="Speaking">
+      </div>
+
+      <div class="row">
+        <input placeholder="Overall Band Score">
+        <input placeholder="CEFR Level">
       </div>
 
       <h4>Administrator Comments</h4>
@@ -215,22 +216,22 @@ body{
 
       <div class="row">
         <input type="date">
-        <input type="text" placeholder="Test Report Form Number">
+        <input placeholder="Test Report Form Number">
       </div>
+
+      <button class="pdf-btn" onclick="generatePDF()">Generate PDF</button>
 
     </div>
 
-    <!-- RIGHT SIDE LIVE PHOTO -->
-    <div class="trf-photo">
+    <!-- RIGHT PHOTO -->
+    <div class="trf-right">
       <h4>Live Photo</h4>
       <div class="photo-box">Webcam Preview</div>
       <button>Start Camera</button>
     </div>
 
   </div>
-
-</div>
-
+</section>
 <!-- ================= UPDATE RESULT (FIXED) ================= -->
 <div class="section" id="resultSection">
   <div class="result-box">
