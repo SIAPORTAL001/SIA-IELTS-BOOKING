@@ -231,8 +231,13 @@ input, textarea, select{
 
     <div class="trf-right">
       <h4>Live Photo</h4>
-      <div class="photo-box">Webcam Preview</div>
-      <button>Start Camera</button>
+      <div class="photo-box">
+  <video id="video" autoplay></video>
+  <canvas id="canvas" style="display:none;"></canvas>
+</div>
+
+<button onclick="startCamera()">Start Camera</button>
+<button onclick="capturePhoto()">Capture Photo</button>
     </div>
 
   </div>
