@@ -1,4 +1,3 @@
-
 *{
   margin:0;
   padding:0;
@@ -29,7 +28,7 @@ body{
 
 .logo img{
   height:45px;
-  pointer-events:none; /* ✅️ ZOOM */
+  pointer-events:none;
 }
 
 .nav-links{
@@ -154,14 +153,14 @@ footer{
   position:fixed;
   inset:0;
   background:rgba(0,0,0,0.6);
-  backdrop-filter:blur(8px);
+  backdrop-filter:blur(6px);
   justify-content:center;
   align-items:center;
   z-index:9999;
 }
 
 .admin-box{
-  background:#f5f5f5;
+  background:#fff;
   width:340px;
   padding:30px;
   border-radius:12px;
@@ -193,145 +192,47 @@ footer{
   font-size:22px;
   cursor:pointer;
 }
-.update-result-btn{
-  display:block;
-  margin:30px auto;
-  padding:14px 40px;
-  background:#d32f2f;
-  color:#fff;
-  border:none;
-  border-radius:6px;
-  font-size:16px;
-  cursor:pointer;
-}
-.trf-container {
-  display: flex;
-  gap: 20px;
-  background: #fff;
-  padding: 20px;
+
+/* ================= TRF FORM ================= */
+.trf-wrapper{
+  display:flex;
+  gap:20px;
+  background:#fff;
+  padding:20px;
 }
 
-.trf-form {
-  flex: 3;
+.trf-left{
+  flex:3;
 }
 
-.trf-photo {
-  flex: 1;
-  border: 1px solid #000;
-  padding: 10px;
-  text-align: center;
-}
-
-.trf-form input,
-.trf-form textarea {
-  width: 100%;
-  margin-bottom: 8px;
-  padding: 6px;
-}
-
-.row {
-  display: flex;
-  gap: 10px;
-}
-
-.photo-box {
-  border: 2px dashed #000;
-  height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 10px;
-}
-.trf-wrapper {
-  display: flex;
-  gap: 20px;
-  background: #fff;
-  padding: 20px;
-}
-
-.trf-left {
-  flex: 3;
-}
-
-.trf-right {
-  flex: 1;
-  border: 1px solid #000;
-  padding: 10px;
-  text-align: center;
+.trf-right{
+  flex:1;
+  border:1px solid #000;
+  padding:10px;
+  text-align:center;
 }
 
 .trf-left input,
-.trf-left textarea {
-  width: 100%;
-  padding: 6px;
-  margin-bottom: 8px;
-}
-
-.row {
-  display: flex;
-  gap: 10px;
-}
-
-.photo-box {
-  height: 220px;
-  border: 2px dashed #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 10px;
-}
-
-.pdf-btn {
-  background: black;
-  color: white;
-  padding: 10px;
-  border: none;
-  width: 200px;
-  margin-top: 15px;
-  cursor: pointer;
-}
-video, canvas{
+.trf-left textarea{
   width:100%;
-  height:100%;
-  object-fit:cover;
-}
-.photo-box video,
-.photo-box canvas{
-  width:100%;
-  height:100%;
-  object-fit: cover;
-}
-.photo-box {
-  width: 320px;
-  height: 240px;
-  border: 2px dashed #000;
-  position: relative;
-  overflow: hidden;
-  background: #f5f5f5;
+  padding:6px;
+  margin-bottom:8px;
 }
 
-.photo-box video,
-.photo-box canvas {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.row{
+  display:flex;
+  gap:10px;
 }
 
-#canvas {
-  display: none;
-}
-
-.camera-buttons {
-  margin-top: 10px;
-}
-/* ===== CAMERA FIX ===== */
-
+/* ================= CAMERA (FINAL FIX) ================= */
 .photo-box{
-  height:260px;
+  width:300px;
+  height:350px;
   border:2px dashed #000;
   position:relative;
   overflow:hidden;
   background:#f5f5f5;
+  margin:auto;
 }
 
 .photo-box video,
@@ -342,6 +243,7 @@ video, canvas{
   width:100%;
   height:100%;
   object-fit:cover;
+  display:none;
 }
 
 #canvas{
@@ -354,61 +256,21 @@ video, canvas{
   justify-content:center;
   gap:10px;
 }
-.photo-box{
-  position: relative;
-  width: 100%;
-  height: 260px;
-  border: 2px dashed #000;
-  overflow: hidden;          /* 🔴 MOST IMPORTANT */
-  background: #f9f9f9;
-}
 
-/* Video & Canvas INSIDE BOX */
-.photo-box video,
-.photo-box canvas{
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;         /* 🔴 keeps face inside box */
-  display: none;
-}
-.photo-box {
-  width: 300px;
-  height: 350px;
-  border: 2px dashed #999;
-  position: relative;
-  overflow: hidden;
-}
-
-.photo-box video,
-.photo-box canvas {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: none;
-}
-/* SIGN UP POPUP */
+/* ================= SIGNUP POPUP ================= */
 .signup-modal{
   display:none;
   position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
+  inset:0;
   background:rgba(0,0,0,0.6);
-  backdrop-filter: blur(6px);
+  backdrop-filter:blur(6px);
   justify-content:center;
   align-items:center;
   z-index:9999;
 }
 
 .signup-box{
-  background:white;
+  background:#fff;
   padding:30px;
   width:320px;
   border-radius:12px;
@@ -424,8 +286,8 @@ video, canvas{
 .signup-box button{
   width:100%;
   padding:12px;
-  background:black;
-  color:white;
+  background:#000;
+  color:#fff;
   border:none;
   cursor:pointer;
 }
