@@ -48,59 +48,6 @@ body{
   padding:30px;
 }
 
-/* REG FORM */
-.form-container{
-  display:flex;
-  gap:30px;
-  background:#fff;
-  padding:30px;
-  border-radius:10px;
-}
-
-.form-left{ width:65%; }
-.form-right{ width:35%; text-align:center; }
-
-.form-left input{
-  width:100%;
-  padding:10px;
-  margin-bottom:12px;
-}
-
-.photo-box{
-  height:260px;
-  border:2px dashed #000;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:#fafafa;
-  margin-bottom:10px;
-}
-
-/* UPDATE RESULT */
-.result-box{
-  background:#fff;
-  padding:30px;
-  border-radius:10px;
-  max-width:600px;
-  margin:auto;
-}
-
-.result-box input, .result-box select{
-  width:100%;
-  padding:10px;
-  margin-bottom:10px;
-}
-
-.update-btn{
-  background:#2e7d32;
-  color:#fff;
-  padding:14px;
-  width:100%;
-  border:none;
-  font-size:16px;
-  cursor:pointer;
-}
-
 /* BOOK TEST */
 .book-box{
   background:#fff;
@@ -125,6 +72,66 @@ body{
   font-size:16px;
   cursor:pointer;
 }
+
+/* TRF FORM */
+.trf-wrapper{
+  display:flex;
+  gap:30px;
+  background:#fff;
+  padding:30px;
+  border-radius:10px;
+}
+
+.trf-left{ width:65%; }
+.trf-right{ width:35%; text-align:center; }
+
+.row{
+  display:flex;
+  gap:10px;
+  margin-bottom:10px;
+}
+
+input, textarea, select{
+  width:100%;
+  padding:10px;
+}
+
+.photo-box{
+  height:260px;
+  border:2px dashed #000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:10px;
+}
+
+.pdf-btn{
+  background:#000;
+  color:#fff;
+  padding:12px;
+  border:none;
+  cursor:pointer;
+  margin-top:15px;
+}
+
+/* UPDATE RESULT */
+.result-box{
+  background:#fff;
+  padding:30px;
+  border-radius:10px;
+  max-width:600px;
+  margin:auto;
+}
+
+.update-btn{
+  background:#2e7d32;
+  color:#fff;
+  padding:14px;
+  width:100%;
+  border:none;
+  font-size:16px;
+  cursor:pointer;
+}
 </style>
 </head>
 
@@ -138,7 +145,7 @@ body{
   <button class="btn-trf" onclick="showResult()">Update Result</button>
 </div>
 
-<!-- ================= BOOK TEST ================= -->
+<!-- BOOK TEST -->
 <div class="section" id="bookSection">
   <div class="book-box">
     <h3>Book Test (Admin)</h3>
@@ -166,14 +173,14 @@ body{
   </div>
 </div>
 
-<section id="candidate-registration">
+<!-- CANDIDATE REGISTRATION (ORIGINAL STYLE FIXED) -->
+<div class="section" id="regSection">
 
-  <h2 class="trf-title">IELTS</h2>
-  <p class="trf-subtitle">Test Report Form</p>
+  <h2>IELTS</h2>
+  <p>Test Report Form</p>
 
   <div class="trf-wrapper">
 
-    <!-- LEFT FORM -->
     <div class="trf-left" id="trfForm">
 
       <div class="row">
@@ -220,10 +227,8 @@ body{
       </div>
 
       <button class="pdf-btn" onclick="generatePDF()">Generate PDF</button>
-
     </div>
 
-    <!-- RIGHT PHOTO -->
     <div class="trf-right">
       <h4>Live Photo</h4>
       <div class="photo-box">Webcam Preview</div>
@@ -231,8 +236,9 @@ body{
     </div>
 
   </div>
-</section>
-<!-- ================= UPDATE RESULT (FIXED) ================= -->
+</div>
+
+<!-- UPDATE RESULT -->
 <div class="section" id="resultSection">
   <div class="result-box">
     <h3>Candidate Result Update Form</h3>
@@ -245,64 +251,40 @@ body{
 
     <select id="cefr">
       <option>Select CEFR Level</option>
-      <option>A1</option>
-      <option>A2</option>
-      <option>B1</option>
-      <option>B2</option>
-      <option>C1</option>
-      <option>C2</option>
+      <option>A1</option><option>A2</option>
+      <option>B1</option><option>B2</option>
+      <option>C1</option><option>C2</option>
     </select>
 
     <label>Upload TRF PDF</label>
-    <input type="file" id="trfPdf" accept="application/pdf">
+    <input type="file" accept="application/pdf">
 
-    <br><br>
     <button class="update-btn" onclick="updateResult()">Update Result</button>
   </div>
 </div>
 
+<!-- JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+
 <script>
 function hideAll(){
-  bookSection.style.display="none";
-  regSection.style.display="none";
-  resultSection.style.display="none";
+  document.getElementById("bookSection").style.display="none";
+  document.getElementById("regSection").style.display="none";
+  document.getElementById("resultSection").style.display="none";
 }
 
-function showBook(){
-  hideAll();
-  bookSection.style.display="block";
-}
+function showBook(){ hideAll(); bookSection.style.display="block"; }
+function showReg(){ hideAll(); regSection.style.display="block"; }
+function showResult(){ hideAll(); resultSection.style.display="block"; }
 
-function showReg(){
-  hideAll();
-  regSection.style.display="block";
-}
-
-function showResult(){
-  hideAll();
-  resultSection.style.display="block";
+function generatePDF(){
+  html2pdf().from(document.getElementById("trfForm")).save("IELTS-TRF.pdf");
 }
 
 function updateResult(){
-  const data = {
-    listening: listening.value,
-    reading: reading.value,
-    writing: writing.value,
-    speaking: speaking.value,
-    overall: overall.value,
-    cefr: cefr.value,
-    pdf: "uploaded-trf/sample-trf.pdf"
-  };
-  localStorage.setItem("candidateResult", JSON.stringify(data));
   alert("Result Updated Successfully ✅");
 }
-<<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
-
-<script>
-function generatePDF() {
-  const element = document.getElementById("trfForm");
-  html2pdf().from(element).save("IELTS-TRF.pdf");
-}
 </script>
+
 </body>
 </html>
