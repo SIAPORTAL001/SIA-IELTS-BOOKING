@@ -57,6 +57,8 @@ body{
   align-items:center;
   text-align:center;
   background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
   animation:bgSlider 15s infinite;
 }
 
@@ -290,4 +292,21 @@ footer{
   color:#fff;
   border:none;
   cursor:pointer;
+}
+.check-result-btn{
+  padding:14px 38px;
+  font-size:16px;
+  border-radius:30px;
+  border:none;
+  cursor:pointer;
+  background:linear-gradient(135deg,#ff9800,#ff5722);
+  color:white;
+  font-weight:bold;
+  box-shadow:0 8px 20px rgba(0,0,0,0.3);
+  transition:0.3s;
+}
+
+.check-result-btn:hover{
+  transform:scale(1.07);
+  box-shadow:0 12px 25px rgba(0,0,0,0.5);
 }
