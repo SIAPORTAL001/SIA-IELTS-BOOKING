@@ -241,3 +241,51 @@ footer{
   justify-content: center;
   margin-bottom: 10px;
 }
+.trf-wrapper {
+  display: flex;
+  gap: 20px;
+  background: #fff;
+  padding: 20px;
+}
+
+.trf-left {
+  flex: 3;
+}
+
+.trf-right {
+  flex: 1;
+  border: 1px solid #000;
+  padding: 10px;
+  text-align: center;
+}
+
+.trf-left input,
+.trf-left textarea {
+  width: 100%;
+  padding: 6px;
+  margin-bottom: 8px;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+}
+
+.photo-box {
+  height: 220px;
+  border: 2px dashed #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.pdf-btn {
+  background: black;
+  color: white;
+  padding: 10px;
+  border: none;
+  width: 200px;
+  margin-top: 15px;
+  cursor: pointer;
+}
