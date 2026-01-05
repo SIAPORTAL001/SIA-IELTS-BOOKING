@@ -306,9 +306,11 @@ function updateResult(){
 }
 
 /* ================= CAMERA ================= */
-let stream = null;
+<!-- ========= CAMERA + ALL JS ========= -->
+<script>
+let stream;
 
-function startCamera(){
+function startCamera() {
   const video = document.getElementById("video");
   const canvas = document.getElementById("canvas");
 
@@ -320,29 +322,53 @@ function startCamera(){
       stream = s;
       video.srcObject = stream;
     })
-    .catch(() => alert("Camera access denied"));
+    .catch(err => {
+      alert("Camera access denied");
+      console.error(err);
+    });
 }
 
-function capturePhoto(){
+function capturePhoto() {
   const video = document.getElementById("video");
   const canvas = document.getElementById("canvas");
-
-  canvas.width = video.videoWidth;
-  canvas.height = video.videoHeight;
-
   const ctx = canvas.getContext("2d");
+
+  canvas.width = video.clientWidth;
+  canvas.height = video.clientHeight;
+
   ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
   video.style.display = "none";
   canvas.style.display = "block";
 
-  if(stream){
+  if (stream) {
     stream.getTracks().forEach(t => t.stop());
   }
 }
+
+/* ===== PANEL FUNCTIONS ===== */
+function showBook() {
+  hideAll();
+  document.getElementById("bookTestSection").style.display = "block";
+}
+
+function showReg() {
+  hideAll();
+  document.getElementById("registrationSection").style.display = "block";
+}
+
+function showResult() {
+  hideAll();
+  document.getElementById("resultSection").style.display = "block";
+}
+
+function hideAll() {
+  document.querySelectorAll(".section").forEach(s => s.style.display = "none");
+}
+
+/* DEFAULT OPEN */
+showReg();
 </script>
-<script>
-showReg(); 
-</script>
+
 </body>
 </html>
