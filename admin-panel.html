@@ -307,41 +307,37 @@ function updateResult(){
 let stream = null;
 
 function startCamera(){
-  if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){
-    alert("Camera not supported");
-    return;
-  }
+  const video = document.getElementById("video");
+  const canvas = document.getElementById("canvas");
+
+  canvas.style.display = "none";
+  video.style.display = "block";
 
   navigator.mediaDevices.getUserMedia({ video: true })
     .then(s => {
       stream = s;
-      const video = document.getElementById("video");
       video.srcObject = stream;
-      video.style.display = "block";
       video.play();
     })
     .catch(err => {
-      alert("Camera access denied");
-      console.error(err);
+      alert("Camera access denied ❌");
     });
 }
 
 function capturePhoto(){
-  if(!stream){
-    alert("Please start camera first");
-    return;
-  }
-
   const video = document.getElementById("video");
   const canvas = document.getElementById("canvas");
   const ctx = canvas.getContext("2d");
 
   canvas.width = video.videoWidth;
   canvas.height = video.videoHeight;
-  ctx.drawImage(video, 0, 0);
 
-  stream.getTracks().forEach(track => track.stop());
-  stream = null;
+  ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+  // Stop camera
+  if(stream){
+    stream.getTracks().forEach(track => track.stop());
+  }
 
   video.style.display = "none";
   canvas.style.display = "block";
