@@ -353,3 +353,23 @@ video, canvas{
   justify-content:center;
   gap:10px;
 }
+.photo-box{
+  position: relative;
+  width: 100%;
+  height: 260px;
+  border: 2px dashed #000;
+  overflow: hidden;          /* 🔴 MOST IMPORTANT */
+  background: #f9f9f9;
+}
+
+/* Video & Canvas INSIDE BOX */
+.photo-box video,
+.photo-box canvas{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;         /* 🔴 keeps face inside box */
+  display: none;
+}
