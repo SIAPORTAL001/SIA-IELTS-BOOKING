@@ -296,7 +296,13 @@ function updateResult(){
   localStorage.setItem("candidateResult", JSON.stringify(data));
   alert("Result Updated Successfully ✅");
 }
-</script>
+<<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
 
+<script>
+function generatePDF() {
+  const element = document.getElementById("trfForm");
+  html2pdf().from(element).save("IELTS-TRF.pdf");
+}
+</script>
 </body>
 </html>
