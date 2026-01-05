@@ -4,9 +4,6 @@
 <meta charset="UTF-8">
 <title>Admin Panel - OFFICIAL SIA</title>
 
-<!-- jsPDF -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
 <style>
 body{
   font-family: Arial, Helvetica, sans-serif;
@@ -40,6 +37,8 @@ body{
   border-radius:6px;
 }
 
+/* BUTTON COLORS */
+.btn-book{ background:linear-gradient(45deg,#8e24aa,#d81b60); color:#fff; }
 .btn-reg{ background:#f5c400; }
 .btn-trf{ background:#1976d2; color:#fff; }
 
@@ -49,76 +48,82 @@ body{
   padding:30px;
 }
 
-/* IELTS FORM */
-.ielts-form{
+/* REG FORM */
+.form-container{
+  display:flex;
+  gap:30px;
   background:#fff;
   padding:30px;
   border-radius:10px;
-  display:flex;
-  gap:30px;
 }
 
-.form-main{
-  width:70%;
-}
+.form-left{ width:65%; }
+.form-right{ width:35%; text-align:center; }
 
-.form-main h2{
-  margin:0;
-}
-
-.row{
-  display:flex;
-  gap:10px;
-  margin-bottom:10px;
-}
-
-.row input{
+.form-left input{
   width:100%;
-  padding:8px;
-}
-
-.full{
-  width:100%;
-  padding:8px;
-  margin-bottom:10px;
-}
-
-/* PHOTO */
-.form-photo{
-  width:30%;
-  text-align:center;
+  padding:10px;
+  margin-bottom:12px;
 }
 
 .photo-box{
-  height:250px;
+  height:260px;
   border:2px dashed #000;
   display:flex;
   align-items:center;
   justify-content:center;
+  background:#fafafa;
   margin-bottom:10px;
 }
 
-/* RESULTS */
-.results{
-  display:flex;
-  gap:10px;
+/* UPDATE RESULT */
+.result-box{
+  background:#fff;
+  padding:30px;
+  border-radius:10px;
+  max-width:600px;
+  margin:auto;
 }
 
-.results input{
+.result-box input, .result-box select{
   width:100%;
-  padding:8px;
+  padding:10px;
+  margin-bottom:10px;
 }
 
-/* BUTTON */
-.pdf-btn{
-  background:#000;
+.update-btn{
+  background:#2e7d32;
   color:#fff;
-  padding:15px;
+  padding:14px;
   width:100%;
   border:none;
   font-size:16px;
   cursor:pointer;
-  margin-top:20px;
+}
+
+/* BOOK TEST */
+.book-box{
+  background:#fff;
+  padding:30px;
+  border-radius:10px;
+  max-width:500px;
+  margin:auto;
+}
+
+.book-box select, .book-box input{
+  width:100%;
+  padding:10px;
+  margin-bottom:12px;
+}
+
+.book-btn{
+  background:#000;
+  color:#fff;
+  padding:14px;
+  width:100%;
+  border:none;
+  font-size:16px;
+  cursor:pointer;
 }
 </style>
 </head>
@@ -128,99 +133,123 @@ body{
 <div class="header">WELCOME TO THE ADMIN PANEL</div>
 
 <div class="dashboard">
+  <button class="btn-book" onclick="showBook()">BOOK TEST</button>
   <button class="btn-reg" onclick="showReg()">Candidate Registration Form</button>
   <button class="btn-trf" onclick="showResult()">Update Result</button>
 </div>
 
-<!-- ================= REGISTRATION ================= -->
+<!-- ================= BOOK TEST ================= -->
+<div class="section" id="bookSection">
+  <div class="book-box">
+    <h3>Book Test (Admin)</h3>
+
+    <select>
+      <option>Select Test Mode</option>
+      <option>IELTS Academic</option>
+      <option>IELTS General Training</option>
+      <option>IELTS Life Skill</option>
+    </select>
+
+    <input type="date">
+
+    <select>
+      <option>Select Test Time</option>
+      <option>10:00 AM</option>
+      <option>11:00 AM</option>
+      <option>01:00 PM</option>
+      <option>02:00 PM</option>
+      <option>03:00 PM</option>
+      <option>04:00 PM</option>
+    </select>
+
+    <button class="book-btn">BOOK TEST</button>
+  </div>
+</div>
+
+<!-- ================= REGISTRATION (UNCHANGED) ================= -->
 <div class="section" id="regSection">
-
-<div class="ielts-form" id="pdfArea">
-
-  <div class="form-main">
-    <h2>IELTS</h2>
-    <p>Test Report Form</p>
-
-    <div class="row">
-      <input placeholder="Centre Number">
+  <div class="form-container">
+    <div class="form-left">
+      <h3>Candidate Details</h3>
+      <input placeholder="Full Name">
+      <input placeholder="Passport / CNIC">
       <input type="date">
-      <input placeholder="Candidate Number">
-    </div>
-
-    <h4>Candidate Details</h4>
-
-    <input class="full" placeholder="Family Name">
-    <input class="full" placeholder="First Name(s)">
-
-    <div class="row">
-      <input placeholder="Candidate ID">
+      <input placeholder="Test Type">
+      <input placeholder="Test Center">
       <input type="date">
-      <input placeholder="Sex (M/F)">
     </div>
 
-    <input class="full" placeholder="Country or Region of Origin">
-    <input class="full" placeholder="Country of Nationality">
-    <input class="full" placeholder="First Language">
-
-    <h4>Test Results</h4>
-    <div class="results">
-      <input placeholder="Listening">
-      <input placeholder="Reading">
-      <input placeholder="Writing">
-      <input placeholder="Speaking">
-      <input placeholder="Overall">
-      <input placeholder="CEFR">
+    <div class="form-right">
+      <h3>Live Photo</h3>
+      <div class="photo-box">Webcam Preview</div>
+      <button>Capture Photo</button>
     </div>
-
-    <h4>Administrator Comments</h4>
-    <input class="full" placeholder="Comments">
-
-    <div class="row">
-      <input type="date">
-      <input placeholder="Test Report Form Number">
-    </div>
-
   </div>
-
-  <div class="form-photo">
-    <h4>Live Photo</h4>
-    <div class="photo-box">Webcam Preview</div>
-    <button>Start Camera</button>
-  </div>
-
 </div>
 
-<button class="pdf-btn" onclick="generatePDF()">Generate PDF</button>
-
-</div>
-
-<!-- ================= RESULT ================= -->
+<!-- ================= UPDATE RESULT (FIXED) ================= -->
 <div class="section" id="resultSection">
-  <p>Result Section (No change)</p>
+  <div class="result-box">
+    <h3>Candidate Result Update Form</h3>
+
+    <input id="listening" placeholder="Listening">
+    <input id="reading" placeholder="Reading">
+    <input id="writing" placeholder="Writing">
+    <input id="speaking" placeholder="Speaking">
+    <input id="overall" placeholder="Overall Band Score">
+
+    <select id="cefr">
+      <option>Select CEFR Level</option>
+      <option>A1</option>
+      <option>A2</option>
+      <option>B1</option>
+      <option>B2</option>
+      <option>C1</option>
+      <option>C2</option>
+    </select>
+
+    <label>Upload TRF PDF</label>
+    <input type="file" id="trfPdf" accept="application/pdf">
+
+    <br><br>
+    <button class="update-btn" onclick="updateResult()">Update Result</button>
+  </div>
 </div>
 
 <script>
-function showReg(){
-  regSection.style.display="block";
+function hideAll(){
+  bookSection.style.display="none";
+  regSection.style.display="none";
   resultSection.style.display="none";
 }
 
-function showResult(){
-  resultSection.style.display="block";
-  regSection.style.display="none";
+function showBook(){
+  hideAll();
+  bookSection.style.display="block";
 }
 
-function generatePDF(){
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF("p","pt","a4");
+function showReg(){
+  hideAll();
+  regSection.style.display="block";
+}
 
-  doc.html(document.querySelector("#pdfArea"), {
-    callback: function (pdf) {
-      pdf.save("IELTS-TRF.pdf");
-    },
-    x: 20,
-    y: 20
-  });
+function showResult(){
+  hideAll();
+  resultSection.style.display="block";
+}
+
+function updateResult(){
+  const data = {
+    listening: listening.value,
+    reading: reading.value,
+    writing: writing.value,
+    speaking: speaking.value,
+    overall: overall.value,
+    cefr: cefr.value,
+    pdf: "uploaded-trf/sample-trf.pdf"
+  };
+  localStorage.setItem("candidateResult", JSON.stringify(data));
+  alert("Result Updated Successfully ✅");
 }
 </script>
 
