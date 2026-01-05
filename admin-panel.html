@@ -166,25 +166,69 @@ body{
   </div>
 </div>
 
-<!-- ================= REGISTRATION (UNCHANGED) ================= -->
+<!-- ================= CANDIDATE REGISTRATION (IELTS TRF STYLE) ================= -->
+
 <div class="section" id="regSection">
-  <div class="form-container">
-    <div class="form-left">
-      <h3>Candidate Details</h3>
-      <input placeholder="Full Name">
-      <input placeholder="Passport / CNIC">
-      <input type="date">
-      <input placeholder="Test Type">
-      <input placeholder="Test Center">
-      <input type="date">
+
+  <div class="trf-container">
+
+    <!-- LEFT SIDE FORM -->
+    <div class="trf-form">
+
+      <h2>IELTS</h2>
+      <p>Test Report Form</p>
+
+      <div class="row">
+        <input type="text" placeholder="Centre Number">
+        <input type="date">
+        <input type="text" placeholder="Candidate Number">
+      </div>
+
+      <h4>Candidate Details</h4>
+
+      <input type="text" placeholder="Family Name">
+      <input type="text" placeholder="First Name(s)">
+
+      <div class="row">
+        <input type="text" placeholder="Candidate ID">
+        <input type="date" placeholder="Date of Birth">
+        <input type="text" placeholder="Sex (M/F)">
+      </div>
+
+      <input type="text" placeholder="Country or Region of Origin">
+      <input type="text" placeholder="Country of Nationality">
+      <input type="text" placeholder="First Language">
+
+      <h4>Test Results</h4>
+
+      <div class="row">
+        <input type="text" placeholder="Listening">
+        <input type="text" placeholder="Reading">
+        <input type="text" placeholder="Writing">
+        <input type="text" placeholder="Speaking">
+        <input type="text" placeholder="Overall">
+        <input type="text" placeholder="CEFR">
+      </div>
+
+      <h4>Administrator Comments</h4>
+      <textarea></textarea>
+
+      <div class="row">
+        <input type="date">
+        <input type="text" placeholder="Test Report Form Number">
+      </div>
+
     </div>
 
-    <div class="form-right">
-      <h3>Live Photo</h3>
+    <!-- RIGHT SIDE LIVE PHOTO -->
+    <div class="trf-photo">
+      <h4>Live Photo</h4>
       <div class="photo-box">Webcam Preview</div>
-      <button>Capture Photo</button>
+      <button>Start Camera</button>
     </div>
+
   </div>
+
 </div>
 
 <!-- ================= UPDATE RESULT (FIXED) ================= -->
