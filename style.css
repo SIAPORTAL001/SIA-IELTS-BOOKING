@@ -203,3 +203,41 @@ footer{
   font-size:16px;
   cursor:pointer;
 }
+.trf-container {
+  display: flex;
+  gap: 20px;
+  background: #fff;
+  padding: 20px;
+}
+
+.trf-form {
+  flex: 3;
+}
+
+.trf-photo {
+  flex: 1;
+  border: 1px solid #000;
+  padding: 10px;
+  text-align: center;
+}
+
+.trf-form input,
+.trf-form textarea {
+  width: 100%;
+  margin-bottom: 8px;
+  padding: 6px;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+}
+
+.photo-box {
+  border: 2px dashed #000;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
