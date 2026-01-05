@@ -56,7 +56,7 @@ body{
   max-width:500px;
   margin:auto;
 }
- 
+
 .book-box select, .book-box input{
   width:100%;
   padding:10px;
@@ -96,6 +96,7 @@ input, textarea, select{
   padding:10px;
 }
 
+/* 🔥 PHOTO FIX */
 .photo-box{
   height:260px;
   border:2px dashed #000;
@@ -103,6 +104,18 @@ input, textarea, select{
   align-items:center;
   justify-content:center;
   margin-bottom:10px;
+  overflow:hidden;
+  position:relative;
+}
+
+.photo-box video,
+.photo-box canvas{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  position:absolute;
+  top:0;
+  left:0;
 }
 
 .pdf-btn{
@@ -173,16 +186,14 @@ input, textarea, select{
   </div>
 </div>
 
-<!-- CANDIDATE REGISTRATION (ORIGINAL STYLE FIXED) -->
+<!-- REGISTRATION -->
 <div class="section" id="regSection">
-
   <h2>IELTS</h2>
   <p>Test Report Form</p>
 
   <div class="trf-wrapper">
 
     <div class="trf-left" id="trfForm">
-
       <div class="row">
         <input placeholder="Centre Number">
         <input type="date">
@@ -190,7 +201,6 @@ input, textarea, select{
       </div>
 
       <h4>Candidate Details</h4>
-
       <input placeholder="Family Name">
       <input placeholder="First Name(s)">
 
@@ -200,47 +210,20 @@ input, textarea, select{
         <input placeholder="Sex (M/F)">
       </div>
 
-      <input placeholder="Country or Region of Origin">
-      <input placeholder="Country of Nationality">
-      <input placeholder="First Language">
-
-      <h4>Test Results</h4>
-
-      <div class="row">
-        <input placeholder="Listening">
-        <input placeholder="Reading">
-        <input placeholder="Writing">
-        <input placeholder="Speaking">
-      </div>
-
-      <div class="row">
-        <input placeholder="Overall Band Score">
-        <input placeholder="CEFR Level">
-      </div>
-
-      <h4>Administrator Comments</h4>
-      <textarea></textarea>
-
-      <div class="row">
-        <input type="date">
-        <input placeholder="Test Report Form Number">
-      </div>
-
-      <button class="pdf-btn" onclick="generatePDF()">Generate PDF</button>
+      <button class="pdf-btn">Generate PDF</button>
     </div>
 
     <div class="trf-right">
       <h4>Live Photo</h4>
-    <!-- Live Photo Section -->
-<div class="photo-box">
-  <video id="video" autoplay playsinline></video>
-  <canvas id="canvas"></canvas>
-</div>
 
-<div class="camera-buttons">
-  <button type="button" onclick="startCamera()">Start Camera</button>
-  <button type="button" onclick="capturePhoto()">Capture Photo</button>
-</div>
+      <div class="photo-box">
+        <video id="video" autoplay playsinline></video>
+        <canvas id="canvas"></canvas>
+      </div>
+
+      <button onclick="startCamera()">Start Camera</button>
+      <button onclick="capturePhoto()">Capture Photo</button>
+    </div>
 
   </div>
 </div>
@@ -249,68 +232,37 @@ input, textarea, select{
 <div class="section" id="resultSection">
   <div class="result-box">
     <h3>Candidate Result Update Form</h3>
-
-    <input id="listening" placeholder="Listening">
-    <input id="reading" placeholder="Reading">
-    <input id="writing" placeholder="Writing">
-    <input id="speaking" placeholder="Speaking">
-    <input id="overall" placeholder="Overall Band Score">
-
-    <select id="cefr">
-      <option>Select CEFR Level</option>
-      <option>A1</option><option>A2</option>
-      <option>B1</option><option>B2</option>
-      <option>C1</option><option>C2</option>
-    </select>
-
-    <label>Upload TRF PDF</label>
-    <input type="file" accept="application/pdf">
+    <input placeholder="Listening">
+    <input placeholder="Reading">
+    <input placeholder="Writing">
+    <input placeholder="Speaking">
+    <input placeholder="Overall Band Score">
 
     <button class="update-btn" onclick="updateResult()">Update Result</button>
   </div>
 </div>
 
-<!-- ===================== JS (ONLY ONE SCRIPT) ===================== -->
 <script>
-/* ===== SECTION CONTROL ===== */
 function hideAll(){
-  document.querySelectorAll(".section").forEach(s => s.style.display="none");
+  document.querySelectorAll(".section").forEach(s=>s.style.display="none");
 }
 
-function showBook(){
-  hideAll();
-  document.getElementById("bookSection").style.display="block";
-}
+function showBook(){ hideAll(); bookSection.style.display="block"; }
+function showReg(){ hideAll(); regSection.style.display="block"; }
+function showResult(){ hideAll(); resultSection.style.display="block"; }
 
-function showReg(){
-  hideAll();
-  document.getElementById("regSection").style.display="block";
-}
-
-function showResult(){
-  hideAll();
-  document.getElementById("resultSection").style.display="block";
-}
-
-/* ===== CAMERA ===== */
+/* CAMERA */
 let stream;
 
 function startCamera(){
-  const video = document.getElementById("video");
-  const canvas = document.getElementById("canvas");
-
+  const video=document.getElementById("video");
+  const canvas=document.getElementById("canvas");
   canvas.style.display="none";
   video.style.display="block";
 
   navigator.mediaDevices.getUserMedia({video:true})
-  .then(s=>{
-    stream=s;
-    video.srcObject=s;
-  })
-  .catch(err=>{
-    alert("Camera access denied");
-    console.error(err);
-  });
+  .then(s=>{ stream=s; video.srcObject=s; })
+  .catch(()=>alert("Camera denied"));
 }
 
 function capturePhoto(){
@@ -318,20 +270,16 @@ function capturePhoto(){
   const canvas=document.getElementById("canvas");
   const ctx=canvas.getContext("2d");
 
-  canvas.width=video.clientWidth;
-  canvas.height=video.clientHeight;
-
+  canvas.width=video.videoWidth;
+  canvas.height=video.videoHeight;
   ctx.drawImage(video,0,0,canvas.width,canvas.height);
 
   video.style.display="none";
   canvas.style.display="block";
 
-  if(stream){
-    stream.getTracks().forEach(t=>t.stop());
-  }
+  if(stream) stream.getTracks().forEach(t=>t.stop());
 }
 
-/* ===== RESULT ===== */
 function updateResult(){
   alert("Result Updated Successfully ✅");
 }
