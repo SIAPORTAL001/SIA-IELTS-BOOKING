@@ -110,6 +110,8 @@ onclick="window.location.href='check-result.html'">
 </footer>
 
 <!-- ================= JAVASCRIPT ================= -->
+
+<!-- ===== NORMAL JS (UI FUNCTIONS) ===== -->
 <script>
 /* ================= SEARCH ================= */
 function searchPage(e){
@@ -123,13 +125,11 @@ function searchPage(e){
 
 /* ================= ADMIN LOGIN ================= */
 function openAdminLogin(){
-  const modal = document.getElementById("adminModal");
-  if(modal) modal.style.display = "flex";
+  document.getElementById("adminModal").style.display = "flex";
 }
 
 function closeAdminLogin(){
-  const modal = document.getElementById("adminModal");
-  if(modal) modal.style.display = "none";
+  document.getElementById("adminModal").style.display = "none";
 }
 
 function adminLogin(){
@@ -143,18 +143,36 @@ function adminLogin(){
   }
 }
 
-/* ================= SIGN UP ================= */
+/* ================= SIGNUP MODAL ================= */
 function openSignup(){
-  const modal = document.getElementById("signupModal");
-  if(modal) modal.style.display = "flex";
+  document.getElementById("signupModal").style.display = "flex";
 }
 
 function closeSignup(){
-  const modal = document.getElementById("signupModal");
-  if(modal) modal.style.display = "none";
+  document.getElementById("signupModal").style.display = "none";
 }
+</script>
 
-function signupUser(){
+<!-- ===== FIREBASE + SIGNUP LOGIC ===== -->
+<script type="module">
+/* ================= FIREBASE ================= */
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCJIDeFNghTSHsEjgcxXImOUjpqx-1fs",
+  authDomain: "official-sia-10ae8.firebaseapp.com",
+  projectId: "official-sia-10ae8",
+  storageBucket: "official-sia-10ae8.appspot.com",
+  messagingSenderId: "493681107472",
+  appId: "1:493681107472:web:428fa16a1d363238ea8095"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+/* ================= SIGN UP ================= */
+window.signupUser = function () {
   const name  = document.getElementById("suName").value.trim();
   const email = document.getElementById("suEmail").value.trim();
   const pass  = document.getElementById("suPass").value;
@@ -170,58 +188,21 @@ function signupUser(){
     return;
   }
 
-  alert(
-    "🎉 Congratulations!\n\n" +
-    "Dear " + name + "\n\n" +
-    "Your OFFICIAL-SIA account has been created.\n" +
-    "Now please login your account.\n\n" +
-    "Best regards,\nOFFICIAL-SIA"
-  );
-
-  closeSignup();
-}
-
-<script type="module">
-  // Firebase core
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-  import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyCJIDeFNghTSHsEjgcxXImOUjpqx-1fs",
-    authDomain: "official-sia-10ae8.firebaseapp.com",
-    projectId: "official-sia-10ae8",
-    storageBucket: "official-sia-10ae8.appspot.com",
-    messagingSenderId: "493681107472",
-    appId: "1:493681107472:web:428fa16a1d363238ea8095"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-
-  // Signup function (GLOBAL)
-  window.signupUser = function () {
-    const name = document.getElementById("suName").value;
-    const email = document.getElementById("suEmail").value;
-    const pass = document.getElementById("suPass").value;
-    const cpass = document.getElementById("suCPass").value;
-
-    if (!name || !email || !pass || !cpass) {
-      alert("Please fill all fields");
-      return;
-    }
-
-    if (pass !== cpass) {
-      alert("Passwords do not match");
-      return;
-    }
-
-    createUserWithEmailAndPassword(auth, email, pass)
-      .then(() => {
-        alert("Signup successful 🎉");
-        document.getElementById("signupModal").style.display = "none";
-      })
-      .catch(err => alert(err.message));
-  };
+  createUserWithEmailAndPassword(auth, email, pass)
+    .then(() => {
+      alert(
+        "🎉 Congratulations!\n\n" +
+        "Dear " + name + "\n\n" +
+        "Your OFFICIAL-SIA account has been created.\n" +
+        "Now please login your account.\n\n" +
+        "Best regards,\nOFFICIAL-SIA"
+      );
+      document.getElementById("signupModal").style.display = "none";
+    })
+    .catch(error => {
+      alert("❌ " + error.message);
+    });
+};
 </script>
 </body>
 </html>
