@@ -31,6 +31,21 @@
   </div>
 </nav>
 
+<!-- SIGN UP POPUP -->
+<div class="signup-modal" id="signupModal">
+  <div class="signup-box">
+    <span class="close-btn" onclick="closeSignup()">×</span>
+    <h2>Sign Up</h2>
+
+    <input type="text" id="signupName" placeholder="Your Name">
+    <input type="email" id="signupEmail" placeholder="Email Address">
+    <input type="password" id="signupPassword" placeholder="Password">
+    <input type="password" placeholder="Confirm Password">
+
+    <button onclick="signup()">Sign Up</button>
+  </div>
+</div>
+
 <!-- ================= HERO ================= -->
 <section class="hero" id="home">
   <div class="overlay"></div>
@@ -42,9 +57,10 @@
     </p>
 
     <div class="hero-buttons">
-  <button class="btn-result" onclick="window.location.href='check-result.html'">
-    Check Your Result
-  </button>
+  <button class="check-result-btn"
+onclick="window.location.href='check-result.html'">
+💧 Check Your Result
+</button>
 </div>
   </div>
 </section>
@@ -141,7 +157,6 @@ function adminLogin(){
 function openSignup(){
   document.getElementById("signupModal").style.display = "flex";
 }
-</script>
-
+<script>
 </body>
 </html>
