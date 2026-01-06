@@ -128,39 +128,59 @@
 <!-- ================= JAVASCRIPT ================= -->
 <script>
 function searchPage(e){
-  if(e.key==="Enter"){
-    const v=document.getElementById("searchInput").value.toLowerCase();
-    if(v.includes("home")) document.getElementById("home").scrollIntoView({behavior:"smooth"});
-    if(v.includes("service")) document.getElementById("services").scrollIntoView({behavior:"smooth"});
-    if(v.includes("contact")) document.getElementById("contact").scrollIntoView({behavior:"smooth"});
+  if(e.key === "Enter"){
+    const v = document.getElementById("searchInput").value.toLowerCase();
+    if(v.includes("home")) document.getElementById("home")?.scrollIntoView({behavior:"smooth"});
+    else if(v.includes("service")) document.getElementById("services")?.scrollIntoView({behavior:"smooth"});
+    else if(v.includes("contact")) document.getElementById("contact")?.scrollIntoView({behavior:"smooth"});
   }
 }
 
-function openSignup(){ signupModal.style.display="flex"; }
-function closeSignup(){ signupModal.style.display="none"; }
+function openAdminLogin(){
+  document.getElementById("adminModal").style.display = "flex";
+}
+function closeAdminLogin(){
+  document.getElementById("adminModal").style.display = "none";
+}
 
-function openLogin(){ loginModal.style.display="flex"; }
-function closeLogin(){ loginModal.style.display="none"; }
+function openSignup(){
+  document.getElementById("signupModal").style.display = "flex";
+}
+function closeSignup(){
+  document.getElementById("signupModal").style.display = "none";
+}
 
-function openAdminLogin(){ adminModal.style.display="flex"; }
-function closeAdminLogin(){ adminModal.style.display="none"; }
+function openLogin(){
+  document.getElementById("loginModal").style.display = "flex";
+}
+function closeLogin(){
+  document.getElementById("loginModal").style.display = "none";
+}
 
 function adminLogin(){
-  if(adminEmail.value==="siaportal0@gmail.com" && adminPassword.value==="SIAPORTAL@123"){
-    window.location.href="admin-panel.html";
-  } else alert("Invalid Admin Login");
+  const email = document.getElementById("adminEmail").value.trim();
+  const pass  = document.getElementById("adminPassword").value.trim();
+
+  if(email === "siaportal0@gmail.com" && pass === "SIAPORTAL@123"){
+    window.location.href = "admin-panel.html";
+  } else {
+    alert("❌ Invalid admin credentials");
+  }
 }
 
-document.querySelectorAll(".service-btn").forEach(btn=>{
-  btn.onclick=()=>{
-    const target=document.getElementById(btn.dataset.target);
-    document.querySelectorAll(".service-content").forEach(c=>{
-      if(c!==target) c.style.display="none";
+/* ===== SERVICES TOGGLE (NO DESIGN CHANGE) ===== */
+document.querySelectorAll('.service-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = document.getElementById(btn.dataset.target);
+
+    document.querySelectorAll('.service-content').forEach(c => {
+      if(c !== target) c.style.display = "none";
     });
-    target.style.display = target.style.display==="block"?"none":"block";
-  }
+
+    target.style.display =
+      target.style.display === "block" ? "none" : "block";
+  });
 });
 </script>
-
 </body>
 </html>
