@@ -20,17 +20,9 @@
       <li><a href="#services">Services</a></li>
       <li><a href="#contact">Contact</a></li>
 
-      <li>
-      <a href="javascript:void(0)" id="adminBtn" onclick="openAdminLogin()">Admin Login</a>
-      </li>
-
-      <li>
-        <a href="javascript:void(0)" id="signupBtn" onclick="openSignup()">Sign Up</a>
-      </li>
-
-      <li>
-     <a href="javascript:void(0)" id="loginBtn" onclick="openLogin()">Login</a>
-      </li>
+      <li><a href="javascript:void(0)" onclick="openAdminLogin()">Admin Login</a></li>
+      <li><a href="javascript:void(0)" onclick="openSignup()">Sign Up</a></li>
+      <li><a href="javascript:void(0)" onclick="openLogin()">Login</a></li>
     </ul>
 
     <div class="nav-search">
@@ -43,7 +35,7 @@
 <!-- ================= SIGNUP POPUP ================= -->
 <div class="signup-modal" id="signupModal">
   <div class="signup-box">
-   <span class="close-btn" onclick="closeSignup()">×</span>
+    <span class="close-btn" onclick="closeSignup()">×</span>
     <h2>Sign Up</h2>
 
     <input type="text" id="suName" placeholder="Your Name">
@@ -55,11 +47,11 @@
   </div>
 </div>
 
-<!-- ================= LOGIN POPUP (FIXED) ================= -->
+<!-- ================= LOGIN POPUP ================= -->
 <div class="login-modal" id="loginModal">
   <div class="login-box">
     <span class="close-btn" onclick="closeLogin()">×</span>
-     <h2>Login</h2>
+    <h2>Login</h2>
 
     <input type="email" id="loginEmail" placeholder="Email Address">
     <input type="password" id="loginPassword" placeholder="Password">
@@ -72,152 +64,103 @@
 <section class="hero" id="home">
   <div class="overlay"></div>
   <div class="hero-content">
-    <h1 style="
-      font-size: 52px;
-      font-weight: 900;
-      background: linear-gradient(90deg,#00f2ff,#ff00cc,#ffb300);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 2px 4px 12px rgba(0,0,0,0.4);
-    ">
-      Welcome to the <span>OFFICIAL-SIA</span>
-    </h1>
-
-    <p>
-      You can book your test here with confidentiality<br>
-      Academic | General Training | Life Skill
-    </p>
-
-    <div class="hero-buttons">
-      <button class="check-result-btn" onclick="window.location.href='check-result.html'">
-        💧 Check Your Result
-      </button>
-    </div>
+    <h1>Welcome to the OFFICIAL-SIA</h1>
+    <p>Academic | General Training | Life Skill</p>
   </div>
 </section>
 
 <!-- ================= SERVICES ================= -->
 <section id="services" class="services">
   <h2 class="services-title">Our Services</h2>
-<p class="services-subtitle">
-  We Provide Professional IELTS And Language Test Services
-</p>
+  <p class="services-subtitle">Professional IELTS & Language Tests</p>
 
-<div class="services-buttons">
+  <div class="services-buttons">
 
-  <button class="service-btn" data-target="ielts">
-    IELTS Preparation
-  </button>
-  <div class="service-content" id="ielts">
-    <ul>
-      <li>IELTS UKVI</li>
-      <li>IELTS ACADEMIC</li>
-      <li>IELTS GENERAL TRAINING</li>
-      <li>IELTS LIFE SKILL A1 / A2</li>
-    </ul>
+    <button class="service-btn" data-target="ielts">IELTS Preparation</button>
+    <div class="service-content" id="ielts">
+      <ul>
+        <li>IELTS UKVI</li>
+        <li>IELTS Academic</li>
+        <li>IELTS General Training</li>
+        <li>IELTS Life Skill A1 / A2</li>
+      </ul>
+    </div>
+
+    <button class="service-btn" data-target="language">LanguageCert</button>
+    <div class="service-content" id="language">
+      LanguageCert Test Confidentially Managed
+    </div>
+
+    <button class="service-btn" data-target="oxford">Oxford Test</button>
+    <div class="service-content" id="oxford">
+      Oxford Test Confidentially Managed
+    </div>
+
+    <button class="service-btn" data-target="toefl">TOEFL</button>
+    <div class="service-content" id="toefl">
+      TOEFL Confidentially Managed
+    </div>
+
   </div>
-
-  <button class="service-btn" data-target="language">
-    LanguageCert
-  </button>
-  <div class="service-content" id="language">
-    We can manage LanguageCert Test Confidentially
-  </div>
-
-  <button class="service-btn" data-target="oxford">
-    OXFORD TEST
-  </button>
-  <div class="service-content" id="oxford">
-    We can manage OXFORD TEST Confidentially
-  </div>
-
-  <button class="service-btn" data-target="toefl">
-    TOEFL
-  </button>
-  <div class="service-content" id="toefl">
-    We can manage TOEFL Confidentially
-  </div>
-
-</div>
 </section>
 
 <!-- ================= CONTACT ================= -->
 <section class="contact" id="contact">
-  <div class="contact-info">
-    <h2>OFFICIAL-SIA</h2>
-    <p>Phone: +92 304 5931881</p>
-    <p>Email: siaportal0@gmail.com</p>
-    <p>Address: Raj Ali Plaza, Dinga Road, Kharian</p>
-  </div>
-
-  <iframe
-    src="https://maps.google.com/maps?q=Raj%20Ali%20Plaza%20Kharian&output=embed"
-    width="100%"
-    height="250"
-    style="border:0;"
-    loading="lazy">
-  </iframe>
+  <h2>OFFICIAL-SIA</h2>
+  <p>Phone: +92 304 5931881</p>
+  <p>Email: siaportal0@gmail.com</p>
+  <p>Address: Raj Ali Plaza, Kharian</p>
 </section>
 
-<!-- ================= ADMIN LOGIN POPUP ================= -->
+<!-- ================= ADMIN POPUP ================= -->
 <div class="admin-modal" id="adminModal">
   <div class="admin-box">
     <span class="close-btn" onclick="closeAdminLogin()">×</span>
-
     <h2>Admin</h2>
 
     <input type="email" id="adminEmail" placeholder="Email">
     <input type="password" id="adminPassword" placeholder="Password">
 
-    <button class="admin-login-btn" onclick="adminLogin()">Login</button>
+    <button onclick="adminLogin()">Login</button>
   </div>
 </div>
-
-<!-- ================= FOOTER ================= -->
-<footer>
-  <p>© OFFICIAL-SIA — All Copyright Reserved</p>
-</footer>
 
 <!-- ================= JAVASCRIPT ================= -->
 <script>
 function searchPage(e){
-  if(e.key === "Enter"){
-    const v = document.getElementById("searchInput").value.toLowerCase();
-    if(v.includes("home")) document.getElementById("home")?.scrollIntoView({behavior:"smooth"});
-    else if(v.includes("service")) document.getElementById("services")?.scrollIntoView({behavior:"smooth"});
-    else if(v.includes("contact")) document.getElementById("contact")?.scrollIntoView({behavior:"smooth"});
+  if(e.key==="Enter"){
+    const v=document.getElementById("searchInput").value.toLowerCase();
+    if(v.includes("home")) document.getElementById("home").scrollIntoView({behavior:"smooth"});
+    if(v.includes("service")) document.getElementById("services").scrollIntoView({behavior:"smooth"});
+    if(v.includes("contact")) document.getElementById("contact").scrollIntoView({behavior:"smooth"});
   }
 }
 
-function openAdminLogin(){ document.getElementById("adminModal").style.display="flex"; }
-function closeAdminLogin(){ document.getElementById("adminModal").style.display="none"; }
+function openSignup(){ signupModal.style.display="flex"; }
+function closeSignup(){ signupModal.style.display="none"; }
 
-function openSignup(){ document.getElementById("signupModal").style.display="flex"; }
-function closeSignup(){ document.getElementById("signupModal").style.display="none"; }
+function openLogin(){ loginModal.style.display="flex"; }
+function closeLogin(){ loginModal.style.display="none"; }
 
-function openLogin(){ document.getElementById("loginModal").style.display="flex"; }
-function closeLogin(){ document.getElementById("loginModal").style.display="none"; }
+function openAdminLogin(){ adminModal.style.display="flex"; }
+function closeAdminLogin(){ adminModal.style.display="none"; }
 
 function adminLogin(){
-  const email=document.getElementById("adminEmail").value.trim();
-  const pass=document.getElementById("adminPassword").value.trim();
-  if(email==="siaportal0@gmail.com" && pass==="SIAPORTAL@123"){
+  if(adminEmail.value==="siaportal0@gmail.com" && adminPassword.value==="SIAPORTAL@123"){
     window.location.href="admin-panel.html";
-  } else alert("❌ Invalid admin credentials");
+  } else alert("Invalid Admin Login");
 }
-<script>
-document.querySelectorAll('.service-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const target = document.getElementById(btn.dataset.target);
 
-    document.querySelectorAll('.service-content').forEach(c => {
-      if (c !== target) c.style.display = 'none';
+document.querySelectorAll(".service-btn").forEach(btn=>{
+  btn.onclick=()=>{
+    const target=document.getElementById(btn.dataset.target);
+    document.querySelectorAll(".service-content").forEach(c=>{
+      if(c!==target) c.style.display="none";
     });
-
-    target.style.display =
-      target.style.display === 'block' ? 'none' : 'block';
-  });
+    target.style.display = target.style.display==="block"?"none":"block";
+  }
 });
 </script>
+
 </body>
 </html>
