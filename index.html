@@ -209,9 +209,16 @@ function openLogin() {
 }
 
 // CLOSE LOGIN POPUP (background click)
-document.getElementById("loginModal").addEventListener("click", function(e) {
-  if (e.target === this) {
-    this.style.display = "none";
+// ⚠️ DOM ready ke baad attach hoga
+document.addEventListener("DOMContentLoaded", function () {
+  const loginModal = document.getElementById("loginModal");
+
+  if (loginModal) {
+    loginModal.addEventListener("click", function (e) {
+      if (e.target === this) {
+        this.style.display = "none";
+      }
+    });
   }
 });
 
