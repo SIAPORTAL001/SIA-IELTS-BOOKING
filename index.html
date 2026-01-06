@@ -15,27 +15,24 @@
       <img src="images/logo.png" alt="OFFICIAL-SIA">
     </div>
 
-   <ul class="nav-links">
-  <li><a href="#home">Home</a></li>
-  <li><a href="#services">Services</a></li>
-  <li><a href="#contact">Contact</a></li>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
 
-  <li>
-    <a href="javascript:void(0)" id="adminBtn" onclick="openAdminLogin()">
-      Admin Login
-    </a>
-  </li>
+      <li>
+        <a href="javascript:void(0)" id="adminBtn" onclick="openAdminLogin()">Admin Login</a>
+      </li>
 
-  <li>
-    <a href="javascript:void(0)" id="signupBtn" onclick="openSignup()">
-      Sign Up
-    </a>
-  </li>
+      <li>
+        <a href="javascript:void(0)" id="signupBtn" onclick="openSignup()">Sign Up</a>
+      </li>
 
- <li>
-  <a href="javascript:void(0)" id="loginBtn" onclick="openLogin()">Login</a>
-</li>
-</ul>
+      <li>
+        <a href="javascript:void(0)" id="loginBtn" onclick="openLogin()">Login</a>
+      </li>
+    </ul>
+
     <div class="nav-search">
       <input type="text" id="searchInput" placeholder="Search..." onkeydown="searchPage(event)">
     </div>
@@ -43,18 +40,33 @@
   </div>
 </nav>
 
-<!-- SIGN UP POPUP -->
+<!-- ================= SIGNUP POPUP ================= -->
 <div class="signup-modal" id="signupModal">
   <div class="signup-box">
     <span class="close-btn" onclick="closeSignup()">×</span>
+
     <h2>Sign Up</h2>
 
-    <input type="text" id="signupName" placeholder="Your Name">
-    <input type="email" id="signupEmail" placeholder="Email Address">
-    <input type="password" id="signupPassword" placeholder="Password">
-    <input type="password" placeholder="Confirm Password">
+    <input type="text" id="suName" placeholder="Your Name">
+    <input type="email" id="suEmail" placeholder="Email Address">
+    <input type="password" id="suPass" placeholder="Password">
+    <input type="password" id="suCPass" placeholder="Confirm Password">
 
-    <button onclick="signup()">Sign Up</button>
+    <button onclick="signupUser()">Sign Up</button>
+  </div>
+</div>
+
+<!-- ================= LOGIN POPUP (FIXED) ================= -->
+<div class="login-modal" id="loginModal">
+  <div class="login-box">
+    <span class="close-btn" onclick="closeLogin()">×</span>
+
+    <h2>Login</h2>
+
+    <input type="email" id="loginEmail" placeholder="Email Address">
+    <input type="password" id="loginPassword" placeholder="Password">
+
+    <button onclick="loginUser()">Login</button>
   </div>
 </div>
 
@@ -62,18 +74,27 @@
 <section class="hero" id="home">
   <div class="overlay"></div>
   <div class="hero-content">
-    <h1>Welcome to the <span>OFFICIAL-SIA</span></h1>
+    <h1 style="
+      font-size: 52px;
+      font-weight: 900;
+      background: linear-gradient(90deg,#00f2ff,#ff00cc,#ffb300);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 2px 4px 12px rgba(0,0,0,0.4);
+    ">
+      Welcome to the <span>OFFICIAL-SIA</span>
+    </h1>
+
     <p>
       You can book your test here with confidentiality<br>
       Academic | General Training | Life Skill
     </p>
 
     <div class="hero-buttons">
-  <button class="check-result-btn"
-onclick="window.location.href='check-result.html'">
-💧 Check Your Result
-</button>
-</div>
+      <button class="check-result-btn" onclick="window.location.href='check-result.html'">
+        💧 Check Your Result
+      </button>
+    </div>
   </div>
 </section>
 
@@ -99,13 +120,13 @@ onclick="window.location.href='check-result.html'">
     <p>Address: Raj Ali Plaza, Dinga Road, Kharian</p>
   </div>
 
-<iframe
-  src="https://maps.google.com/maps?q=Raj%20Ali%20Plaza%20Kharian&output=embed"
-  width="100%"
-  height="250"
-  style="border:0;"
-  loading="lazy">
-</iframe>
+  <iframe
+    src="https://maps.google.com/maps?q=Raj%20Ali%20Plaza%20Kharian&output=embed"
+    width="100%"
+    height="250"
+    style="border:0;"
+    loading="lazy">
+  </iframe>
 </section>
 
 <!-- ================= ADMIN LOGIN POPUP ================= -->
@@ -128,10 +149,7 @@ onclick="window.location.href='check-result.html'">
 </footer>
 
 <!-- ================= JAVASCRIPT ================= -->
-
-<!-- ===== NORMAL JS (UI FUNCTIONS) ===== -->
 <script>
-/* ================= SEARCH ================= */
 function searchPage(e){
   if(e.key === "Enter"){
     const v = document.getElementById("searchInput").value.toLowerCase();
@@ -141,121 +159,23 @@ function searchPage(e){
   }
 }
 
-/* ================= ADMIN LOGIN ================= */
-function openAdminLogin(){
-  document.getElementById("adminModal").style.display = "flex";
-}
-function closeAdminLogin(){
-  document.getElementById("adminModal").style.display = "none";
-}
+function openAdminLogin(){ document.getElementById("adminModal").style.display="flex"; }
+function closeAdminLogin(){ document.getElementById("adminModal").style.display="none"; }
+
+function openSignup(){ document.getElementById("signupModal").style.display="flex"; }
+function closeSignup(){ document.getElementById("signupModal").style.display="none"; }
+
+function openLogin(){ document.getElementById("loginModal").style.display="flex"; }
+function closeLogin(){ document.getElementById("loginModal").style.display="none"; }
+
 function adminLogin(){
-  const email = document.getElementById("adminEmail").value.trim();
-  const password = document.getElementById("adminPassword").value.trim();
-  if(email === "siaportal0@gmail.com" && password === "SIAPORTAL@123"){
-    window.location.href = "admin-panel.html";
-  } else {
-    alert("❌ Invalid admin credentials");
-  }
-}
-
-/* ================= SIGNUP ================= */
-function openSignup(){
-  document.getElementById("signupModal").style.display = "flex";
-}
-function closeSignup(){
-  document.getElementById("signupModal").style.display = "none";
-}
-
-/* ================= LOGIN POPUP ================= */
-function openLogin(){
-  document.getElementById("loginModal").style.display = "flex";
-}
-function closeLogin(){
-  document.getElementById("loginModal").style.display = "none";
+  const email=document.getElementById("adminEmail").value.trim();
+  const pass=document.getElementById("adminPassword").value.trim();
+  if(email==="siaportal0@gmail.com" && pass==="SIAPORTAL@123"){
+    window.location.href="admin-panel.html";
+  } else alert("❌ Invalid admin credentials");
 }
 </script>
 
-<!-- ===== FIREBASE AUTH ===== -->
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyCJIDeFNghTSHsEjgcxXImOUjpqx-1fs",
-  authDomain: "official-sia-10ae8.firebaseapp.com",
-  projectId: "official-sia-10ae8",
-  storageBucket: "official-sia-10ae8.appspot.com",
-  messagingSenderId: "493681107472",
-  appId: "1:493681107472:web:428fa16a1d363238ea8095"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-
-/* ================= SIGNUP ================= */
-window.signupUser = function(){
-  const name  = document.getElementById("suName").value.trim();
-  const email = document.getElementById("suEmail").value.trim();
-  const pass  = document.getElementById("suPass").value;
-  const cpass = document.getElementById("suCPass").value;
-
-  if(!name || !email || !pass || !cpass){
-    alert("❌ Please fill all fields");
-    return;
-  }
-  if(pass !== cpass){
-    alert("❌ Passwords do not match");
-    return;
-  }
-
-  createUserWithEmailAndPassword(auth, email, pass)
-    .then(()=>{
-      alert("✅ Account created successfully. Please login.");
-      document.getElementById("signupModal").style.display = "none";
-    })
-    .catch(err=>alert("❌ " + err.message));
-};
-
-/* ================= LOGIN ================= */
-window.loginUser = function(){
-  const email = document.getElementById("loginEmail").value.trim();
-  const password = document.getElementById("loginPassword").value.trim();
-
-  if(!email || !password){
-    alert("❌ Please fill all fields");
-    return;
-  }
-
-  signInWithEmailAndPassword(auth, email, password)
-    .then(()=>{
-      localStorage.setItem("isLoggedIn","true");
-      alert("✅ Login Successful");
-      document.getElementById("loginModal").style.display = "none";
-      location.reload();
-    })
-    .catch(err=>alert("❌ " + err.message));
-};
-</script>
-
-<!-- ===== LOGIN STATE RULES ===== -->
-<script>
-document.addEventListener("DOMContentLoaded",()=>{
-  const isLoggedIn = localStorage.getItem("isLoggedIn");
-
-  const adminBtn  = document.getElementById("adminBtn");
-  const signupBtn = document.getElementById("signupBtn");
-  const loginBtn  = document.getElementById("loginBtn");
-
-  if(isLoggedIn === "true"){
-    if(adminBtn) adminBtn.style.display="none";
-    if(signupBtn) signupBtn.style.display="none";
-    if(loginBtn)  loginBtn.style.display="none";
-  }
-});
-</script>
 </body>
 </html>
