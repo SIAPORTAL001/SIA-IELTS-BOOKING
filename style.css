@@ -362,3 +362,18 @@ footer{
 .login-box button:hover {
   background: #222;
 }
+.services-title {
+  font-size: 36px;          /* medium size */
+  font-weight: 700;
+  text-align: center;
+  color: #1e293b;           /* classy dark */
+  letter-spacing: 1px;
+  margin-bottom: 5px;
+}
+
+.services-subtitle {
+  text-align: center;
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 40px;
+}
