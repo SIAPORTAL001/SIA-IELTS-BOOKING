@@ -171,13 +171,18 @@ function closeSignup(){ document.getElementById("signupModal").style.display="no
 function openLogin(){ document.getElementById("loginModal").style.display="flex"; }
 function closeLogin(){ document.getElementById("loginModal").style.display="none"; }
 
-function adminLogin(){
-  const email=document.getElementById("adminEmail").value.trim();
-  const pass=document.getElementById("adminPassword").value.trim();
-  if(email==="siaportal0@gmail.com" && pass==="SIAPORTAL@123"){
-    window.location.href="admin-panel.html";
-  } else alert("❌ Invalid admin credentials");
+function adminLogin() {
+  const email = document.getElementById("adminEmail").value.trim();
+  const password = document.getElementById("adminPassword").value.trim();
+
+  if (email === "siaportal0@gmail.com" && password === "SIAPORTAL@123") {
+    alert("Admin Login Successful");
+    window.location.href = "admin-panel.html";
+  } else {
+    alert("❌️ Invalid Admin Email or Password");
+  }
 }
+
 
 /* SERVICES TOGGLE */
 document.querySelectorAll('.service-btn').forEach(btn=>{
