@@ -129,14 +129,57 @@ onclick="window.location.href='check-result.html'">
 
 <!-- ================= JAVASCRIPT ================= -->
 
+<!-- ===== NORMAL JS (GLOBAL FUNCTIONS) ===== -->
+<script>
+/* ================= SEARCH ================= */
+function searchPage(e){
+  if(e.key === "Enter"){
+    const v = document.getElementById("searchInput").value.toLowerCase();
+    if(v.includes("home")) document.getElementById("home")?.scrollIntoView({behavior:"smooth"});
+    else if(v.includes("service")) document.getElementById("services")?.scrollIntoView({behavior:"smooth"});
+    else if(v.includes("contact")) document.getElementById("contact")?.scrollIntoView({behavior:"smooth"});
+  }
+}
+
+/* ================= ADMIN LOGIN ================= */
+function openAdminLogin(){
+  document.getElementById("adminModal").style.display = "flex";
+}
+function closeAdminLogin(){
+  document.getElementById("adminModal").style.display = "none";
+}
+function adminLogin(){
+  const email = document.getElementById("adminEmail").value.trim();
+  const password = document.getElementById("adminPassword").value.trim();
+  if(email === "siaportal0@gmail.com" && password === "SIAPORTAL@123"){
+    window.location.href = "admin-panel.html";
+  } else {
+    alert("❌ Invalid admin credentials");
+  }
+}
+
+/* ================= SIGNUP ================= */
+function openSignup(){
+  document.getElementById("signupModal").style.display = "flex";
+}
+function closeSignup(){
+  document.getElementById("signupModal").style.display = "none";
+}
+
+/* ================= LOGIN (FIXED) ================= */
+function openLogin(){
+  document.getElementById("loginModal").style.display = "flex";
+}
+function closeLogin(){
+  document.getElementById("loginModal").style.display = "none";
+}
+</script>
+
+<!-- ===== FIREBASE + AUTH ===== -->
 <script type="module">
-/* ================= FIREBASE ================= */
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { 
-  getAuth, 
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } 
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCJIDeFNghTSHsEjgcxXImOUjpqx-1fs",
@@ -150,93 +193,64 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-/* ================= SEARCH ================= */
-window.searchPage = function (e) {
-  if (e.key === "Enter") {
-    const v = document.getElementById("searchInput").value.toLowerCase();
-    if (v.includes("home")) document.getElementById("home")?.scrollIntoView({behavior:"smooth"});
-    if (v.includes("service")) document.getElementById("services")?.scrollIntoView({behavior:"smooth"});
-    if (v.includes("contact")) document.getElementById("contact")?.scrollIntoView({behavior:"smooth"});
-  }
-};
-
-/* ================= ADMIN LOGIN ================= */
-window.openAdminLogin = function () {
-  document.getElementById("adminModal").style.display = "flex";
-};
-window.closeAdminLogin = function () {
-  document.getElementById("adminModal").style.display = "none";
-};
-window.adminLogin = function () {
-  const email = document.getElementById("adminEmail").value.trim();
-  const password = document.getElementById("adminPassword").value.trim();
-
-  if (email === "siaportal0@gmail.com" && password === "SIAPORTAL@123") {
-    window.location.href = "admin-panel.html";
-  } else {
-    alert("❌ Invalid admin credentials");
-  }
-};
-
-/* ================= SIGNUP ================= */
-window.openSignup = () => document.getElementById("signupModal").style.display = "flex";
-window.closeSignup = () => document.getElementById("signupModal").style.display = "none";
-
-window.signupUser = function () {
+/* ================= SIGN UP ================= */
+window.signupUser = function(){
   const name  = document.getElementById("suName").value.trim();
   const email = document.getElementById("suEmail").value.trim();
   const pass  = document.getElementById("suPass").value;
   const cpass = document.getElementById("suCPass").value;
 
-  if (!name || !email || !pass || !cpass) {
-    alert("⚠️ Please fill all fields");
+  if(!name || !email || !pass || !cpass){
+    alert("❌ Please fill all fields");
     return;
   }
-  if (pass !== cpass) {
+  if(pass !== cpass){
     alert("❌ Passwords do not match");
     return;
   }
 
   createUserWithEmailAndPassword(auth, email, pass)
-    .then(() => {
-      alert(
-        `🎉 Congratulations!\n\nDear ${name}\n\nYour OFFICIAL-SIA account has been created.\nPlease login now.\n\nBest regards\nOFFICIAL-SIA`
-      );
-      closeSignup();
+    .then(()=>{
+      alert("✅ Account created successfully. Please login.");
+      document.getElementById("signupModal").style.display = "none";
     })
-    .catch(err => alert("❌ " + err.message));
+    .catch(err=>alert(err.message));
 };
 
 /* ================= LOGIN ================= */
-window.openLogin = () => document.getElementById("loginModal").style.display = "flex";
-
-window.loginUser = function () {
+window.loginUser = function(){
   const email = document.getElementById("loginEmail").value.trim();
   const password = document.getElementById("loginPassword").value.trim();
 
-  if (!email || !password) {
-    alert("⚠️ Please fill all fields");
+  if(!email || !password){
+    alert("❌ Please fill all fields");
     return;
   }
 
   signInWithEmailAndPassword(auth, email, password)
-    .then(() => {
-      localStorage.setItem("isLoggedIn", "true");
+    .then(()=>{
+      localStorage.setItem("isLoggedIn","true");
       alert("✅ Login Successful");
       document.getElementById("loginModal").style.display = "none";
       location.reload();
     })
-    .catch(err => alert("❌ " + err.message));
+    .catch(err=>alert(err.message));
 };
+</script>
 
-/* ================= LOGIN STATE ================= */
-document.addEventListener("DOMContentLoaded", () => {
+<!-- ================= LOGIN STATE RULES ================= -->
+<script>
+document.addEventListener("DOMContentLoaded",()=>{
   const isLoggedIn = localStorage.getItem("isLoggedIn");
 
-  if (isLoggedIn === "true") {
-    document.getElementById("adminLoginBtn")?.remove();
-    document.getElementById("signupBtn")?.remove();
-    document.getElementById("loginBtn")?.remove();
+  const adminBtn  = document.getElementById("adminBtn");
+  const signupBtn = document.getElementById("signupBtn");
+  const loginBtn  = document.getElementById("loginBtn");
+
+  if(isLoggedIn === "true"){
+    if(adminBtn) adminBtn.style.display="none";
+    if(signupBtn) signupBtn.style.display="none";
+    if(loginBtn) loginBtn.style.display="none";
   }
 });
 </script>
