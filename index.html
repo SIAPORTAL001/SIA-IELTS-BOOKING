@@ -19,10 +19,21 @@
       <li><a href="#home">Home</a></li>
       <li><a href="#services">Services</a></li>
       <li><a href="#contact">Contact</a></li>
-      <li><a href="javascript:void(0)" onclick="openAdminLogin()">Admin Login</a></li>
-      <li><a href="javascript:void(0)" onclick="openSignup()">Sign Up</a></li>
-     <li><a href="#" id="loginBtn">Login</a></li>
+      <<li>
+  <a href="javascript:void(0)" id="adminLoginBtn" onclick="openAdminLogin()">
+    Admin Login
+  </a>
+</li>
 
+<li>
+  <a href="javascript:void(0)" id="signupBtn" onclick="openSignup()">
+    Sign Up
+  </a>
+</li>
+
+<li>
+  <a href="#" id="loginBtn">Login</a>
+</li>
     <div class="nav-search">
       <input type="text" id="searchInput" placeholder="Search..." onkeydown="searchPage(event)">
     </div>
@@ -255,5 +266,51 @@ function loginUser() {
     <button onclick="loginUser()">Login</button>
   </div>
 </div>
+
+<script>
+/* ================= LOGIN STATE CHECK ================= */
+
+// Page load par check
+document.addEventListener("DOMContentLoaded", () => {
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+  const adminBtn  = document.getElementById("adminLoginBtn");
+  const signupBtn = document.getElementById("signupBtn");
+  const loginBtn  = document.getElementById("loginBtn");
+  const checkBtn  = document.querySelector(".check-result-btn");
+
+  if (isLoggedIn === "true") {
+    // Candidate logged in
+    if (adminBtn) adminBtn.style.display = "none";
+    if (signupBtn) signupBtn.style.display = "none";
+    if (loginBtn)  loginBtn.style.display = "none";
+  } else {
+    // Not logged in
+    if (checkBtn) {
+      checkBtn.onclick = function () {
+        alert("❌ Please login first to check your result");
+      };
+    }
+  }
+});
+
+/* ================= LOGIN FUNCTION ================= */
+function loginUser() {
+  const email = document.getElementById("loginEmail").value;
+  const password = document.getElementById("loginPassword").value;
+
+  if (!email || !password) {
+    alert("❌ Please fill all fields");
+    return;
+  }
+
+  // TEMP FRONTEND LOGIN (backend baad me)
+  localStorage.setItem("isLoggedIn", "true");
+
+  alert("✅ Login Successful");
+  document.getElementById("loginModal").style.display = "none";
+  location.reload(); // refresh to apply navbar rules
+}
+</script>
 </body>
 </html>
