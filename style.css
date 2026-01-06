@@ -519,3 +519,30 @@ footer{
   50%{box-shadow:0 0 25px rgba(255,87,34,0.9);}
   100%{box-shadow:0 0 10px rgba(255,87,34,0.4);}
 }
+/* BIG & FANCY WELCOME TEXT */
+.fancy-title{
+  font-size: 70px;          /* 🔥 text BARA */
+  font-weight: 900;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  background: linear-gradient(90deg,#ff9800,#ff5722,#ffc107);
+  background-size: 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: glowMove 4s ease-in-out infinite;
+  text-shadow: 0 0 35px rgba(255,152,0,0.6);
+}
+
+/* MOBILE FIX */
+@media(max-width:768px){
+  .fancy-title{
+    font-size: 42px;
+  }
+}
+
+/* ANIMATION */
+@keyframes glowMove{
+  0%{background-position:0%;}
+  50%{background-position:100%;}
+  100%{background-position:0%;}
+}
