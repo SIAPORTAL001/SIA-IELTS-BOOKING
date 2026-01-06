@@ -454,3 +454,43 @@ footer{
 .service-box.active .service-front {
   opacity: 0;
 }
+.services-buttons {
+  max-width: 800px;
+  margin: auto;
+}
+
+.service-btn {
+  width: 100%;
+  padding: 15px;
+  margin-top: 15px;
+  background: #0f172a;
+  color: #fff;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: left;
+  border-radius: 6px;
+}
+
+.service-btn:hover {
+  background: #2563eb;
+}
+
+.service-content {
+  display: none;
+  background: #f1f5f9;
+  padding: 15px;
+  border-left: 4px solid #2563eb;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
