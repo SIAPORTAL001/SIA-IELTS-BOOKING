@@ -330,10 +330,18 @@ function capturePhoto(){
   if(stream) stream.getTracks().forEach(t=>t.stop());
 }
 
-function updateResult(){
-  alert("Result Updated Successfully ✅");
+function updateResult() {
+  const resultData = {
+    listening: document.getElementById("listening").value,
+    reading: document.getElementById("reading").value,
+    writing: document.getElementById("writing").value,
+    speaking: document.getElementById("speaking").value,
+    pdf: document.getElementById("pdfLink").value
+  };
+
+  localStorage.setItem("studentResult", JSON.stringify(resultData));
+  alert("Result Updated Successfully!");
 }
 </script>
-
 </body>
 </html>
