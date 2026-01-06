@@ -33,7 +33,7 @@
   </li>
 
  <li>
-  <a href= "#" onclick="openLogin()">Login</a>
+  <a href="javascript:void(0)" id="loginBtn" onclick="openLogin()">Login</a>
 </li>
 </ul>
     <div class="nav-search">
@@ -129,7 +129,7 @@ onclick="window.location.href='check-result.html'">
 
 <!-- ================= JAVASCRIPT ================= -->
 
-<!-- ===== NORMAL JS (GLOBAL FUNCTIONS) ===== -->
+<!-- ===== NORMAL JS (UI FUNCTIONS) ===== -->
 <script>
 /* ================= SEARCH ================= */
 function searchPage(e){
@@ -139,7 +139,7 @@ function searchPage(e){
     else if(v.includes("service")) document.getElementById("services")?.scrollIntoView({behavior:"smooth"});
     else if(v.includes("contact")) document.getElementById("contact")?.scrollIntoView({behavior:"smooth"});
   }
-} 
+}
 
 /* ================= ADMIN LOGIN ================= */
 function openAdminLogin(){
@@ -166,7 +166,7 @@ function closeSignup(){
   document.getElementById("signupModal").style.display = "none";
 }
 
-/* ================= LOGIN (FIXED) ================= */
+/* ================= LOGIN POPUP ================= */
 function openLogin(){
   document.getElementById("loginModal").style.display = "flex";
 }
@@ -175,11 +175,14 @@ function closeLogin(){
 }
 </script>
 
-<!-- ===== FIREBASE + AUTH ===== -->
+<!-- ===== FIREBASE AUTH ===== -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } 
-from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCJIDeFNghTSHsEjgcxXImOUjpqx-1fs",
@@ -193,7 +196,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-/* ================= SIGN UP ================= */
+/* ================= SIGNUP ================= */
 window.signupUser = function(){
   const name  = document.getElementById("suName").value.trim();
   const email = document.getElementById("suEmail").value.trim();
@@ -214,7 +217,7 @@ window.signupUser = function(){
       alert("✅ Account created successfully. Please login.");
       document.getElementById("signupModal").style.display = "none";
     })
-    .catch(err=>alert(err.message));
+    .catch(err=>alert("❌ " + err.message));
 };
 
 /* ================= LOGIN ================= */
@@ -234,11 +237,11 @@ window.loginUser = function(){
       document.getElementById("loginModal").style.display = "none";
       location.reload();
     })
-    .catch(err=>alert(err.message));
+    .catch(err=>alert("❌ " + err.message));
 };
 </script>
 
-<!-- ================= LOGIN STATE RULES ================= -->
+<!-- ===== LOGIN STATE RULES ===== -->
 <script>
 document.addEventListener("DOMContentLoaded",()=>{
   const isLoggedIn = localStorage.getItem("isLoggedIn");
@@ -250,16 +253,9 @@ document.addEventListener("DOMContentLoaded",()=>{
   if(isLoggedIn === "true"){
     if(adminBtn) adminBtn.style.display="none";
     if(signupBtn) signupBtn.style.display="none";
-    if(loginBtn) loginBtn.style.display="none";
+    if(loginBtn)  loginBtn.style.display="none";
   }
 });
-
-function openLogin(){
-  document.getElementById("loginModal").style.display = "flex";
-}
-function closeLogin(){
-  document.getElementById("loginModal").style.display = "none";
-}
 </script>
 </body>
 </html>
