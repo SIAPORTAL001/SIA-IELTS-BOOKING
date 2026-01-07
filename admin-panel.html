@@ -190,10 +190,14 @@ input,select,textarea{
         </div>
 
         <!-- PHOTO -->
-        <div class="photo-box" id="photoBox">
-          Tap to Capture Photo
-          <video id="video" autoplay playsinline></video>
-          <canvas id="canvas"></canvas>
+       <div class="photo-box" id="photoBox">
+  <span class="photo-text">Tap to Capture Photo</span>
+  <video id="video" autoplay playsinline></video>
+  <canvas id="canvas"></canvas>
+</div>
+
+<input id="candidateNumber" readonly>
+<input id="trfNumber" readonly>
         </div>
       </div>
 
@@ -338,29 +342,76 @@ function bookTest() {
     .forEach(el => el.value = "");
 }
 
-/* UNIQUE NUMBERS */
-candidateNumber.value="CND-"+Math.random().toString(36).substr(2,8).toUpperCase();
-trfNumber.value="TRF-"+Date.now().toString().slice(-8);
+document.addEventListener("DOMContentLoaded", () => {
 
-/* CAMERA */
-let stream=null, taken=false;
-photoBox.onclick=async()=>{
-  if(!stream){
-    stream=await navigator.mediaDevices.getUserMedia({video:true});
-    video.srcObject=stream;
-    video.style.display="block";
-    return;
+  /* ===============================
+     AUTO GENERATE NUMBERS
+  =============================== */
+
+  function generateUniqueNumber(prefix) {
+    return prefix + Math.floor(100000 + Math.random() * 900000);
   }
-  if(!taken){
-    canvas.width=video.videoWidth;
-    canvas.height=video.videoHeight;
-    canvas.getContext("2d").drawImage(video,0,0);
-    video.style.display="none";
-    canvas.style.display="block";
-    stream.getTracks().forEach(t=>t.stop());
-    taken=true;
+
+  const candidateInput = document.getElementById("candidateNumber");
+  const trfInput = document.getElementById("trfNumber");
+
+  if (candidateInput) {
+    candidateInput.value = generateUniqueNumber("CAND-");
   }
-};
+
+  if (trfInput) {
+    trfInput.value = generateUniqueNumber("TRF-");
+  }
+
+  /* ===============================
+     CAMERA CAPTURE (TAP → OPEN → TAP → CAPTURE)
+  =============================== */
+
+  const photoBox = document.getElementById("photoBox");
+  const video = document.getElementById("video");
+  const canvas = document.getElementById("canvas");
+  const text = document.querySelector(".photo-text");
+
+  let stream = null;
+  let captured = false;
+
+  if (photoBox) {
+    photoBox.addEventListener("click", async () => {
+
+      // FIRST TAP → OPEN CAMERA
+      if (!stream && !captured) {
+        try {
+          stream = await navigator.mediaDevices.getUserMedia({
+            video: { facingMode: "user" }
+          });
+
+          video.srcObject = stream;
+          video.style.display = "block";
+          text.style.display = "none";
+        } catch (err) {
+          alert("Camera permission denied");
+        }
+        return;
+      }
+
+      // SECOND TAP → CAPTURE PHOTO
+      if (stream && !captured) {
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        canvas.getContext("2d").drawImage(video, 0, 0);
+
+        stream.getTracks().forEach(track => track.stop());
+        stream = null;
+
+        video.style.display = "none";
+        canvas.style.display = "block";
+        captured = true;
+      }
+    });
+  }
+
+});
+
 
 /* PDF */
 function generatePDF(){
