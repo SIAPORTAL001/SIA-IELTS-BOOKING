@@ -145,7 +145,7 @@ input,select,textarea{
       <option>02:00 PM</option><option>03:00 PM</option>
       <option>04:00 PM</option>
     </select>
-    <button class="black-btn">BOOK TEST</button>
+    <button class="black-btn" onclick="bookTest()">BOOK TEST</button>
   </div>
 </div>
 
@@ -270,6 +270,73 @@ function showSection(id){
   document.getElementById(id).style.display='block';
 }
 showSection('reg');
+
+
+// ==========================
+// Disable Fri, Sat, Sun
+// ==========================
+const testDate = document.getElementById("testDate");
+
+testDate.addEventListener("input", function () {
+  const selectedDate = new Date(this.value);
+  const day = selectedDate.getDay(); 
+  // 0=Sunday, 5=Friday, 6=Saturday
+
+  if (day === 0 || day === 5 || day === 6) {
+    alert("Friday, Saturday and Sunday are not available");
+    this.value = "";
+  }
+});
+
+// ==========================
+// Time options (10AM–4PM)
+// ==========================
+const timeSelect = document.getElementById("testTime");
+
+const times = [
+  "10:00 AM",
+  "11:00 AM",
+  "12:00 PM",
+  "01:00 PM",
+  "02:00 PM",
+  "03:00 PM",
+  "04:00 PM"
+];
+
+times.forEach(time => {
+  const option = document.createElement("option");
+  option.value = time;
+  option.textContent = time;
+  timeSelect.appendChild(option);
+});
+
+// ==========================
+// BOOK TEST BUTTON FUNCTION
+// ==========================
+function bookTest() {
+
+  const name = document.querySelector('#book input[placeholder="Candidate Name"]').value;
+  const email = document.querySelector('#book input[type="email"]').value;
+  const date = testDate.value;
+  const time = timeSelect.value;
+
+  if (!name || !email || !date || !time) {
+    alert("Please fill all fields");
+    return;
+  }
+
+  alert(
+    "✅ Test Booked Successfully!\n\n" +
+    "Name: " + name + "\n" +
+    "Email: " + email + "\n" +
+    "Date: " + date + "\n" +
+    "Time: " + time
+  );
+
+  // Clear form
+  document.querySelectorAll('#book input, #book select')
+    .forEach(el => el.value = "");
+}
 
 /* UNIQUE NUMBERS */
 candidateNumber.value="CND-"+Math.random().toString(36).substr(2,8).toUpperCase();
