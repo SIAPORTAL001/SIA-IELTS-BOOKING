@@ -269,7 +269,9 @@ hr{margin:20px 0}
       </div>
     </div>
 
-    <button class="pdf-btn" onclick="window.print()">Generate TRF PDF</button>
+    <button onclick="generatePDF()" class="black-btn">
+  Generate TRF PDF
+</button>
   </div>
 </div>
 
@@ -345,6 +347,32 @@ photoBox.addEventListener("click", async () => {
     photoTaken = true;
   }
 });
+ src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+
+function generatePDF() {
+
+  const element = document.getElementById("trfForm");
+
+  const options = {
+    margin: 0,
+    filename: 'IELTS_TRF_Report.pdf',
+    image: { type: 'jpeg', quality: 1 },
+    html2canvas: { 
+      scale: 3,
+      useCORS: true
+    },
+    jsPDF: { 
+      unit: 'mm',
+      format: 'a4',
+      orientation: 'portrait'
+    }
+  };
+
+  html2pdf()
+    .set(options)
+    .from(element)
+    .save();
+}
 </script>
 </body>
 </html>
