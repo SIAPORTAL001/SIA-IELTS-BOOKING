@@ -347,31 +347,33 @@ photoBox.addEventListener("click", async () => {
     photoTaken = true;
   }
 });
- src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
+<script>
 function generatePDF() {
-
   const element = document.getElementById("trfForm");
+
+  if (!element) {
+    alert("TRF Form not found!");
+    return;
+  }
 
   const options = {
     margin: 0,
     filename: 'IELTS_TRF_Report.pdf',
     image: { type: 'jpeg', quality: 1 },
-    html2canvas: { 
+    html2canvas: {
       scale: 3,
       useCORS: true
     },
-    jsPDF: { 
+    jsPDF: {
       unit: 'mm',
       format: 'a4',
       orientation: 'portrait'
     }
   };
 
-  html2pdf()
-    .set(options)
-    .from(element)
-    .save();
+  html2pdf().set(options).from(element).save();
 }
 </script>
 </body>
