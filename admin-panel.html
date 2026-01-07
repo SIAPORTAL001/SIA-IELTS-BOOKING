@@ -211,7 +211,8 @@ hr{margin:20px 0}
       <div class="row">
         Centre Number:<input value="PK361" readonly>
         Date:<input>
-        Candidate Number:<input>
+        Candidate Number:
+      <input id="candidateNumber">
       </div>
 
       <hr>
@@ -264,8 +265,12 @@ hr{margin:20px 0}
       </div>
 
       <div class="row">
-        Date:<input>
-        TRF Number:<input class="gray" value="TRF-<?=Date.now?>" readonly>
+        TRF Number:
+<input
+  id="trfNumber"
+  class="gray"
+  readonly
+>
       </div>
     </div>
 
