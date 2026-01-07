@@ -207,77 +207,121 @@ input, textarea{
   </div>
 </div>
 
-<!-- ================= REGISTRATION ================= -->
-<div class="section" id="regSection">
+<!-- IELTS TEST REPORT FORM -->
+<section class="ielts-form-wrapper">
 
-<div class="trf-wrapper">
+  <div class="ielts-form">
 
-  <div class="trf-top">
-    <div>
-      <h2>IELTS</h2>
-      <p>Test Report Form</p>
-    </div>
-    <input placeholder ="Test Mode">
-  </div>
+    <!-- TOP SECTION -->
+    <div class="top-row">
+      <div class="left-box"></div>
 
-  <div class="row">
-    <input placeholder="Centre Number">
-    <input type="date">
-    <input placeholder="Candidate Number">
-  </div>
-
-  <h4>Candidate Details</h4>
-
-  <div class="trf-main">
-
-    <div class="trf-left">
-      <input placeholder="Family Name">
-      <input placeholder="First Name(s)">
-
-      <div class="row">
-        <input placeholder="Candidate ID">
-        <input type="date">
-        <input placeholder="Sex (M/F)">
-      </div>
-
-      <input placeholder="Country or Region of Origin">
-      <input placeholder="Country of Nationality">
-      <input placeholder="First Language">
-
-      <h4>Test Results</h4>
-      <div class="row">
-        <input placeholder="Listening">
-        <input placeholder="Reading">
-        <input placeholder="Writing">
-        <input placeholder="Speaking">
-        <input placeholder="Overall Band Score">
-        <input placeholder="CEFR">
-      </div>
-
-      <h4>Administrator Comments</h4>
-      <textarea rows="4"></textarea>
-
-      <div class="row">
-        <input type="date">
-        <input placeholder="Test Report Form Number">
+      <div class="right-text">
+        <div class="ielts-title">
+          IELTS<sup>TM</sup>
+        </div>
+        <div class="report-title">Test Report Form</div>
       </div>
     </div>
 
-    <div class="trf-right">
-      <div class="photo-box">
-        <video id="video" autoplay playsinline></video>
-        <canvas id="canvas"></canvas>
+    <p class="note-text">
+      <strong>NOTE.</strong><br>
+      Admission to undergraduate and post graduate courses should be based on the
+      <strong>ACADEMIC</strong> Reading and Writing Modules.<br>
+      <strong>GENERAL TRAINING</strong> Reading and Writing Modules are not designed to test the full range
+      of language skills required for academic purposes.<br>
+      It is recommended that the candidate's language ability as indicated in this Test Report Form
+      be re-assessed after two years from the date of the test.
+    </p>
+
+    <div class="info-row">
+      <div>Centre Number: <input value="PK361" readonly></div>
+      <div>Date: <input></div>
+      <div>Candidate Number: <input></div>
+    </div>
+
+    <hr>
+
+    <!-- CANDIDATE DETAILS -->
+    <h3>Candidate Details</h3>
+
+    <div class="candidate-row">
+      <div>
+        Family Name:<input class="gray">
+        First Name:<input class="gray">
+        Candidate ID:<input class="gray">
       </div>
 
-      <div class="photo-actions">
-        <button onclick="startCamera()">Open Camera</button>
-        <button onclick="capturePhoto()">Capture Photo</button>
+      <div class="photo-box" id="photoBox">
+        Click to Capture Photo
+        <input type="file" accept="image/*" capture="user" hidden id="cameraInput">
       </div>
     </div>
 
+    <hr>
+
+    <!-- PERSONAL INFO -->
+    <div class="info-grid">
+      <div>Date of Birth:<input></div>
+      <div>Sex (M/F):<input class="small"></div>
+      <div>Scheme Code:<input></div>
+    </div>
+
+    <div>Country or Region of Origin:<input class="long"></div>
+    <div>Country of Nationality:<input class="long"></div>
+    <div>First Language:<input class="long"></div>
+
+    <hr>
+
+    <!-- TEST RESULTS -->
+    <h3>Test Results</h3>
+
+    <div class="results-row">
+      Listening:<input class="gray">
+      Reading:<input class="gray">
+      Writing:<input class="gray">
+      Speaking:<input class="gray">
+      Overall Band Score:<input class="gray">
+      CEFR Level:<input class="gray">
+    </div>
+
+    <hr>
+
+    <!-- ADMIN COMMENTS -->
+    <h3>Administrator Comments</h3>
+
+    <textarea class="comments-box"></textarea>
+
+    <div class="stamp-row">
+      <div class="square-box">
+        Recognising organisations must verify this score at ielts.org/verify
+      </div>
+
+      <div class="square-box editable">
+        Validation Stamp
+      </div>
+    </div>
+
+    <div class="final-row">
+      Date:<input>
+      Test Report Form Number:<input class="gray" id="trfNumber" readonly>
+    </div>
+
+    <div class="logos">
+      <span>BRITISH COUNCIL</span>
+      <span>IDP IELTS</span>
+      <span>CAMBRIDGE English</span>
+    </div>
+
+    <p class="footer-note">
+      IELTS is jointly owned by the British Council; IDP IELTS; and Cambridge University Press & Assessment
+    </p>
+
   </div>
-</div>
-</div>
+
+  <button class="pdf-btn" onclick="generatePDF()">Generate PDF FORM</button>
+
+</section>
 
 <!-- ================= UPDATE RESULT ================= -->
 <div class="section" id="resultSection">
