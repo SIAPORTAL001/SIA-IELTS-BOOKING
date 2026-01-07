@@ -304,7 +304,47 @@ document.getElementById("testDate").addEventListener("input",e=>{
     e.target.value="";
   }
 });
-</script>
 
+const photoBox = document.getElementById("photoBox");
+const video = document.getElementById("video");
+const canvas = document.getElementById("canvas");
+const text = document.querySelector(".photo-text");
+
+let stream = null;
+let photoTaken = false;
+
+photoBox.addEventListener("click", async () => {
+
+  // FIRST TAP → CAMERA OPEN
+  if (!stream) {
+    try {
+      stream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: "user" }
+      });
+
+      video.srcObject = stream;
+      video.style.display = "block";
+      text.style.display = "none";
+    } catch (err) {
+      alert("Camera permission denied");
+    }
+    return;
+  }
+
+  // SECOND TAP → PHOTO CAPTURE
+  if (!photoTaken) {
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    canvas.getContext("2d").drawImage(video, 0, 0);
+
+    video.style.display = "none";
+    canvas.style.display = "block";
+
+    stream.getTracks().forEach(track => track.stop());
+    stream = null;
+    photoTaken = true;
+  }
+});
+</script>
 </body>
 </html>
