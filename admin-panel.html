@@ -269,152 +269,127 @@ input,select,textarea{
 </div>
 
 <script>
-function showSection(id){
-  document.querySelectorAll('.section').forEach(s=>s.style.display='none');
-  document.getElementById(id).style.display='block';
-}
-showSection('reg');
-
-
-// ==========================
-// Disable Fri, Sat, Sun
-// ==========================
-const testDate = document.getElementById("testDate");
-
-testDate.addEventListener("input", function () {
-  const selectedDate = new Date(this.value);
-  const day = selectedDate.getDay(); 
-  // 0=Sunday, 5=Friday, 6=Saturday
-
-  if (day === 0 || day === 5 || day === 6) {
-    alert("Friday, Saturday and Sunday are not available");
-    this.value = "";
-  }
-});
-
-// ==========================
-// Time options (10AM–4PM)
-// ==========================
-const timeSelect = document.getElementById("testTime");
-
-const times = [
-  "10:00 AM",
-  "11:00 AM",
-  "12:00 PM",
-  "01:00 PM",
-  "02:00 PM",
-  "03:00 PM",
-  "04:00 PM"
-];
-
-times.forEach(time => {
-  const option = document.createElement("option");
-  option.value = time;
-  option.textContent = time;
-  timeSelect.appendChild(option);
-});
-
-// ==========================
-// BOOK TEST BUTTON FUNCTION
-// ==========================
-function bookTest() {
-
-  const name = document.querySelector('#book input[placeholder="Candidate Name"]').value;
-  const email = document.querySelector('#book input[type="email"]').value;
-  const date = testDate.value;
-  const time = timeSelect.value;
-
-  if (!name || !email || !date || !time) {
-    alert("Please fill all fields");
-    return;
-  }
-
-  alert(
-    "✅ Test Booked Successfully!\n\n" +
-    "Name: " + name + "\n" +
-    "Email: " + email + "\n" +
-    "Date: " + date + "\n" +
-    "Time: " + time
-  );
-
-  // Clear form
-  document.querySelectorAll('#book input, #book select')
-    .forEach(el => el.value = "");
-}
-
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function () {
 
   /* ===============================
-     AUTO GENERATE NUMBERS
+     SECTION SWITCHING (FIXED)
   =============================== */
-
-  function generateUniqueNumber(prefix) {
-    return prefix + Math.floor(100000 + Math.random() * 900000);
+  function showSection(id){
+    document.querySelectorAll(".section").forEach(sec=>{
+      sec.style.display="none";
+    });
+    const el=document.getElementById(id);
+    if(el) el.style.display="block";
   }
+  window.showSection=showSection;
+  showSection("book");
 
-  const candidateInput = document.getElementById("candidateNumber");
-  const trfInput = document.getElementById("trfNumber");
-
-  if (candidateInput) {
-    candidateInput.value = generateUniqueNumber("CAND-");
-  }
-
-  if (trfInput) {
-    trfInput.value = generateUniqueNumber("TRF-");
+  /* ===============================
+     BOOK TEST BUTTON WORKING
+  =============================== */
+  const bookBtn=document.getElementById("bookTestBtn");
+  if(bookBtn){
+    bookBtn.addEventListener("click",()=>{
+      alert("✅ Test booked successfully!\nEmail will be sent after backend setup.");
+    });
   }
 
   /* ===============================
-     CAMERA CAPTURE (TAP → OPEN → TAP → CAPTURE)
+     DISABLE FRI SAT SUN
   =============================== */
+  const testDate=document.getElementById("testDate");
+  if(testDate){
+    testDate.addEventListener("change",e=>{
+      const day=new Date(e.target.value).getDay();
+      if(day===5||day===6||day===0){
+        alert("❌ Friday, Saturday & Sunday not allowed");
+        e.target.value="";
+      }
+    });
+  }
 
-  const photoBox = document.getElementById("photoBox");
-  const video = document.getElementById("video");
-  const canvas = document.getElementById("canvas");
-  const text = document.querySelector(".photo-text");
+  /* ===============================
+     AUTO CANDIDATE + TRF NUMBER
+  =============================== */
+  const candNo=document.getElementById("candidateNumber");
+  const trfNo=document.getElementById("trfNumber");
 
-  let stream = null;
-  let captured = false;
+  function gen(prefix){
+    return prefix+"-"+Math.floor(100000+Math.random()*900000);
+  }
+  if(candNo) candNo.value=gen("CAND");
+  if(trfNo) trfNo.value=gen("TRF");
 
-  if (photoBox) {
-    photoBox.addEventListener("click", async () => {
+  /* ===============================
+     PHOTO BOX – TAP OPEN CAMERA
+  =============================== */
+  const photoBox=document.getElementById("photoBox");
+  const video=document.getElementById("video");
+  const canvas=document.getElementById("canvas");
+  const text=document.querySelector(".photo-text");
 
-      // FIRST TAP → OPEN CAMERA
-      if (!stream && !captured) {
-        try {
-          stream = await navigator.mediaDevices.getUserMedia({
-            video: { facingMode: "user" }
-          });
+  let stream=null;
 
-          video.srcObject = stream;
-          video.style.display = "block";
-          text.style.display = "none";
-        } catch (err) {
+  if(photoBox){
+    photoBox.addEventListener("click",async()=>{
+      if(!stream){
+        try{
+          stream=await navigator.mediaDevices.getUserMedia({video:true});
+          video.srcObject=stream;
+          video.style.display="block";
+          text.style.display="none";
+        }catch{
           alert("Camera permission denied");
         }
         return;
       }
+      canvas.width=video.videoWidth;
+      canvas.height=video.videoHeight;
+      canvas.getContext("2d").drawImage(video,0,0);
+      canvas.style.display="block";
+      video.style.display="none";
+      stream.getTracks().forEach(t=>t.stop());
+      stream=null;
+    });
+  }
 
-      // SECOND TAP → CAPTURE PHOTO
-      if (stream && !captured) {
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
-        canvas.getContext("2d").drawImage(video, 0, 0);
+  /* ===============================
+     UPDATE RESULT BUTTON WORKING
+  =============================== */
+  const updateBtn=document.getElementById("updateResultBtn");
+  if(updateBtn){
+    updateBtn.addEventListener("click",()=>{
+      const inputs=document.querySelectorAll("#update input[type='text']");
+      const pdf=document.querySelector("#update input[type='file']");
+      let ok=true;
+      inputs.forEach(i=>{ if(!i.value) ok=false; });
+      if(!pdf||!pdf.files.length) ok=false;
 
-        stream.getTracks().forEach(track => track.stop());
-        stream = null;
-
-        video.style.display = "none";
-        canvas.style.display = "block";
-        captured = true;
+      if(!ok){
+        alert("❌ Please fill all fields & upload TRF PDF");
+        return;
       }
+      alert("✅ Result uploaded successfully");
+      inputs.forEach(i=>i.value="");
+      pdf.value="";
     });
   }
 
 });
 
-/* PDF */
+/* ===============================
+   GENERATE PDF (FORM ONLY)
+=============================== */
 function generatePDF(){
-  html2pdf().from(trfForm).save("IELTS_TRF.pdf");
+  const el=document.getElementById("trfForm");
+  if(!el){ alert("TRF Form not found"); return; }
+
+  html2pdf().set({
+    margin:0,
+    filename:"IELTS_TRF_Report.pdf",
+    html2canvas:{scale:3},
+    jsPDF:{unit:"mm",format:"a4"}
+  }).from(el).save();
 }
 </script>
 </body>
