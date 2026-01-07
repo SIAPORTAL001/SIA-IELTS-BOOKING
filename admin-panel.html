@@ -2,164 +2,125 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Admin Panel - OFFICIAL SIA</title>
+<title>Admin Panel</title>
 
 <style>
-body{
-  font-family: Arial, Helvetica, sans-serif;
-  background:#f4f4f4;
-  margin:0;
-}
+*{box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+body{margin:0;background:#f4f4f4}
 
 /* HEADER */
 .header{
   background:#000;
   color:#fff;
-  padding:18px;
   text-align:center;
-  font-size:24px;
+  padding:25px;
+  font-size:28px;
   font-weight:bold;
 }
 
-/* DASHBOARD */
-.dashboard{
-  padding:15px;
-  text-align:center;
-  background:#eee;
+/* TOP BUTTONS */
+.top-buttons{
+  display:flex;
+  justify-content:center;
+  gap:15px;
+  padding:20px;
 }
-
-.dashboard button{
-  padding:12px 22px;
-  margin:6px;
+.top-buttons button{
+  padding:14px 26px;
   border:none;
-  cursor:pointer;
-  border-radius:6px;
+  border-radius:30px;
   font-size:15px;
+  cursor:pointer;
+  font-weight:600;
 }
-
-.btn-book{ background:#8e24aa; color:#fff; }
-.btn-reg{ background:#f5c400; }
-.btn-trf{ background:#1976d2; color:#fff; }
+.btn-book{background:#000;color:#fff}
+.btn-reg{background:#f5c400}
+.btn-update{background:#1976d2;color:#fff}
 
 /* SECTIONS */
-.section{ display:none; padding:25px; }
+.section{display:none;padding:25px}
 
-/* ================= BOOK TEST ================= */
-.book-box{
+/* COMMON BOX */
+.box{
   background:#fff;
-  max-width:500px;
+  max-width:900px;
   margin:auto;
   padding:25px;
-  border-radius:8px;
+  border-radius:12px;
 }
 
-.book-box input,
-.book-box select{
+/* INPUTS */
+input,select,textarea{
   width:100%;
   padding:10px;
-  margin-bottom:10px;
+  border-radius:20px;
+  border:1px solid #ccc;
+  margin-bottom:12px;
 }
 
-.book-btn{
-  width:100%;
-  padding:12px;
+/* BUTTON */
+.black-btn{
   background:#000;
   color:#fff;
   border:none;
+  padding:14px;
+  border-radius:30px;
+  width:100%;
+  font-size:16px;
   cursor:pointer;
 }
 
-/* ================= TRF FORM ================= */
-.trf-wrapper{
-  background:#fff;
-  padding:25px;
-  border-radius:8px;
+/* TRF FORM */
+.trf{
+  border:2px solid #000;
+  padding:20px;
 }
-
 .trf-top{
   display:flex;
   justify-content:space-between;
   align-items:center;
 }
-
-.trf-main{
-  display:flex;
-  gap:25px;
-}
-
-.trf-left{ width:70%; }
-.trf-right{ width:30%; }
-
-.row{
-  display:flex;
-  gap:10px;
-  margin-bottom:8px;
-}
-
-input, textarea{
-  width:100%;
-  padding:6px;
-}
-
+.trf-note{font-size:12px;margin:15px 0}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.gray{background:#eaeaea}
 .photo-box{
-  width:100%;
-  height:260px;
+  width:150px;
+  height:200px;
   border:2px solid #000;
-  position:relative;
-  overflow:hidden;
 }
+hr{margin:20px 0}
 
-.photo-box video,
-.photo-box canvas{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  position:absolute;
-  top:0;
-  left:0;
-}
-
-.photo-actions{
+/* RESULTS ROW */
+.results-row{
   display:flex;
   gap:8px;
-  margin-top:8px;
+  flex-wrap:wrap;
 }
+.results-row input{width:120px}
 
-.photo-actions button{
-  width:100%;
-  padding:6px;
-  cursor:pointer;
+/* ADMIN COMMENTS */
+.square{
+  width:180px;
+  height:120px;
+  border:1px solid #000;
+  padding:5px;
 }
+.comment-box{height:100px}
 
-/* ================= UPDATE RESULT ================= */
-.result-box{
-  background:#fff;
-  max-width:600px;
-  margin:auto;
-  padding:25px;
-  border-radius:8px;
-}
-
-.result-box input,
-.result-box select{
-  width:100%;
-  padding:10px;
-  margin-bottom:10px;
-}
-
-.update-btn{
-  background:#2e7d32;
+/* PDF BUTTON */
+.pdf-btn{
+  margin-top:20px;
+  background:#000;
   color:#fff;
-  padding:12px;
-  width:100%;
+  padding:12px 30px;
+  border-radius:30px;
   border:none;
   cursor:pointer;
 }
 
 /* MOBILE */
 @media(max-width:768px){
-  .trf-main{ flex-direction:column; }
-  .trf-left,.trf-right{ width:100%; }
+  .results-row input{width:100%}
 }
 </style>
 </head>
@@ -168,267 +129,150 @@ input, textarea{
 
 <div class="header">WELCOME TO THE ADMIN PANEL</div>
 
-<div class="dashboard">
-  <button class="btn-book" onclick="showBook()">BOOK TEST</button>
-  <button class="btn-reg" onclick="showReg()">Candidate Registration Form</button>
-  <button class="btn-trf" onclick="showResult()">Update Result</button>
+<div class="top-buttons">
+  <button class="btn-book" onclick="showSection('book')">BOOK TEST</button>
+  <button class="btn-reg" onclick="showSection('reg')">Candidate Registration Form</button>
+  <button class="btn-update" onclick="showSection('update')">Update Result</button>
 </div>
 
-<!-- ================= BOOK TEST ================= -->
-<div class="section" id="bookSection">
-  <div class="book-box">
-    <h3>BOOK TEST</h3>
-
-<input type="text" id="candidateName" placeholder="Candidate Name" required>
-
-<input type="email" id="candidateEmail" placeholder="Candidate Email" required>
-
+<!-- BOOK TEST -->
+<div class="section" id="book">
+  <div class="box">
+    <h3>Book Test</h3>
+    <input placeholder="Candidate Name">
+    <input type="email" placeholder="Candidate Email">
     <select>
-      <option>Select Test Type</option>
+      <option>Select Test Mode</option>
       <option>IELTS Academic</option>
-      <option>IELTS General</option>
-      <option>IELTS Life Skills</option>
+      <option>IELTS General Training</option>
+      <option>IELTS Life Skill</option>
     </select>
-
-    <input type="date">
-
+    <input type="date" id="testDate">
     <select>
-      <option>Select Time</option>
-      <option>10:00 AM</option>
-      <option>11:00 AM</option>
-      <option>12:00 PM</option>
-      <option>01:00 PM</option>
-      <option>02:00 PM</option>
-      <option>03:00 PM</option>
+      <option>Select Test Time</option>
+      <option>10:00 AM</option><option>11:00 AM</option>
+      <option>12:00 PM</option><option>01:00 PM</option>
+      <option>02:00 PM</option><option>03:00 PM</option>
       <option>04:00 PM</option>
     </select>
-
-    <button class="book-btn">BOOK TEST</button>
+    <button class="black-btn">BOOK TEST</button>
   </div>
 </div>
 
-<!-- IELTS TEST REPORT FORM -->
-<section class="ielts-form-wrapper">
+<!-- CANDIDATE REGISTRATION -->
+<div class="section" id="reg">
+  <div class="box">
+    <h3>Welcome to the Candidate Registration Form</h3>
 
-  <div class="ielts-form">
-
-    <!-- TOP SECTION -->
-    <div class="top-row">
-      <div class="left-box"></div>
-
-      <div class="right-text">
-        <div class="ielts-title">
-          IELTS<sup>TM</sup>
+    <div class="trf">
+      <div class="trf-top">
+        <div style="width:60%;border:1px solid #000;height:35px"></div>
+        <div>
+          <b>IELTS<sup>TM</sup></b><br>Test Report Form
         </div>
-        <div class="report-title">Test Report Form</div>
+      </div>
+
+      <p class="trf-note">
+        <b>NOTE.</b><br>
+        Admission to undergraduate and post graduate courses should be based on the
+        <b>ACADEMIC</b> Reading and Writing Modules.<br>
+        GENERAL TRAINING modules are not designed for academic purposes.<br>
+        Re-assessment recommended after two years.
+      </p>
+
+      <div class="row">
+        Centre Number:<input value="PK361" readonly>
+        Date:<input>
+        Candidate Number:<input>
+      </div>
+
+      <hr>
+
+      <h4>Candidate Details</h4>
+      <div class="row">
+        <div style="flex:1">
+          Family Name:<input class="gray">
+          First Name:<input class="gray">
+          Candidate ID:<input class="gray">
+        </div>
+        <div class="photo-box"></div>
+      </div>
+
+      <hr>
+
+      <div class="row">
+        Date of Birth:<input>
+        Sex:<input style="width:60px">
+        Scheme Code:<input>
+      </div>
+      Country/Region:<input>
+      Nationality:<input>
+      First Language:<input>
+
+      <hr>
+
+      <h4>Test Results</h4>
+      <div class="results-row">
+        Listening<input class="gray">
+        Reading<input class="gray">
+        Writing<input class="gray">
+        Speaking<input class="gray">
+        Overall<input class="gray">
+        CEFR<input class="gray">
+      </div>
+
+      <hr>
+
+      <h4>Administrator Comments</h4>
+      <textarea class="comment-box"></textarea>
+
+      <div class="row">
+        <div class="square">Recognising organisations must verify this score at ielts.org/verify</div>
+        <div class="square">Validation Stamp</div>
+      </div>
+
+      <div class="row">
+        Date:<input>
+        TRF Number:<input class="gray" value="TRF-<?=Date.now?>" readonly>
       </div>
     </div>
 
-    <p class="note-text">
-      <strong>NOTE.</strong><br>
-      Admission to undergraduate and post graduate courses should be based on the
-      <strong>ACADEMIC</strong> Reading and Writing Modules.<br>
-      <strong>GENERAL TRAINING</strong> Reading and Writing Modules are not designed to test the full range
-      of language skills required for academic purposes.<br>
-      It is recommended that the candidate's language ability as indicated in this Test Report Form
-      be re-assessed after two years from the date of the test.
-    </p>
-
-    <div class="info-row">
-      <div>Centre Number: <input value="PK361" readonly></div>
-      <div>Date: <input></div>
-      <div>Candidate Number: <input></div>
-    </div>
-
-    <hr>
-
-    <!-- CANDIDATE DETAILS -->
-    <h3>Candidate Details</h3>
-
-    <div class="candidate-row">
-      <div>
-        Family Name:<input class="gray">
-        First Name:<input class="gray">
-        Candidate ID:<input class="gray">
-      </div>
-
-      <div class="photo-box" id="photoBox">
-        Click to Capture Photo
-        <input type="file" accept="image/*" capture="user" hidden id="cameraInput">
-      </div>
-    </div>
-
-    <hr>
-
-    <!-- PERSONAL INFO -->
-    <div class="info-grid">
-      <div>Date of Birth:<input></div>
-      <div>Sex (M/F):<input class="small"></div>
-      <div>Scheme Code:<input></div>
-    </div>
-
-    <div>Country or Region of Origin:<input class="long"></div>
-    <div>Country of Nationality:<input class="long"></div>
-    <div>First Language:<input class="long"></div>
-
-    <hr>
-
-    <!-- TEST RESULTS -->
-    <h3>Test Results</h3>
-
-    <div class="results-row">
-      Listening:<input class="gray">
-      Reading:<input class="gray">
-      Writing:<input class="gray">
-      Speaking:<input class="gray">
-      Overall Band Score:<input class="gray">
-      CEFR Level:<input class="gray">
-    </div>
-
-    <hr>
-
-    <!-- ADMIN COMMENTS -->
-    <h3>Administrator Comments</h3>
-
-    <textarea class="comments-box"></textarea>
-
-    <div class="stamp-row">
-      <div class="square-box">
-        Recognising organisations must verify this score at ielts.org/verify
-      </div>
-
-      <div class="square-box editable">
-        Validation Stamp
-      </div>
-    </div>
-
-    <div class="final-row">
-      Date:<input>
-      Test Report Form Number:<input class="gray" id="trfNumber" readonly>
-    </div>
-
-    <div class="logos">
-      <span>BRITISH COUNCIL</span>
-      <span>IDP IELTS</span>
-      <span>CAMBRIDGE English</span>
-    </div>
-
-    <p class="footer-note">
-      IELTS is jointly owned by the British Council; IDP IELTS; and Cambridge University Press & Assessment
-    </p>
-
+    <button class="pdf-btn" onclick="window.print()">Generate TRF PDF</button>
   </div>
+</div>
 
-  <button class="pdf-btn" onclick="generatePDF()">Generate PDF FORM</button>
-
-</section>
-
-<!-- ================= UPDATE RESULT ================= -->
-<div class="section" id="resultSection">
-  <div class="result-box">
-    <h3>Candidate Result Update</h3>
-
+<!-- UPDATE RESULT -->
+<div class="section" id="update">
+  <div class="box">
+    <h3>Update Result</h3>
     <input placeholder="Listening">
     <input placeholder="Reading">
     <input placeholder="Writing">
     <input placeholder="Speaking">
     <input placeholder="Overall Band Score">
-
-    <select>
-      <option>Select CEFR</option>
-      <option>A1</option><option>A2</option>
-      <option>B1</option><option>B2</option>
-      <option>C1</option><option>C2</option>
-    </select>
-
+    <input placeholder="CEFR Level">
     <label>Upload TRF PDF</label>
     <input type="file" accept="application/pdf">
-
-    <button class="update-btn" onclick="updateResult()">Update Result</button>
+    <button class="black-btn">Upload Result</button>
   </div>
 </div>
 
 <script>
-function hideAll(){
-  document.querySelectorAll(".section").forEach(s=>s.style.display="none");
+function showSection(id){
+  document.querySelectorAll('.section').forEach(s=>s.style.display='none');
+  document.getElementById(id).style.display='block';
 }
-function showBook(){ hideAll(); bookSection.style.display="block"; }
-function showReg(){ hideAll(); regSection.style.display="block"; }
-function showResult(){ hideAll(); resultSection.style.display="block"; }
-showReg();
+showSection('book');
 
-/* CAMERA */
-let stream;
-function startCamera(){
-  const v=document.getElementById("video");
-  const c=document.getElementById("canvas");
-  c.style.display="none"; v.style.display="block";
-
-  navigator.mediaDevices.getUserMedia({video:true})
-  .then(s=>{ stream=s; v.srcObject=s; })
-  .catch(()=>alert("Camera permission denied"));
-}
-function capturePhoto(){
-  const v=document.getElementById("video");
-  const c=document.getElementById("canvas");
-  c.width=v.videoWidth;
-  c.height=v.videoHeight;
-  c.getContext("2d").drawImage(v,0,0,c.width,c.height);
-  v.style.display="none"; c.style.display="block";
-  if(stream) stream.getTracks().forEach(t=>t.stop());
-}
-
-function updateResult() {
-  const resultData = {
-    listening: document.getElementById("listening").value,
-    reading: document.getElementById("reading").value,
-    writing: document.getElementById("writing").value,
-    speaking: document.getElementById("speaking").value,
-    pdf: document.getElementById("pdfLink").value
-  };
-
-  localStorage.setItem("studentResult", JSON.stringify(resultData));
-  alert("Result Updated Successfully!");
-}
-
-function bookTest(){
-  const name = document.getElementById("bookCandidateName").value.trim();
-  const email = document.getElementById("bookCandidateEmail").value.trim();
-
-  if(name === "" || email === ""){
-    alert("❌ Please enter Candidate Name & Email");
-    return;
-  }
-
-  alert("✅ Test booked successfully!\n\nEmail will be sent after backend setup.");
-}
-
-// PHOTO CAPTURE
-const photoBox = document.getElementById("photoBox");
-const cameraInput = document.getElementById("cameraInput");
-
-photoBox.addEventListener("click", () => cameraInput.click());
-
-cameraInput.addEventListener("change", () => {
-  const file = cameraInput.files[0];
-  if(file){
-    const img = document.createElement("img");
-    img.src = URL.createObjectURL(file);
-    img.style.width = "100%";
-    img.style.height = "100%";
-    photoBox.innerHTML = "";
-    photoBox.appendChild(img);
+/* Disable Fri Sat Sun */
+document.getElementById("testDate").addEventListener("input",e=>{
+  const d=new Date(e.target.value).getDay();
+  if(d==5||d==6||d==0){
+    alert("Friday, Saturday and Sunday not allowed");
+    e.target.value="";
   }
 });
-
-// AUTO TRF NUMBER
-document.getElementById("trfNumber").value =
-  "TRF-" + Date.now();
-
-// PDF GENERATE
-function generatePDF(){
-  window.print();
-}
 </script>
+
 </body>
 </html>
