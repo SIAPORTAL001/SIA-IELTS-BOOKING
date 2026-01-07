@@ -306,6 +306,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const el = document.getElementById(id);
     if (el) el.style.display = 'block';
   }
+
+  window.showSection = showSection;   // ✅ <<< ISSUE FIX (ONLY THIS LINE)
+
   showSection('book');
 
   /* Disable Fri Sat Sun */
@@ -331,7 +334,6 @@ document.addEventListener("DOMContentLoaded", function () {
   if (photoBox) {
     photoBox.addEventListener("click", async () => {
 
-      // FIRST TAP → CAMERA OPEN
       if (!stream) {
         try {
           stream = await navigator.mediaDevices.getUserMedia({
@@ -347,7 +349,6 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
       }
 
-      // SECOND TAP → PHOTO CAPTURE
       if (!photoTaken) {
         canvas.width = video.videoWidth;
         canvas.height = video.videoHeight;
