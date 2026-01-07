@@ -346,6 +346,18 @@ function updateResult() {
   localStorage.setItem("studentResult", JSON.stringify(resultData));
   alert("Result Updated Successfully!");
 }
+
+function bookTest(){
+  const name = document.getElementById("bookCandidateName").value.trim();
+  const email = document.getElementById("bookCandidateEmail").value.trim();
+
+  if(name === "" || email === ""){
+    alert("❌ Please enter Candidate Name & Email");
+    return;
+  }
+
+  alert("✅ Test booked successfully!\n\nEmail will be sent after backend setup.");
+}
 </script>
 </body>
 </html>
