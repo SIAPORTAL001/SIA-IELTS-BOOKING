@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <title>Admin Panel</title>
 
-<!-- PDF Library -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
 <style>
@@ -92,6 +91,18 @@ input,select,textarea{
   justify-content:center;
   font-size:13px;
   text-align:center;
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+}
+.photo-box video,
+.photo-box canvas{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:none;
 }
 
 /* RESULTS */
@@ -114,40 +125,6 @@ input,select,textarea{
   <button class="btn-update" onclick="showSection('update')">Update Result</button>
 </div>
 
-<!-- ================= BOOK TEST ================= -->
-<div class="section" id="book">
-  <div class="box">
-    <h3>Book Test</h3>
-
-    <input placeholder="Candidate Name">
-    <input type="email" placeholder="Candidate Email">
-
-    <select>
-      <option>Select Your Test Mode</option>
-      <option>IELTS Academic</option>
-      <option>IELTS General Training</option>
-      <option>IELTS Life Skills</option>
-    </select>
-
-    <input type="date" id="testDate">
-
-    <select>
-      <option>Select Your Test Time</option>
-      <option>10:00 AM</option>
-      <option>11:00 AM</option>
-      <option>12:00 PM</option>
-      <option>01:00 PM</option>
-      <option>02:00 PM</option>
-      <option>03:00 PM</option>
-      <option>04:00 PM</option>
-    </select>
-
-    <button class="black-btn" onclick="alert('Test Booked Successfully')">
-      BOOK TEST
-    </button>
-  </div>
-</div>
-
 <!-- ================= REGISTRATION ================= -->
 <div class="section" id="reg">
   <div class="box">
@@ -155,8 +132,10 @@ input,select,textarea{
 
     <div class="trf" id="trfForm">
 
+      <!-- MANUAL TOP BOX -->
+      <input placeholder="Manual Text (Admin Use Only)">
+
       <div class="row">
-        <div style="flex:2;border:1px solid #000;height:35px"></div>
         <div>
           <b>IELTS<sup>TM</sup></b><br>Test Report Form
         </div>
@@ -185,8 +164,32 @@ input,select,textarea{
           First Name:<input>
           Candidate ID:<input>
         </div>
-        <div class="photo-box">Photo</div>
+
+        <!-- PHOTO -->
+        <div class="photo-box" id="photoBox">
+          Tap to Capture Photo
+          <video id="video" autoplay playsinline></video>
+          <canvas id="canvas"></canvas>
+        </div>
       </div>
+
+      <hr>
+
+      <!-- NEW INFO -->
+      <div class="row">
+        Date of Birth:<input type="date" style="width:150px">
+        Sex (M/F):<input style="width:70px">
+        Scheme Code:<input value="Private Candidate">
+      </div>
+
+      Country / Region of Origin:
+      <input>
+
+      Country of Nationality:
+      <input>
+
+      First Language:
+      <input>
 
       <hr>
 
@@ -215,7 +218,6 @@ input,select,textarea{
 
   </div>
 </div>
-
 <!-- ================= UPDATE RESULT ================= -->
 <div class="section" id="update">
   <div class="box">
@@ -243,27 +245,35 @@ function showSection(id){
   document.querySelectorAll('.section').forEach(s=>s.style.display='none');
   document.getElementById(id).style.display='block';
 }
-showSection('book');
+showSection('reg');
 
-/* Disable Fri Sat Sun */
-document.getElementById("testDate").addEventListener("input", e=>{
-  const d=new Date(e.target.value).getDay();
-  if(d==5||d==6||d==0){
-    alert("Friday, Saturday & Sunday not allowed");
-    e.target.value="";
+/* UNIQUE NUMBERS */
+candidateNumber.value="CND-"+Math.random().toString(36).substr(2,8).toUpperCase();
+trfNumber.value="TRF-"+Date.now().toString().slice(-8);
+
+/* CAMERA */
+let stream=null, taken=false;
+photoBox.onclick=async()=>{
+  if(!stream){
+    stream=await navigator.mediaDevices.getUserMedia({video:true});
+    video.srcObject=stream;
+    video.style.display="block";
+    return;
   }
-});
-
-/* Unique Numbers */
-document.getElementById("candidateNumber").value =
-  "CND-" + Math.random().toString(36).substr(2,8).toUpperCase();
-
-document.getElementById("trfNumber").value =
-  "TRF-" + Date.now().toString().slice(-8);
+  if(!taken){
+    canvas.width=video.videoWidth;
+    canvas.height=video.videoHeight;
+    canvas.getContext("2d").drawImage(video,0,0);
+    video.style.display="none";
+    canvas.style.display="block";
+    stream.getTracks().forEach(t=>t.stop());
+    taken=true;
+  }
+};
 
 /* PDF */
 function generatePDF(){
-  html2pdf().from(document.getElementById("trfForm")).save("IELTS_TRF.pdf");
+  html2pdf().from(trfForm).save("IELTS_TRF.pdf");
 }
 </script>
 
