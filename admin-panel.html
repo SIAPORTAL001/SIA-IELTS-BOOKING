@@ -402,6 +402,33 @@ function bookTest(){
 
   alert("✅ Test booked successfully!\n\nEmail will be sent after backend setup.");
 }
+
+// PHOTO CAPTURE
+const photoBox = document.getElementById("photoBox");
+const cameraInput = document.getElementById("cameraInput");
+
+photoBox.addEventListener("click", () => cameraInput.click());
+
+cameraInput.addEventListener("change", () => {
+  const file = cameraInput.files[0];
+  if(file){
+    const img = document.createElement("img");
+    img.src = URL.createObjectURL(file);
+    img.style.width = "100%";
+    img.style.height = "100%";
+    photoBox.innerHTML = "";
+    photoBox.appendChild(img);
+  }
+});
+
+// AUTO TRF NUMBER
+document.getElementById("trfNumber").value =
+  "TRF-" + Date.now();
+
+// PDF GENERATE
+function generatePDF(){
+  window.print();
+}
 </script>
 </body>
 </html>
